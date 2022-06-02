@@ -1,0 +1,183 @@
+schema: draft-07
+name: azure-aks-cluster
+description: "Azure Kubernetes Service (AKS) is a fully managed container orchestration service. AKS offers serverless Kubernetes, an integrated continuous integration and continuous delivery (CI/CD) experience, and enterprise-grade security and governance."
+ref: github.com/massdriver-cloud/massdriver-bundles/bundles/azure-aks-cluster
+access: "public"
+type: bundle
+
+steps:
+  - path: src
+    provisioner: terraform
+  - path: core-services
+    provisioner: terraform
+  - path: custom-resources
+    provisioner: terraform
+
+params:
+  examples:
+    - __name: Dev/Test ($)
+      kubernetes_version: "1.22.6"
+      node_groups:
+        - name: shared
+          node_size: B2s (2 vCores, 4 GiB memory)
+          min_size: 1
+          max_size: 10
+    - __name: Standard ($$)
+      kubernetes_version: "1.22.6"
+      node_groups:
+        - name: shared
+          node_size: D8s (8 vCores, 32 GiB memory)
+          min_size: 1
+          max_size: 10
+  required:
+    - node_groups
+  properties:
+    kubernetes_version:
+      type: string
+      title: Kubernetes version
+      description: The version of Kubernetes that should be used for this cluster. You will be able to upgrade this version after creating the cluster.
+      enum:
+        - "1.23.5"
+        - "1.23.3"
+        - "1.22.6"
+        - "1.22.4"
+        - "1.21.9"
+        - "1.21.7"
+    node_groups:
+      type: array
+      title: Node groups
+      description: Number of node groups to provision.
+      minItems: 1
+      items:
+        type: object
+        title: Node group
+        description: Configuration of a node group.
+        required:
+          - name
+          - node_size
+          - min_size
+          - max_size
+        properties:
+          name:
+            type: string
+            title: Name
+            description: The name of this node group.
+            pattern: "[a-z]{1,}[a-z0-9]{0,11}"
+            minlength: 1
+            maxlength: 12
+          min_size:
+            type: number
+            title: Minimum size
+            description: Minimum number of instances in the node group.
+            default: 1
+            minimum: 1
+            maximum: 1000
+          max_size:
+            type: number
+            title: Maximum size
+            description: Maximum number of instances in the node group.
+            default: 10
+            minimum: 1
+            maximum: 1000
+          node_size:
+            type: string
+            title: Compute size
+            description: Compute size to use in the primary node group (B = Burstable, D = General Purpose, E = Memory Optimized, F = Compute Optimized).
+            enum:
+              - B2s (2 vCores, 4 GiB memory)
+              - B2ms (2 vCores, 8 GiB memory)
+              - B4ms (4vCores, 16 GiB memory)
+              - B8ms (8 vCores, 32 GiB memory)
+              - B16ms (16 vCores, 64 GiB memory)
+              - DS2 (2 vCores, 7 GiB memory)
+              - DS3 (4 vCores, 14 GiB memory)
+              - D2s (2 vCores, 8 GiB memory)
+              - D4s (4 vCores, 16 GiB memory)
+              - D8s (8 vCores, 32 GiB memory)
+              - D16s (16 vCores, 64 GiB memory)
+              - D32s (32 vCores, 64 GiB memory)
+              - D64s (64 vCores, 256 GiB memory)
+              - E2s (2 vCores, 16 GiB memory)
+              - E4s (4 vCores, 32 GiB memory)
+              - E8s (8 vCores, 64 GiB memory)
+              - E16s (8 vCores, 128 GiB memory)
+              - E32s (32 vCores, 256 GiB memory)
+              - E64s (64 vCores, 432 GiB memory)
+              - F2s (2 vCores, 4 GiB memory)
+              - F4s (4 vCores, 8 GiB memory)
+              - F8s (8 vCores, 16 GiB memory)
+              - F16s (16 vCores, 32 GiB memory)
+              - F32s (32 vCores, 64 GiB memory)
+              - F64s (64 vCores, 128 GiB memory)
+    core_services:
+      type: object
+      title: Core Services
+      description: Configure core services in Kubernetes for Massdriver to manage.
+      required: []
+      properties:
+        enable_ingress:
+          type: boolean
+          title: Enable Ingress Controller
+          description: Enabling this will create an NGINX Ingress Controller in the cluster, allowing internet traffic to flow into web accessible services within the cluster.
+          default: false
+        azure_dns_zones:
+          type: object
+          title: Azure DNS Zones
+          description: List any Azure DNS Zones associated with this cluster to allow the Kubernetes to automatically manage DNS records and SSL certificates.
+          # not supported by our current MUI implementation, but useful once it is: https://json-schema.org/understanding-json-schema/reference/conditionals.html#id5
+          dependentRequired:
+            dns_zones:
+              - resource_group
+            resource_group:
+              - dns_zones
+          properties:
+            dns_zones:
+              type: array
+              title: Azure DNS zone
+              description: The name of the Azure DNS zone for the AKS Cluster.
+              items:
+                type: string
+                pattern: "[a-zA-Z]+\\.[a-zA-Z]+"
+            resource_group:
+              type: string
+              title: Resource Group name
+              description: The name of the Resource Group the Azure DNS zones are in (all zones must share the same Resource Group).
+              minlength: 1
+              maxlength: 90
+
+connections:
+  required:
+    - azure_service_principal
+    - vnet
+  properties:
+    azure_service_principal:
+      $ref: massdriver/azure-service-principal
+    vnet:
+      $ref: massdriver/azure-virtual-network
+
+artifacts:
+  required:
+    - kubernetes_cluster
+  properties:
+    kubernetes_cluster:
+      $ref: massdriver/kubernetes-cluster
+
+ui:
+  ui:order:
+    - kubernetes_version
+    - node_groups
+    - core_services
+    - "*"
+  node_groups:
+    items:
+      ui:order:
+        - name
+        - node_size
+        - min_size
+        - max_size
+        - "*"
+  core_services:
+    ui:order:
+      - enable_ingress
+      - azure_dns_zones
+      - "*"

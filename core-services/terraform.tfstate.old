@@ -1,0 +1,1392 @@
+{
+  "version": 4,
+  "terraform_version": "1.1.8",
+  "serial": 100,
+  "lineage": "9a1f5f4f-d478-bb61-dac4-d3a682b05de1",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "data",
+      "type": "azurerm_kubernetes_cluster",
+      "name": "cluster",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "aci_connector_linux": [],
+            "agent_pool_profile": [
+              {
+                "count": 1,
+                "enable_auto_scaling": false,
+                "enable_node_public_ip": false,
+                "max_count": 0,
+                "max_pods": 30,
+                "min_count": 0,
+                "name": "default",
+                "node_labels": {},
+                "node_public_ip_prefix_id": "",
+                "node_taints": [],
+                "orchestrator_version": "1.23.3",
+                "os_disk_size_gb": 128,
+                "os_type": "Linux",
+                "tags": {},
+                "type": "VirtualMachineScaleSets",
+                "upgrade_settings": [],
+                "vm_size": "Standard_B2s",
+                "vnet_subnet_id": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f/resourceGroups/local-dev/providers/Microsoft.Network/virtualNetworks/local-dev-vnet-0000/subnets/default",
+                "zones": []
+              },
+              {
+                "count": 1,
+                "enable_auto_scaling": true,
+                "enable_node_public_ip": false,
+                "max_count": 100,
+                "max_pods": 30,
+                "min_count": 1,
+                "name": "michael",
+                "node_labels": {},
+                "node_public_ip_prefix_id": "",
+                "node_taints": [],
+                "orchestrator_version": "1.23.3",
+                "os_disk_size_gb": 128,
+                "os_type": "Linux",
+                "tags": {
+                  "md-manifest": "aks",
+                  "md-project": "local",
+                  "md-target": "dev"
+                },
+                "type": "VirtualMachineScaleSets",
+                "upgrade_settings": [],
+                "vm_size": "Standard_B2s",
+                "vnet_subnet_id": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f/resourceGroups/local-dev/providers/Microsoft.Network/virtualNetworks/local-dev-vnet-0000/subnets/default",
+                "zones": []
+              },
+              {
+                "count": 1,
+                "enable_auto_scaling": true,
+                "enable_node_public_ip": false,
+                "max_count": 100,
+                "max_pods": 30,
+                "min_count": 1,
+                "name": "michael2",
+                "node_labels": {},
+                "node_public_ip_prefix_id": "",
+                "node_taints": [],
+                "orchestrator_version": "1.23.3",
+                "os_disk_size_gb": 128,
+                "os_type": "Linux",
+                "tags": {
+                  "md-manifest": "aks",
+                  "md-project": "local",
+                  "md-target": "dev"
+                },
+                "type": "VirtualMachineScaleSets",
+                "upgrade_settings": [],
+                "vm_size": "Standard_B2s",
+                "vnet_subnet_id": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f/resourceGroups/local-dev/providers/Microsoft.Network/virtualNetworks/local-dev-vnet-0000/subnets/default",
+                "zones": []
+              }
+            ],
+            "api_server_authorized_ip_ranges": [],
+            "azure_active_directory_role_based_access_control": [
+              {
+                "admin_group_object_ids": [],
+                "azure_rbac_enabled": true,
+                "client_app_id": "",
+                "managed": true,
+                "server_app_id": "",
+                "tenant_id": "565f19fb-40ea-44d1-8ae8-9912a017ef09"
+              }
+            ],
+            "azure_policy_enabled": false,
+            "disk_encryption_set_id": "",
+            "dns_prefix": "local-dev-aks-0000-dns",
+            "fqdn": "local-dev-aks-0000-dns-7cad5b0e.hcp.eastus.azmk8s.io",
+            "http_application_routing_enabled": false,
+            "http_application_routing_zone_name": "",
+            "id": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f/resourceGroups/local-dev/providers/Microsoft.ContainerService/managedClusters/local-dev-aks-0000",
+            "identity": [
+              {
+                "identity_ids": [],
+                "principal_id": "850afa68-7787-4bc8-ae90-25402b927d15",
+                "tenant_id": "565f19fb-40ea-44d1-8ae8-9912a017ef09",
+                "type": "SystemAssigned"
+              }
+            ],
+            "ingress_application_gateway": [],
+            "key_vault_secrets_provider": [],
+            "kube_admin_config": [
+              {
+                "client_certificate": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZIVENDQXdXZ0F3SUJBZ0lRU0J0QTRKQWNGenF4SnRPOHVyaXJaakFOQmdrcWhraUc5dzBCQVFzRkFEQU4KTVFzd0NRWURWUVFERXdKallUQWVGdzB5TWpBMU1qQXhPREk1TVRoYUZ3MHlOREExTWpBeE9ETTVNVGhhTURBeApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1SVXdFd1lEVlFRREV3eHRZWE4wWlhKamJHbGxiblF3CmdnSWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUNEd0F3Z2dJS0FvSUNBUUN0RmRkcGNZcDN1R1NwWTk0OVQ3WGgKV003enBIdTlVUnpJQXN4elJUMTkxWllZUFJuY2xPbnNUcHAyd0p4L1drVVBKbTdoVUoyd1RRZXpnM1BUcm5Ucwp1UGphQnlub281WHBmaVpuYWg0elQ5MGlBQ1pFN3prZ21SeDZFYjJCYWJleGx0ZXNvcEJocXBhM2M3WFVMSlZLCmFQcXdHMEdlNVp6VmVCRU5MZDVxSUQyYUZwOFplbFF0eHFQZXlmUVFlbXMvSGR1VmNwQW1NbDByaERHbHR0dmUKemdsOTB6Q1NBYmN1Qll5ODhqcVpob21ETnpyY09YVDQ2eUszMC90enRld3hUWHZ6clV3V2lBVjBLWXBEOVhVZQpma0JrUko4VkFPYW1ERGpJVlEwOTlYV2N5ckJ1cHlKTVNvanUrT0dXZ3JFMUkwMGNZSGs5SzRtaElKbGVnN01ZCjVCdkQ0bE5CbHczMVUvSHQ0VWM1SFQ2aFNjS1hhQTg1MXVjcElVSmRXTTBRNVE2VUMxaFdVYnNTMUkwTHd0M2QKTWQ5dGRVbEozYXVwQ1U0VldydVBNTzFEQytMaWliZEMyYkpJNVlVRVpOa2pqK0w0YU1RODhOT0FMdGN5UjVpegoydUhjaVQrVlVIQ004MkliVjdMRm1Za3R2cUlONy8zSHBrdGg4RnB1MEJYZmFSWGhzNmRjVUhZN1BFK3FqR0ZHCjJiNWt6V2g5ZTMzSzNiQmxKSG1XY1FMUU9BdG9uNWNZa3RiNVl0Q0R3b1hnUXlsSVVvYnNSWkRvVm0xT1FNMFcKaDJYbjBCaDlPOVU2ZVp1a0s2WHVFbnNVc3Z1VFA5bThrWDNtSnhyaXZFVUZ3MjZDVm53Sjh3V1IyeWZiUE9SSwpMdEJ3SElmQjQ0MWVaYTQ2MGdBTER3SURBUUFCbzFZd1ZEQU9CZ05WSFE4QkFmOEVCQU1DQmFBd0V3WURWUjBsCkJBd3dDZ1lJS3dZQkJRVUhBd0l3REFZRFZSMFRBUUgvQkFJd0FEQWZCZ05WSFNNRUdEQVdnQlNkd2FSa2N2THYKeDREVXhBOHkwNC9rbE1LQ2FUQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FnRUFLWk8vVGIzZTR6ZTJQTzVWWVBtOQpFMURjRG5SZ0lhaHB5Q2VpWFVsa2p2Zm95LzFCdXRJMDVpNzJvdVJDRnNIY3lUbXRsSTRPRzNZb3FHNlo5bTY5ClZySGphcXN3OFNXdUFDMjQ1NHZEMUpFRlRZVHJtQ2QreStlODdBeGxSNkFHaXVZd011UHJ4dlg0d01URzVFTlQKVVlMbHFCVUQxNnRmNlBXeUxxSXNBZC80MFpKUnZMeUp3K0k3MVlnRU1Hb2dnbEErVlVkZTdEdnd3S2tNR21heApEcnlRa3FMczhyOURtWU9qZjlmMkJ0Nm5RVE1PUUcvNzRuOFBZTk5FWXAzb2dYaWFBVTRtMFNJTjNzL1piODVoCm1WdmthOVBueHplSVFoRVBhSlVXNDVaQVdxVkxzd0t5dUlZUktNMVJDYXlLMWxrMjJpNFdyZ3hlWFRVTTRCVHIKMDhxVDRYWnl2UmhjTThBejRCK09rdnM3SzNNK2ZCL1Y0cXF6RXB0UUVrNTczUVh4WmtjNU1RTW0yV2tMSEM2cAptdG85SnU3bUowbU5tTkJmKzZOdVBUeEdiY2lZWWI3SzFIaGEwMGdjZ1hvRTVzVFJ3dzVMSlVQczB0UGZJcTB6ClpnUTFnVXR4YWdOYlVjRmJDaHY0cG5NejBmYlBnVmNhTUduNWowNCtsR1FnUXFCT3BuYmdiTmhUeGJJMHE0VE0KVnVRaGJKK1Z1OGV2dU40R1FJSG93a09HUDhoaUtaVXpwRTdPakNYNHVnS3lySXdyYUJzVXNtcUM2SW1LTjd3VgphYmZYakNoR1JjbHEyU0g0TXNGcjM2V0IyYmNYYkc5UXYvUHRwcTRwMEJrNWppdHNjQURWcms0R1lHVHN6dXQ2CmhKZ0VpWnhvbXdkbG9NNzE4MEorRzZ3PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==",
+                "client_key": "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlKSndJQkFBS0NBZ0VBclJYWGFYR0tkN2hrcVdQZVBVKzE0VmpPODZSN3ZWRWN5QUxNYzBVOWZkV1dHRDBaCjNKVHA3RTZhZHNDY2YxcEZEeVp1NFZDZHNFMEhzNE56MDY1MDdMajQyZ2NwNktPVjZYNG1aMm9lTTAvZElnQW0KUk84NUlKa2NlaEc5Z1dtM3NaYlhyS0tRWWFxV3QzTzExQ3lWU21qNnNCdEJudVdjMVhnUkRTM2VhaUE5bWhhZgpHWHBVTGNhajNzbjBFSHByUHgzYmxYS1FKakpkSzRReHBiYmIzczRKZmRNd2tnRzNMZ1dNdlBJNm1ZYUpnemM2CjNEbDArT3NpdDlQN2M3WHNNVTE3ODYxTUZvZ0ZkQ21LUS9WMUhuNUFaRVNmRlFEbXBndzR5RlVOUGZWMW5NcXcKYnFjaVRFcUk3dmpobG9LeE5TTk5IR0I1UFN1Sm9TQ1pYb096R09RYncrSlRRWmNOOVZQeDdlRkhPUjArb1VuQwpsMmdQT2RibktTRkNYVmpORU9VT2xBdFlWbEc3RXRTTkM4TGQzVEhmYlhWSlNkMnJxUWxPRlZxN2p6RHRRd3ZpCjRvbTNRdG15U09XRkJHVFpJNC9pK0dqRVBQRFRnQzdYTWtlWXM5cmgzSWsvbFZCd2pQTmlHMWV5eFptSkxiNmkKRGUvOXg2WkxZZkJhYnRBVjMya1Y0Yk9uWEZCMk96eFBxb3hoUnRtK1pNMW9mWHQ5eXQyd1pTUjVsbkVDMERnTAphSitYR0pMVytXTFFnOEtGNEVNcFNGS0c3RVdRNkZadFRrRE5Gb2RsNTlBWWZUdlZPbm1icEN1bDdoSjdGTEw3Cmt6L1p2SkY5NWljYTRyeEZCY051Z2xaOENmTUZrZHNuMnp6a1NpN1FjQnlId2VPTlhtV3VPdElBQ3c4Q0F3RUEKQVFLQ0FnQkFTbWVjRS8rQjNxME5Pam8zZmQ4cUdBbXUrRDY2SUdIWGJTcXgrbHNQM1lFRitkUWNXZmZWdlpDawpZWUQvMFBEcjRyTzIzM0hqSlltaHhVY0ZycnhobllkWnZPVjFNeVlnOTZtZUtnMlRzNnVJMEpObWNaRS9xWCtwClcrT1BLVXlCRzIxN0Exc3IyK2hsdGdZcERISmJsRWpobHc0MXprWUdDTFlVdGgveVBZMkVLYmpwQnNZenhwL2gKeGhQdzl2ZlZGdXNVUk55RVE1clY2aUZpMDF3eUUwZjFRN2U3MUFWTmcrUTEzcWVqbFJTSTk3L1dRMFZPbkZCbQpCY2hWdjVJKzhmQURvREF1QWxJOFJwM0VCbTE5YVJuVDVLVk9jT283YlRpK09ORlZYVkpWYmZoQThiWE1ycmJVClJQL09IemRoYkg1Yzl2eXhtdlZoTXpHa3FMaWgvckxrWSt0aWIvSXZIRS9odlNxL0tNdm5QTWl4QVdEN1BWQ1cKSjBUV1BMNXpaUFBhRHBHcDRabmJkaXdETTBrbVp2TjkvUGhYUjh3aWQ4MnZjSUZ0R0VZK0NJSk43MXRwS3ZkSApuYnVaYmZlTDBDWTE5SklETGRrWTZFN0N4MW1YRE5aNzFlN01mb0EzNHU1QmdidFZkOHhNZFBFWUxZZnBtQ3BoCk5UanlYa0VTM3hkbFE5MHNCQVBTOXdodVVhV01DMFBPNmMycjNZakxZa2VPQ2pxUU03Z1hnZkVuaGR4cmM2c2MKelJwMTNDZ3pMZ2JhZlBpQmpGcklnZnVsTWNuMzFIK2MwVzV5ZUVYalllTXo5cFlIeUhIME1yOHZSS1JLNXYwUgpIalhkME5UeHBIRzdsM2NvaHV0MS91N05xYm9XUkEvSzhFUlp3anBhQnBBQ3o5L1ZJUUtDQVFFQXlMazFtOUJWCk5yRlNYb0YzSTN3YUQwZU1OK0pOOVAyRkI4Sm52RUlucW83WmZWMXR0RHUrTE9kR2wwRmRaN20zbFI2YmgrT0YKZjg0bHU3TnBxamFRc2ZWUzlYaENBZkc4MFByZ3hadUZiUlllTVdVRW9wVUdwWVlmSjhhanJRN3pFYSsrT2ZvSgpYQ2ZvK2FBeFFMS1VKc3hUTVJ5NGFWdXpzZkNiODdpbm5pSXJsc3l3N1E4WkU3cDRueTZpcm9pc2hnZENyc0tuCmVRWGkyUDJ0NlJQR0NPb3VYazc2aHRGbkNQZWdDMjNFMnlnWWtOV3RzYnVnZFVyc0FXMUJrWU00UDlkL2tNV2YKOSs1eHVBZmJ1SERyQ0FYTG9GSUFDRHZXaTg3dGhMRVQ2cjE0VGFtSVZsU2xDSGg3YVdGN3dCZkJkQ1dTWnl5bwpmOExnc0x1b0Q1c0dId0tDQVFFQTNNQXI2dlZSRVRMWUNraG9ES3Z2MUpEdnVyK3RpSFdvYXZJSHNxOXkvQ2JPCk4xQm8yaFhrQVpSSFBSU1BsUHp4OXlIS3lDZlZZWFVmNXk4REZCeG5DdGZjRTlqU3pWclJwejc2Ui9JV0RQRW8KbWlhdnNZZldEM0N2WHN1MG1TQUJ1d09ib1B6YVlkWDNTT1JFVEtWOHc5cFpkanRXOHhabDhIYTdoRWZ1T0NHRgpXNzRZNXA5L3lkMWtTMEZDZStpWFNpMjJ5SUNIQWkxdzFlYWh0OElKd290ZnU5ZHhGVkFlQU9RTGZJUXF5T09tCllOc2N6K1dpV3ErMVMrR0NGYnpBekJibFZ0Q0JJbDhkdXhVZ0d5OWthdDFPZmZKR1NyVm9TOGt5cTk0aEVmZEEKb2tWUlptcnVMNEhRcEtVS1ZMUGlRT01qbnVFYjZGdnphQzE3WjFqOUVRS0NBUUFjTjVVbXMxSFhYM1FoM3ZkZApvS3VWTEV5MDZuWmxFMktwSlpZcHErOGhsZlZUSDFnMXR4UlVBYXMxeGpXWVNFNWJnek1BRm1jRkFYamlleVZHCmpXY243VUhkU2l1VlZHTmp5WERodHF3NkdwcmgvTDU3RUpJZm9Nd3Via2xDSWREZjBxSGVTcDBZUEhBTzc0c2MKK2ozRGVvUFRhcU11QkhzdGI1S3MzMitJMW1ya1J5QTBJeVEyVnNkd01VRWpZZ2xHeWl5QW50S21POEtaR0loagpOS2xwUldxQlRYOEFodDJDTURWcWhlTGZvREpiNGY0SjkwTm1XY0wxckdORVRuc1ExbjJUWDRUT2VORzV1amtVCkk2T1d2Q0hWQnRJRVZrMGgyRlFoakRjdGo3Y2l5OHRqdjRCM3dXQXYvMGxEUnRPbVBVWG9oU21tMUVGNzl0VjQKWkNXbkFvSUJBR3BIOTUwUzZTbnZvY1lwb0RiaG5RRnBtcEg5OFEydklCd0ZWU0Y1aVZIUFdSK1dqalRacjBIMwpZdWtNZWlpUU0rcjVFUW1XN0F3VStQdzBUVFlraXBQVTQ3ZUdmOCt3OXhtZm41NTk5cEhhbGVMSjEzTVE1RVhnCnlmNUk4elY2REhzK3ZISWc2ditKcFpvcGxKeVdYR0JyUXdGQ2hwVlk1bEdFeUxsaWJGWUlCWTNyRTFBTjROZU8KeU5mV25xekxpZk9EMk9ubHY1cVR5Q3lqOHA1blJJMnV6clBBZ1VoeW4wOXNlLzlDSHR0RGgzcEFaRG5QNUgvbQo4dEdLekRlcy9lSUU3L3dCUFBzUWNsNzlSOHp1MzFqNEhlOVRjdlpMS3VDNkNMUm9xT0ZlZW5ibUNzL1ZrY0c3CnJYbG5vSGF4ZUxBbTY2SjEzUnJkRW03STN3NGQ4UkVDZ2dFQUhRTCswaURZT29pZjhoUDJrZm5ieFNCUmdoVEEKMGFvWlZLYXZwbXNEK2liaGJjOUYzSTRGWFpQUDZVdG1WN0dXc1FmZkYybTh1QUpzV3g4dGNHVGhBSjlOcm0zcgpFVnVwVzFZQkVwNE1SdGttVDNvcUhTY2F2Z1UvWU5wLzhtVndSMFhhTFIvMzVWKy9NbDY1VFpkcGtoMitxNk1ZCkNZb0ZPNVlBYS9UV1FyVnE2RUNKR2UwL1hVQWRrN2RpZ2NDN0VCVW5hMTR3eXoxS0YrR2o1WFpGN0QxeGllZi8KT0NWeTM3a0k3bDFVSEQ1RDkvVnUwNzMvK3RFM0kxNGN0dnVuT1dhanFvVE1EbjBGY2pSWUQyNHVWWVpsNXMvTApUNXppRVhmZkFtdDNOUjNQRWZWd2dXZk9aZys2aytJNWZoVzYxNldOVS92QSt2UU5xeTZsNVJTZ1h3PT0KLS0tLS1FTkQgUlNBIFBSSVZBVEUgS0VZLS0tLS0K",
+                "cluster_ca_certificate": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUU2VENDQXRHZ0F3SUJBZ0lSQU9tT3B0UmpKZkJ0TFhWM0dUb2llUnd3RFFZSktvWklodmNOQVFFTEJRQXcKRFRFTE1Ba0dBMVVFQXhNQ1kyRXdJQmNOTWpJd05USXdNVGd5T1RFNFdoZ1BNakExTWpBMU1qQXhPRE01TVRoYQpNQTB4Q3pBSkJnTlZCQU1UQW1OaE1JSUNJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBZzhBTUlJQ0NnS0NBZ0VBCjQ2R0UreVVwQVpyZkcxVUpxRHhIb1pJZzN3MkwrOU1wdUNkYm9xeUs1dW0zd0ExSUdFNHpsbEJyR0N2aEc4bU4KRGQveElac3BsRDRpOFF1Q2ExSzlLRlFUSitlZkpwSis2cW9HRHJ3NWo4V2liWjlpWnlBejF1aWRONE9acEFLeApCU2FVd1NSM2c0WjYvWDErS20zdU1LOHdaUUVaWVJCelI4c1lWZjJsRlM4Y3ZLVHl1ZWM3dUQ2Ujg5M0hab2prCmZ5bVJoMldVcjNGM1FoNy9kemVmeGFPNVZVTks0L0NoZC9sb0tnUGppMVBGNmdWWFV2anhKRS9kZ1N6SG5JTTQKczRYME9UYWZLMXdzL0l3MEJ6aHdocTVmVkJ0TTEwajlTL2tTNXZ2c2pyL0Z4VXFmMDdWZi95b25xQWJwUkFCNQpiQStOTmFzVFl4U0d3NVZ4QmQvQlBIa2pBdFNzS1c2Vld3cEEvaitwdnlSaHNpRDNoc3ZWaW1zSDA5NUd4N1JxCk5YZlFzMWdhTjQ5TXp0T1BPRDFZVTgvbEM1N0lUK2xpekVlaEhNUlEzd2FSZUhUSUZlZnYwc0tRdFpNVFpUNUUKT2t4Wmh3TkJmMnBwMmJneEJQL0hyQXpKSHlYc3E2N3lkNnRrT29DQXVZcS9pai9LUC9BRmRVTlE3REZUU2tvLwpCN3pYTittNHNXSm9DY2tXQ0QzUHNHbU5PV1U3ckgrU2ZmU2ttNytreEFWSUE3WmJCMldaSjkyZ1l4Tk1sWlFtCmI0ZXdjSVRmbnVOSFZHNVBXdjdPT3RZd095VUNlRzR3MGF0Q2E1L1JQSVpSSXZvM3Y0RmxjZTNaNS9UcHVXdlQKZmFMTnNWQ25ZV1NGZVpOdS9EdEVGaDU0QUFiS2FYWm9yYjJXamtaVjBjOENBd0VBQWFOQ01FQXdEZ1lEVlIwUApBUUgvQkFRREFnS2tNQThHQTFVZEV3RUIvd1FGTUFNQkFmOHdIUVlEVlIwT0JCWUVGSjNCcEdSeTh1L0hnTlRFCkR6TFRqK1NVd29KcE1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQ0FRQkFxZWl0QnhsV01LRUREN1lCSit0TXR3S1kKK3drK2RVaUdFVXJyK1I3Y1BPNnhvRHV4Nmx2NS9GbUdsNVpCNDZkaUNaMDA2R2wwWjYrQTQyQmgvT0ZZWVhkTQpUMWNhdTAyZDcwVytWZTJTeGhnRFVEWjZDazVaSTA0aEpCOUZIS1k3bnQ2R0NOZG9TMkFOeExWMGw3UElVVW9mCnNEYzZId2p5RkVmZHdzSmJPdFNNbTVna3ZjRUJNdTdDU0xjdVhyMG04VHlGWWhRMWlwaFA0ejV5a00xNDFWdGYKWXdic3J2U085S1FQckp6T1lRb0VES21hTVdGVGF0Nlo1SkgwNmVoOE1ML0p5YWlIaVdmeU5KZHQyd2VPVHRaYwpvVWhrWHZxSnoxcWJRUkQ0Wit1b2JyT0E0T2JVc3c1REhhT2VuL0JXVHA3QkIxTnhJSkdCMm5sSm02SEdldXlZCmo3T3hlc1VwYUUzWXNITTRqRmRZQ1pEWTQ4WXdMYUdZbi84NVZTUGhWWWduUUwxZzFHSFI1UTBUQ1ZtNElLNmkKMmxpbFVEdGFIWnhTaUgvR1VzbXlVV1pSOG0yYWdZM1lYeGNYeFZINWVTVE80aElqeHVKeEFwVjhpL01ENDB2cgpIREhEUjVrNE5lNTVXMzZPT3A0R3pteGl1dDd5YWJSaUt4VXFGS1JuVTduNDBMUFJ3VmxGOUhVeXcwK1NmdkVyCmZzQ3JVQlcrSVZFM0xyR3ZmamZvTC9DbkVhUlF1Wm8zdmNuRHVtS0tWR3VnSlNDR1U1NVdURVRwOWszdmJocnkKWjJyWW81ZGpoa2VlM1pOTEJjUGtSZnhnblp2QmRMcGFJanlUZXJTZWJrYUNQcHdQUTU3Ym9XSUhCOUR2ZGdYMgpDSXdTYmpCZ2xpTDczUWNhdGc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==",
+                "host": "https://local-dev-aks-0000-dns-7cad5b0e.hcp.eastus.azmk8s.io:443",
+                "password": "9493a47065b76b2d350bbdd5c992336e5c2faf6cb0e9125a100e63c2c258e7ea02cc8f6d79aeec5f8785784e47d4b1b017749b05000fd60567f906076752fb7f",
+                "username": "clusterAdmin_local-dev_local-dev-aks-0000"
+              }
+            ],
+            "kube_admin_config_raw": "apiVersion: v1\nclusters:\n- cluster:\n    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUU2VENDQXRHZ0F3SUJBZ0lSQU9tT3B0UmpKZkJ0TFhWM0dUb2llUnd3RFFZSktvWklodmNOQVFFTEJRQXcKRFRFTE1Ba0dBMVVFQXhNQ1kyRXdJQmNOTWpJd05USXdNVGd5T1RFNFdoZ1BNakExTWpBMU1qQXhPRE01TVRoYQpNQTB4Q3pBSkJnTlZCQU1UQW1OaE1JSUNJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBZzhBTUlJQ0NnS0NBZ0VBCjQ2R0UreVVwQVpyZkcxVUpxRHhIb1pJZzN3MkwrOU1wdUNkYm9xeUs1dW0zd0ExSUdFNHpsbEJyR0N2aEc4bU4KRGQveElac3BsRDRpOFF1Q2ExSzlLRlFUSitlZkpwSis2cW9HRHJ3NWo4V2liWjlpWnlBejF1aWRONE9acEFLeApCU2FVd1NSM2c0WjYvWDErS20zdU1LOHdaUUVaWVJCelI4c1lWZjJsRlM4Y3ZLVHl1ZWM3dUQ2Ujg5M0hab2prCmZ5bVJoMldVcjNGM1FoNy9kemVmeGFPNVZVTks0L0NoZC9sb0tnUGppMVBGNmdWWFV2anhKRS9kZ1N6SG5JTTQKczRYME9UYWZLMXdzL0l3MEJ6aHdocTVmVkJ0TTEwajlTL2tTNXZ2c2pyL0Z4VXFmMDdWZi95b25xQWJwUkFCNQpiQStOTmFzVFl4U0d3NVZ4QmQvQlBIa2pBdFNzS1c2Vld3cEEvaitwdnlSaHNpRDNoc3ZWaW1zSDA5NUd4N1JxCk5YZlFzMWdhTjQ5TXp0T1BPRDFZVTgvbEM1N0lUK2xpekVlaEhNUlEzd2FSZUhUSUZlZnYwc0tRdFpNVFpUNUUKT2t4Wmh3TkJmMnBwMmJneEJQL0hyQXpKSHlYc3E2N3lkNnRrT29DQXVZcS9pai9LUC9BRmRVTlE3REZUU2tvLwpCN3pYTittNHNXSm9DY2tXQ0QzUHNHbU5PV1U3ckgrU2ZmU2ttNytreEFWSUE3WmJCMldaSjkyZ1l4Tk1sWlFtCmI0ZXdjSVRmbnVOSFZHNVBXdjdPT3RZd095VUNlRzR3MGF0Q2E1L1JQSVpSSXZvM3Y0RmxjZTNaNS9UcHVXdlQKZmFMTnNWQ25ZV1NGZVpOdS9EdEVGaDU0QUFiS2FYWm9yYjJXamtaVjBjOENBd0VBQWFOQ01FQXdEZ1lEVlIwUApBUUgvQkFRREFnS2tNQThHQTFVZEV3RUIvd1FGTUFNQkFmOHdIUVlEVlIwT0JCWUVGSjNCcEdSeTh1L0hnTlRFCkR6TFRqK1NVd29KcE1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQ0FRQkFxZWl0QnhsV01LRUREN1lCSit0TXR3S1kKK3drK2RVaUdFVXJyK1I3Y1BPNnhvRHV4Nmx2NS9GbUdsNVpCNDZkaUNaMDA2R2wwWjYrQTQyQmgvT0ZZWVhkTQpUMWNhdTAyZDcwVytWZTJTeGhnRFVEWjZDazVaSTA0aEpCOUZIS1k3bnQ2R0NOZG9TMkFOeExWMGw3UElVVW9mCnNEYzZId2p5RkVmZHdzSmJPdFNNbTVna3ZjRUJNdTdDU0xjdVhyMG04VHlGWWhRMWlwaFA0ejV5a00xNDFWdGYKWXdic3J2U085S1FQckp6T1lRb0VES21hTVdGVGF0Nlo1SkgwNmVoOE1ML0p5YWlIaVdmeU5KZHQyd2VPVHRaYwpvVWhrWHZxSnoxcWJRUkQ0Wit1b2JyT0E0T2JVc3c1REhhT2VuL0JXVHA3QkIxTnhJSkdCMm5sSm02SEdldXlZCmo3T3hlc1VwYUUzWXNITTRqRmRZQ1pEWTQ4WXdMYUdZbi84NVZTUGhWWWduUUwxZzFHSFI1UTBUQ1ZtNElLNmkKMmxpbFVEdGFIWnhTaUgvR1VzbXlVV1pSOG0yYWdZM1lYeGNYeFZINWVTVE80aElqeHVKeEFwVjhpL01ENDB2cgpIREhEUjVrNE5lNTVXMzZPT3A0R3pteGl1dDd5YWJSaUt4VXFGS1JuVTduNDBMUFJ3VmxGOUhVeXcwK1NmdkVyCmZzQ3JVQlcrSVZFM0xyR3ZmamZvTC9DbkVhUlF1Wm8zdmNuRHVtS0tWR3VnSlNDR1U1NVdURVRwOWszdmJocnkKWjJyWW81ZGpoa2VlM1pOTEJjUGtSZnhnblp2QmRMcGFJanlUZXJTZWJrYUNQcHdQUTU3Ym9XSUhCOUR2ZGdYMgpDSXdTYmpCZ2xpTDczUWNhdGc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==\n    server: https://local-dev-aks-0000-dns-7cad5b0e.hcp.eastus.azmk8s.io:443\n  name: local-dev-aks-0000\ncontexts:\n- context:\n    cluster: local-dev-aks-0000\n    user: clusterAdmin_local-dev_local-dev-aks-0000\n  name: local-dev-aks-0000\ncurrent-context: local-dev-aks-0000\nkind: Config\npreferences: {}\nusers:\n- name: clusterAdmin_local-dev_local-dev-aks-0000\n  user:\n    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZIVENDQXdXZ0F3SUJBZ0lRU0J0QTRKQWNGenF4SnRPOHVyaXJaakFOQmdrcWhraUc5dzBCQVFzRkFEQU4KTVFzd0NRWURWUVFERXdKallUQWVGdzB5TWpBMU1qQXhPREk1TVRoYUZ3MHlOREExTWpBeE9ETTVNVGhhTURBeApGekFWQmdOVkJBb1REbk41YzNSbGJUcHRZWE4wWlhKek1SVXdFd1lEVlFRREV3eHRZWE4wWlhKamJHbGxiblF3CmdnSWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUNEd0F3Z2dJS0FvSUNBUUN0RmRkcGNZcDN1R1NwWTk0OVQ3WGgKV003enBIdTlVUnpJQXN4elJUMTkxWllZUFJuY2xPbnNUcHAyd0p4L1drVVBKbTdoVUoyd1RRZXpnM1BUcm5Ucwp1UGphQnlub281WHBmaVpuYWg0elQ5MGlBQ1pFN3prZ21SeDZFYjJCYWJleGx0ZXNvcEJocXBhM2M3WFVMSlZLCmFQcXdHMEdlNVp6VmVCRU5MZDVxSUQyYUZwOFplbFF0eHFQZXlmUVFlbXMvSGR1VmNwQW1NbDByaERHbHR0dmUKemdsOTB6Q1NBYmN1Qll5ODhqcVpob21ETnpyY09YVDQ2eUszMC90enRld3hUWHZ6clV3V2lBVjBLWXBEOVhVZQpma0JrUko4VkFPYW1ERGpJVlEwOTlYV2N5ckJ1cHlKTVNvanUrT0dXZ3JFMUkwMGNZSGs5SzRtaElKbGVnN01ZCjVCdkQ0bE5CbHczMVUvSHQ0VWM1SFQ2aFNjS1hhQTg1MXVjcElVSmRXTTBRNVE2VUMxaFdVYnNTMUkwTHd0M2QKTWQ5dGRVbEozYXVwQ1U0VldydVBNTzFEQytMaWliZEMyYkpJNVlVRVpOa2pqK0w0YU1RODhOT0FMdGN5UjVpegoydUhjaVQrVlVIQ004MkliVjdMRm1Za3R2cUlONy8zSHBrdGg4RnB1MEJYZmFSWGhzNmRjVUhZN1BFK3FqR0ZHCjJiNWt6V2g5ZTMzSzNiQmxKSG1XY1FMUU9BdG9uNWNZa3RiNVl0Q0R3b1hnUXlsSVVvYnNSWkRvVm0xT1FNMFcKaDJYbjBCaDlPOVU2ZVp1a0s2WHVFbnNVc3Z1VFA5bThrWDNtSnhyaXZFVUZ3MjZDVm53Sjh3V1IyeWZiUE9SSwpMdEJ3SElmQjQ0MWVaYTQ2MGdBTER3SURBUUFCbzFZd1ZEQU9CZ05WSFE4QkFmOEVCQU1DQmFBd0V3WURWUjBsCkJBd3dDZ1lJS3dZQkJRVUhBd0l3REFZRFZSMFRBUUgvQkFJd0FEQWZCZ05WSFNNRUdEQVdnQlNkd2FSa2N2THYKeDREVXhBOHkwNC9rbE1LQ2FUQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FnRUFLWk8vVGIzZTR6ZTJQTzVWWVBtOQpFMURjRG5SZ0lhaHB5Q2VpWFVsa2p2Zm95LzFCdXRJMDVpNzJvdVJDRnNIY3lUbXRsSTRPRzNZb3FHNlo5bTY5ClZySGphcXN3OFNXdUFDMjQ1NHZEMUpFRlRZVHJtQ2QreStlODdBeGxSNkFHaXVZd011UHJ4dlg0d01URzVFTlQKVVlMbHFCVUQxNnRmNlBXeUxxSXNBZC80MFpKUnZMeUp3K0k3MVlnRU1Hb2dnbEErVlVkZTdEdnd3S2tNR21heApEcnlRa3FMczhyOURtWU9qZjlmMkJ0Nm5RVE1PUUcvNzRuOFBZTk5FWXAzb2dYaWFBVTRtMFNJTjNzL1piODVoCm1WdmthOVBueHplSVFoRVBhSlVXNDVaQVdxVkxzd0t5dUlZUktNMVJDYXlLMWxrMjJpNFdyZ3hlWFRVTTRCVHIKMDhxVDRYWnl2UmhjTThBejRCK09rdnM3SzNNK2ZCL1Y0cXF6RXB0UUVrNTczUVh4WmtjNU1RTW0yV2tMSEM2cAptdG85SnU3bUowbU5tTkJmKzZOdVBUeEdiY2lZWWI3SzFIaGEwMGdjZ1hvRTVzVFJ3dzVMSlVQczB0UGZJcTB6ClpnUTFnVXR4YWdOYlVjRmJDaHY0cG5NejBmYlBnVmNhTUduNWowNCtsR1FnUXFCT3BuYmdiTmhUeGJJMHE0VE0KVnVRaGJKK1Z1OGV2dU40R1FJSG93a09HUDhoaUtaVXpwRTdPakNYNHVnS3lySXdyYUJzVXNtcUM2SW1LTjd3VgphYmZYakNoR1JjbHEyU0g0TXNGcjM2V0IyYmNYYkc5UXYvUHRwcTRwMEJrNWppdHNjQURWcms0R1lHVHN6dXQ2CmhKZ0VpWnhvbXdkbG9NNzE4MEorRzZ3PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==\n    client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlKSndJQkFBS0NBZ0VBclJYWGFYR0tkN2hrcVdQZVBVKzE0VmpPODZSN3ZWRWN5QUxNYzBVOWZkV1dHRDBaCjNKVHA3RTZhZHNDY2YxcEZEeVp1NFZDZHNFMEhzNE56MDY1MDdMajQyZ2NwNktPVjZYNG1aMm9lTTAvZElnQW0KUk84NUlKa2NlaEc5Z1dtM3NaYlhyS0tRWWFxV3QzTzExQ3lWU21qNnNCdEJudVdjMVhnUkRTM2VhaUE5bWhhZgpHWHBVTGNhajNzbjBFSHByUHgzYmxYS1FKakpkSzRReHBiYmIzczRKZmRNd2tnRzNMZ1dNdlBJNm1ZYUpnemM2CjNEbDArT3NpdDlQN2M3WHNNVTE3ODYxTUZvZ0ZkQ21LUS9WMUhuNUFaRVNmRlFEbXBndzR5RlVOUGZWMW5NcXcKYnFjaVRFcUk3dmpobG9LeE5TTk5IR0I1UFN1Sm9TQ1pYb096R09RYncrSlRRWmNOOVZQeDdlRkhPUjArb1VuQwpsMmdQT2RibktTRkNYVmpORU9VT2xBdFlWbEc3RXRTTkM4TGQzVEhmYlhWSlNkMnJxUWxPRlZxN2p6RHRRd3ZpCjRvbTNRdG15U09XRkJHVFpJNC9pK0dqRVBQRFRnQzdYTWtlWXM5cmgzSWsvbFZCd2pQTmlHMWV5eFptSkxiNmkKRGUvOXg2WkxZZkJhYnRBVjMya1Y0Yk9uWEZCMk96eFBxb3hoUnRtK1pNMW9mWHQ5eXQyd1pTUjVsbkVDMERnTAphSitYR0pMVytXTFFnOEtGNEVNcFNGS0c3RVdRNkZadFRrRE5Gb2RsNTlBWWZUdlZPbm1icEN1bDdoSjdGTEw3Cmt6L1p2SkY5NWljYTRyeEZCY051Z2xaOENmTUZrZHNuMnp6a1NpN1FjQnlId2VPTlhtV3VPdElBQ3c4Q0F3RUEKQVFLQ0FnQkFTbWVjRS8rQjNxME5Pam8zZmQ4cUdBbXUrRDY2SUdIWGJTcXgrbHNQM1lFRitkUWNXZmZWdlpDawpZWUQvMFBEcjRyTzIzM0hqSlltaHhVY0ZycnhobllkWnZPVjFNeVlnOTZtZUtnMlRzNnVJMEpObWNaRS9xWCtwClcrT1BLVXlCRzIxN0Exc3IyK2hsdGdZcERISmJsRWpobHc0MXprWUdDTFlVdGgveVBZMkVLYmpwQnNZenhwL2gKeGhQdzl2ZlZGdXNVUk55RVE1clY2aUZpMDF3eUUwZjFRN2U3MUFWTmcrUTEzcWVqbFJTSTk3L1dRMFZPbkZCbQpCY2hWdjVJKzhmQURvREF1QWxJOFJwM0VCbTE5YVJuVDVLVk9jT283YlRpK09ORlZYVkpWYmZoQThiWE1ycmJVClJQL09IemRoYkg1Yzl2eXhtdlZoTXpHa3FMaWgvckxrWSt0aWIvSXZIRS9odlNxL0tNdm5QTWl4QVdEN1BWQ1cKSjBUV1BMNXpaUFBhRHBHcDRabmJkaXdETTBrbVp2TjkvUGhYUjh3aWQ4MnZjSUZ0R0VZK0NJSk43MXRwS3ZkSApuYnVaYmZlTDBDWTE5SklETGRrWTZFN0N4MW1YRE5aNzFlN01mb0EzNHU1QmdidFZkOHhNZFBFWUxZZnBtQ3BoCk5UanlYa0VTM3hkbFE5MHNCQVBTOXdodVVhV01DMFBPNmMycjNZakxZa2VPQ2pxUU03Z1hnZkVuaGR4cmM2c2MKelJwMTNDZ3pMZ2JhZlBpQmpGcklnZnVsTWNuMzFIK2MwVzV5ZUVYalllTXo5cFlIeUhIME1yOHZSS1JLNXYwUgpIalhkME5UeHBIRzdsM2NvaHV0MS91N05xYm9XUkEvSzhFUlp3anBhQnBBQ3o5L1ZJUUtDQVFFQXlMazFtOUJWCk5yRlNYb0YzSTN3YUQwZU1OK0pOOVAyRkI4Sm52RUlucW83WmZWMXR0RHUrTE9kR2wwRmRaN20zbFI2YmgrT0YKZjg0bHU3TnBxamFRc2ZWUzlYaENBZkc4MFByZ3hadUZiUlllTVdVRW9wVUdwWVlmSjhhanJRN3pFYSsrT2ZvSgpYQ2ZvK2FBeFFMS1VKc3hUTVJ5NGFWdXpzZkNiODdpbm5pSXJsc3l3N1E4WkU3cDRueTZpcm9pc2hnZENyc0tuCmVRWGkyUDJ0NlJQR0NPb3VYazc2aHRGbkNQZWdDMjNFMnlnWWtOV3RzYnVnZFVyc0FXMUJrWU00UDlkL2tNV2YKOSs1eHVBZmJ1SERyQ0FYTG9GSUFDRHZXaTg3dGhMRVQ2cjE0VGFtSVZsU2xDSGg3YVdGN3dCZkJkQ1dTWnl5bwpmOExnc0x1b0Q1c0dId0tDQVFFQTNNQXI2dlZSRVRMWUNraG9ES3Z2MUpEdnVyK3RpSFdvYXZJSHNxOXkvQ2JPCk4xQm8yaFhrQVpSSFBSU1BsUHp4OXlIS3lDZlZZWFVmNXk4REZCeG5DdGZjRTlqU3pWclJwejc2Ui9JV0RQRW8KbWlhdnNZZldEM0N2WHN1MG1TQUJ1d09ib1B6YVlkWDNTT1JFVEtWOHc5cFpkanRXOHhabDhIYTdoRWZ1T0NHRgpXNzRZNXA5L3lkMWtTMEZDZStpWFNpMjJ5SUNIQWkxdzFlYWh0OElKd290ZnU5ZHhGVkFlQU9RTGZJUXF5T09tCllOc2N6K1dpV3ErMVMrR0NGYnpBekJibFZ0Q0JJbDhkdXhVZ0d5OWthdDFPZmZKR1NyVm9TOGt5cTk0aEVmZEEKb2tWUlptcnVMNEhRcEtVS1ZMUGlRT01qbnVFYjZGdnphQzE3WjFqOUVRS0NBUUFjTjVVbXMxSFhYM1FoM3ZkZApvS3VWTEV5MDZuWmxFMktwSlpZcHErOGhsZlZUSDFnMXR4UlVBYXMxeGpXWVNFNWJnek1BRm1jRkFYamlleVZHCmpXY243VUhkU2l1VlZHTmp5WERodHF3NkdwcmgvTDU3RUpJZm9Nd3Via2xDSWREZjBxSGVTcDBZUEhBTzc0c2MKK2ozRGVvUFRhcU11QkhzdGI1S3MzMitJMW1ya1J5QTBJeVEyVnNkd01VRWpZZ2xHeWl5QW50S21POEtaR0loagpOS2xwUldxQlRYOEFodDJDTURWcWhlTGZvREpiNGY0SjkwTm1XY0wxckdORVRuc1ExbjJUWDRUT2VORzV1amtVCkk2T1d2Q0hWQnRJRVZrMGgyRlFoakRjdGo3Y2l5OHRqdjRCM3dXQXYvMGxEUnRPbVBVWG9oU21tMUVGNzl0VjQKWkNXbkFvSUJBR3BIOTUwUzZTbnZvY1lwb0RiaG5RRnBtcEg5OFEydklCd0ZWU0Y1aVZIUFdSK1dqalRacjBIMwpZdWtNZWlpUU0rcjVFUW1XN0F3VStQdzBUVFlraXBQVTQ3ZUdmOCt3OXhtZm41NTk5cEhhbGVMSjEzTVE1RVhnCnlmNUk4elY2REhzK3ZISWc2ditKcFpvcGxKeVdYR0JyUXdGQ2hwVlk1bEdFeUxsaWJGWUlCWTNyRTFBTjROZU8KeU5mV25xekxpZk9EMk9ubHY1cVR5Q3lqOHA1blJJMnV6clBBZ1VoeW4wOXNlLzlDSHR0RGgzcEFaRG5QNUgvbQo4dEdLekRlcy9lSUU3L3dCUFBzUWNsNzlSOHp1MzFqNEhlOVRjdlpMS3VDNkNMUm9xT0ZlZW5ibUNzL1ZrY0c3CnJYbG5vSGF4ZUxBbTY2SjEzUnJkRW03STN3NGQ4UkVDZ2dFQUhRTCswaURZT29pZjhoUDJrZm5ieFNCUmdoVEEKMGFvWlZLYXZwbXNEK2liaGJjOUYzSTRGWFpQUDZVdG1WN0dXc1FmZkYybTh1QUpzV3g4dGNHVGhBSjlOcm0zcgpFVnVwVzFZQkVwNE1SdGttVDNvcUhTY2F2Z1UvWU5wLzhtVndSMFhhTFIvMzVWKy9NbDY1VFpkcGtoMitxNk1ZCkNZb0ZPNVlBYS9UV1FyVnE2RUNKR2UwL1hVQWRrN2RpZ2NDN0VCVW5hMTR3eXoxS0YrR2o1WFpGN0QxeGllZi8KT0NWeTM3a0k3bDFVSEQ1RDkvVnUwNzMvK3RFM0kxNGN0dnVuT1dhanFvVE1EbjBGY2pSWUQyNHVWWVpsNXMvTApUNXppRVhmZkFtdDNOUjNQRWZWd2dXZk9aZys2aytJNWZoVzYxNldOVS92QSt2UU5xeTZsNVJTZ1h3PT0KLS0tLS1FTkQgUlNBIFBSSVZBVEUgS0VZLS0tLS0K\n    token: 9493a47065b76b2d350bbdd5c992336e5c2faf6cb0e9125a100e63c2c258e7ea02cc8f6d79aeec5f8785784e47d4b1b017749b05000fd60567f906076752fb7f\n",
+            "kube_config": [
+              {
+                "client_certificate": "",
+                "client_key": "",
+                "cluster_ca_certificate": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUU2VENDQXRHZ0F3SUJBZ0lSQU9tT3B0UmpKZkJ0TFhWM0dUb2llUnd3RFFZSktvWklodmNOQVFFTEJRQXcKRFRFTE1Ba0dBMVVFQXhNQ1kyRXdJQmNOTWpJd05USXdNVGd5T1RFNFdoZ1BNakExTWpBMU1qQXhPRE01TVRoYQpNQTB4Q3pBSkJnTlZCQU1UQW1OaE1JSUNJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBZzhBTUlJQ0NnS0NBZ0VBCjQ2R0UreVVwQVpyZkcxVUpxRHhIb1pJZzN3MkwrOU1wdUNkYm9xeUs1dW0zd0ExSUdFNHpsbEJyR0N2aEc4bU4KRGQveElac3BsRDRpOFF1Q2ExSzlLRlFUSitlZkpwSis2cW9HRHJ3NWo4V2liWjlpWnlBejF1aWRONE9acEFLeApCU2FVd1NSM2c0WjYvWDErS20zdU1LOHdaUUVaWVJCelI4c1lWZjJsRlM4Y3ZLVHl1ZWM3dUQ2Ujg5M0hab2prCmZ5bVJoMldVcjNGM1FoNy9kemVmeGFPNVZVTks0L0NoZC9sb0tnUGppMVBGNmdWWFV2anhKRS9kZ1N6SG5JTTQKczRYME9UYWZLMXdzL0l3MEJ6aHdocTVmVkJ0TTEwajlTL2tTNXZ2c2pyL0Z4VXFmMDdWZi95b25xQWJwUkFCNQpiQStOTmFzVFl4U0d3NVZ4QmQvQlBIa2pBdFNzS1c2Vld3cEEvaitwdnlSaHNpRDNoc3ZWaW1zSDA5NUd4N1JxCk5YZlFzMWdhTjQ5TXp0T1BPRDFZVTgvbEM1N0lUK2xpekVlaEhNUlEzd2FSZUhUSUZlZnYwc0tRdFpNVFpUNUUKT2t4Wmh3TkJmMnBwMmJneEJQL0hyQXpKSHlYc3E2N3lkNnRrT29DQXVZcS9pai9LUC9BRmRVTlE3REZUU2tvLwpCN3pYTittNHNXSm9DY2tXQ0QzUHNHbU5PV1U3ckgrU2ZmU2ttNytreEFWSUE3WmJCMldaSjkyZ1l4Tk1sWlFtCmI0ZXdjSVRmbnVOSFZHNVBXdjdPT3RZd095VUNlRzR3MGF0Q2E1L1JQSVpSSXZvM3Y0RmxjZTNaNS9UcHVXdlQKZmFMTnNWQ25ZV1NGZVpOdS9EdEVGaDU0QUFiS2FYWm9yYjJXamtaVjBjOENBd0VBQWFOQ01FQXdEZ1lEVlIwUApBUUgvQkFRREFnS2tNQThHQTFVZEV3RUIvd1FGTUFNQkFmOHdIUVlEVlIwT0JCWUVGSjNCcEdSeTh1L0hnTlRFCkR6TFRqK1NVd29KcE1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQ0FRQkFxZWl0QnhsV01LRUREN1lCSit0TXR3S1kKK3drK2RVaUdFVXJyK1I3Y1BPNnhvRHV4Nmx2NS9GbUdsNVpCNDZkaUNaMDA2R2wwWjYrQTQyQmgvT0ZZWVhkTQpUMWNhdTAyZDcwVytWZTJTeGhnRFVEWjZDazVaSTA0aEpCOUZIS1k3bnQ2R0NOZG9TMkFOeExWMGw3UElVVW9mCnNEYzZId2p5RkVmZHdzSmJPdFNNbTVna3ZjRUJNdTdDU0xjdVhyMG04VHlGWWhRMWlwaFA0ejV5a00xNDFWdGYKWXdic3J2U085S1FQckp6T1lRb0VES21hTVdGVGF0Nlo1SkgwNmVoOE1ML0p5YWlIaVdmeU5KZHQyd2VPVHRaYwpvVWhrWHZxSnoxcWJRUkQ0Wit1b2JyT0E0T2JVc3c1REhhT2VuL0JXVHA3QkIxTnhJSkdCMm5sSm02SEdldXlZCmo3T3hlc1VwYUUzWXNITTRqRmRZQ1pEWTQ4WXdMYUdZbi84NVZTUGhWWWduUUwxZzFHSFI1UTBUQ1ZtNElLNmkKMmxpbFVEdGFIWnhTaUgvR1VzbXlVV1pSOG0yYWdZM1lYeGNYeFZINWVTVE80aElqeHVKeEFwVjhpL01ENDB2cgpIREhEUjVrNE5lNTVXMzZPT3A0R3pteGl1dDd5YWJSaUt4VXFGS1JuVTduNDBMUFJ3VmxGOUhVeXcwK1NmdkVyCmZzQ3JVQlcrSVZFM0xyR3ZmamZvTC9DbkVhUlF1Wm8zdmNuRHVtS0tWR3VnSlNDR1U1NVdURVRwOWszdmJocnkKWjJyWW81ZGpoa2VlM1pOTEJjUGtSZnhnblp2QmRMcGFJanlUZXJTZWJrYUNQcHdQUTU3Ym9XSUhCOUR2ZGdYMgpDSXdTYmpCZ2xpTDczUWNhdGc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==",
+                "host": "https://local-dev-aks-0000-dns-7cad5b0e.hcp.eastus.azmk8s.io:443",
+                "password": "",
+                "username": "clusterUser_local-dev_local-dev-aks-0000"
+              }
+            ],
+            "kube_config_raw": "apiVersion: v1\nclusters:\n- cluster:\n    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUU2VENDQXRHZ0F3SUJBZ0lSQU9tT3B0UmpKZkJ0TFhWM0dUb2llUnd3RFFZSktvWklodmNOQVFFTEJRQXcKRFRFTE1Ba0dBMVVFQXhNQ1kyRXdJQmNOTWpJd05USXdNVGd5T1RFNFdoZ1BNakExTWpBMU1qQXhPRE01TVRoYQpNQTB4Q3pBSkJnTlZCQU1UQW1OaE1JSUNJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBZzhBTUlJQ0NnS0NBZ0VBCjQ2R0UreVVwQVpyZkcxVUpxRHhIb1pJZzN3MkwrOU1wdUNkYm9xeUs1dW0zd0ExSUdFNHpsbEJyR0N2aEc4bU4KRGQveElac3BsRDRpOFF1Q2ExSzlLRlFUSitlZkpwSis2cW9HRHJ3NWo4V2liWjlpWnlBejF1aWRONE9acEFLeApCU2FVd1NSM2c0WjYvWDErS20zdU1LOHdaUUVaWVJCelI4c1lWZjJsRlM4Y3ZLVHl1ZWM3dUQ2Ujg5M0hab2prCmZ5bVJoMldVcjNGM1FoNy9kemVmeGFPNVZVTks0L0NoZC9sb0tnUGppMVBGNmdWWFV2anhKRS9kZ1N6SG5JTTQKczRYME9UYWZLMXdzL0l3MEJ6aHdocTVmVkJ0TTEwajlTL2tTNXZ2c2pyL0Z4VXFmMDdWZi95b25xQWJwUkFCNQpiQStOTmFzVFl4U0d3NVZ4QmQvQlBIa2pBdFNzS1c2Vld3cEEvaitwdnlSaHNpRDNoc3ZWaW1zSDA5NUd4N1JxCk5YZlFzMWdhTjQ5TXp0T1BPRDFZVTgvbEM1N0lUK2xpekVlaEhNUlEzd2FSZUhUSUZlZnYwc0tRdFpNVFpUNUUKT2t4Wmh3TkJmMnBwMmJneEJQL0hyQXpKSHlYc3E2N3lkNnRrT29DQXVZcS9pai9LUC9BRmRVTlE3REZUU2tvLwpCN3pYTittNHNXSm9DY2tXQ0QzUHNHbU5PV1U3ckgrU2ZmU2ttNytreEFWSUE3WmJCMldaSjkyZ1l4Tk1sWlFtCmI0ZXdjSVRmbnVOSFZHNVBXdjdPT3RZd095VUNlRzR3MGF0Q2E1L1JQSVpSSXZvM3Y0RmxjZTNaNS9UcHVXdlQKZmFMTnNWQ25ZV1NGZVpOdS9EdEVGaDU0QUFiS2FYWm9yYjJXamtaVjBjOENBd0VBQWFOQ01FQXdEZ1lEVlIwUApBUUgvQkFRREFnS2tNQThHQTFVZEV3RUIvd1FGTUFNQkFmOHdIUVlEVlIwT0JCWUVGSjNCcEdSeTh1L0hnTlRFCkR6TFRqK1NVd29KcE1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQ0FRQkFxZWl0QnhsV01LRUREN1lCSit0TXR3S1kKK3drK2RVaUdFVXJyK1I3Y1BPNnhvRHV4Nmx2NS9GbUdsNVpCNDZkaUNaMDA2R2wwWjYrQTQyQmgvT0ZZWVhkTQpUMWNhdTAyZDcwVytWZTJTeGhnRFVEWjZDazVaSTA0aEpCOUZIS1k3bnQ2R0NOZG9TMkFOeExWMGw3UElVVW9mCnNEYzZId2p5RkVmZHdzSmJPdFNNbTVna3ZjRUJNdTdDU0xjdVhyMG04VHlGWWhRMWlwaFA0ejV5a00xNDFWdGYKWXdic3J2U085S1FQckp6T1lRb0VES21hTVdGVGF0Nlo1SkgwNmVoOE1ML0p5YWlIaVdmeU5KZHQyd2VPVHRaYwpvVWhrWHZxSnoxcWJRUkQ0Wit1b2JyT0E0T2JVc3c1REhhT2VuL0JXVHA3QkIxTnhJSkdCMm5sSm02SEdldXlZCmo3T3hlc1VwYUUzWXNITTRqRmRZQ1pEWTQ4WXdMYUdZbi84NVZTUGhWWWduUUwxZzFHSFI1UTBUQ1ZtNElLNmkKMmxpbFVEdGFIWnhTaUgvR1VzbXlVV1pSOG0yYWdZM1lYeGNYeFZINWVTVE80aElqeHVKeEFwVjhpL01ENDB2cgpIREhEUjVrNE5lNTVXMzZPT3A0R3pteGl1dDd5YWJSaUt4VXFGS1JuVTduNDBMUFJ3VmxGOUhVeXcwK1NmdkVyCmZzQ3JVQlcrSVZFM0xyR3ZmamZvTC9DbkVhUlF1Wm8zdmNuRHVtS0tWR3VnSlNDR1U1NVdURVRwOWszdmJocnkKWjJyWW81ZGpoa2VlM1pOTEJjUGtSZnhnblp2QmRMcGFJanlUZXJTZWJrYUNQcHdQUTU3Ym9XSUhCOUR2ZGdYMgpDSXdTYmpCZ2xpTDczUWNhdGc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==\n    server: https://local-dev-aks-0000-dns-7cad5b0e.hcp.eastus.azmk8s.io:443\n  name: local-dev-aks-0000\ncontexts:\n- context:\n    cluster: local-dev-aks-0000\n    user: clusterUser_local-dev_local-dev-aks-0000\n  name: local-dev-aks-0000\ncurrent-context: local-dev-aks-0000\nkind: Config\npreferences: {}\nusers:\n- name: clusterUser_local-dev_local-dev-aks-0000\n  user:\n    auth-provider:\n      config:\n        apiserver-id: 6dae42f8-4368-4678-94ff-3960e28e3630\n        client-id: 80faf920-1908-4b52-b5ef-a8e7bedfc67a\n        config-mode: \"1\"\n        environment: AzurePublicCloud\n        tenant-id: 565f19fb-40ea-44d1-8ae8-9912a017ef09\n      name: azure\n",
+            "kubelet_identity": [
+              {
+                "client_id": "a74dcf21-5954-4ea7-9236-fd40d83fc667",
+                "object_id": "4d297ac1-c1d3-415f-809a-a745b30bd84b",
+                "user_assigned_identity_id": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f/resourceGroups/MC_local-dev_local-dev-aks-0000_eastus/providers/Microsoft.ManagedIdentity/userAssignedIdentities/local-dev-aks-0000-agentpool"
+              }
+            ],
+            "kubernetes_version": "1.23.3",
+            "linux_profile": [
+              {
+                "admin_username": "",
+                "ssh_key": []
+              }
+            ],
+            "location": "eastus",
+            "microsoft_defender": [],
+            "name": "local-dev-aks-0000",
+            "network_profile": [
+              {
+                "dns_service_ip": "10.1.0.10",
+                "docker_bridge_cidr": "170.10.0.1/16",
+                "load_balancer_sku": "Standard",
+                "network_plugin": "azure",
+                "network_policy": "azure",
+                "pod_cidr": "",
+                "service_cidr": "10.1.0.0/16"
+              }
+            ],
+            "node_resource_group": "MC_local-dev_local-dev-aks-0000_eastus",
+            "oidc_issuer_enabled": false,
+            "oidc_issuer_url": "",
+            "oms_agent": [],
+            "open_service_mesh_enabled": false,
+            "private_cluster_enabled": false,
+            "private_fqdn": "",
+            "resource_group_name": "local-dev",
+            "role_based_access_control_enabled": true,
+            "service_principal": [
+              {
+                "client_id": "msi"
+              }
+            ],
+            "tags": {
+              "md-manifest": "aks",
+              "md-project": "local",
+              "md-target": "dev"
+            },
+            "timeouts": null,
+            "windows_profile": [
+              {
+                "admin_username": "azureuser"
+              }
+            ]
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "kubernetes_secret",
+      "name": "massdriver-cloud-provisioner_service-account_secret",
+      "provider": "provider[\"registry.terraform.io/hashicorp/kubernetes\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "binary_data": null,
+            "data": {
+              "ca.crt": "-----BEGIN CERTIFICATE-----\nMIIE6TCCAtGgAwIBAgIRAOmOptRjJfBtLXV3GToieRwwDQYJKoZIhvcNAQELBQAw\nDTELMAkGA1UEAxMCY2EwIBcNMjIwNTIwMTgyOTE4WhgPMjA1MjA1MjAxODM5MTha\nMA0xCzAJBgNVBAMTAmNhMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA\n46GE+yUpAZrfG1UJqDxHoZIg3w2L+9MpuCdboqyK5um3wA1IGE4zllBrGCvhG8mN\nDd/xIZsplD4i8QuCa1K9KFQTJ+efJpJ+6qoGDrw5j8WibZ9iZyAz1uidN4OZpAKx\nBSaUwSR3g4Z6/X1+Km3uMK8wZQEZYRBzR8sYVf2lFS8cvKTyuec7uD6R893HZojk\nfymRh2WUr3F3Qh7/dzefxaO5VUNK4/Chd/loKgPji1PF6gVXUvjxJE/dgSzHnIM4\ns4X0OTafK1ws/Iw0Bzhwhq5fVBtM10j9S/kS5vvsjr/FxUqf07Vf/yonqAbpRAB5\nbA+NNasTYxSGw5VxBd/BPHkjAtSsKW6VWwpA/j+pvyRhsiD3hsvVimsH095Gx7Rq\nNXfQs1gaN49MztOPOD1YU8/lC57IT+lizEehHMRQ3waReHTIFefv0sKQtZMTZT5E\nOkxZhwNBf2pp2bgxBP/HrAzJHyXsq67yd6tkOoCAuYq/ij/KP/AFdUNQ7DFTSko/\nB7zXN+m4sWJoCckWCD3PsGmNOWU7rH+SffSkm7+kxAVIA7ZbB2WZJ92gYxNMlZQm\nb4ewcITfnuNHVG5PWv7OOtYwOyUCeG4w0atCa5/RPIZRIvo3v4Flce3Z5/TpuWvT\nfaLNsVCnYWSFeZNu/DtEFh54AAbKaXZorb2WjkZV0c8CAwEAAaNCMEAwDgYDVR0P\nAQH/BAQDAgKkMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFJ3BpGRy8u/HgNTE\nDzLTj+SUwoJpMA0GCSqGSIb3DQEBCwUAA4ICAQBAqeitBxlWMKEDD7YBJ+tMtwKY\n+wk+dUiGEUrr+R7cPO6xoDux6lv5/FmGl5ZB46diCZ006Gl0Z6+A42Bh/OFYYXdM\nT1cau02d70W+Ve2SxhgDUDZ6Ck5ZI04hJB9FHKY7nt6GCNdoS2ANxLV0l7PIUUof\nsDc6HwjyFEfdwsJbOtSMm5gkvcEBMu7CSLcuXr0m8TyFYhQ1iphP4z5ykM141Vtf\nYwbsrvSO9KQPrJzOYQoEDKmaMWFTat6Z5JH06eh8ML/JyaiHiWfyNJdt2weOTtZc\noUhkXvqJz1qbQRD4Z+uobrOA4ObUsw5DHaOen/BWTp7BB1NxIJGB2nlJm6HGeuyY\nj7OxesUpaE3YsHM4jFdYCZDY48YwLaGYn/85VSPhVYgnQL1g1GHR5Q0TCVm4IK6i\n2lilUDtaHZxSiH/GUsmyUWZR8m2agY3YXxcXxVH5eSTO4hIjxuJxApV8i/MD40vr\nHDHDR5k4Ne55W36OOp4Gzmxiut7yabRiKxUqFKRnU7n40LPRwVlF9HUyw0+SfvEr\nfsCrUBW+IVE3LrGvfjfoL/CnEaRQuZo3vcnDumKKVGugJSCGU55WTETp9k3vbhry\nZ2rYo5djhkee3ZNLBcPkRfxgnZvBdLpaIjyTerSebkaCPpwPQ57boWIHB9DvdgX2\nCIwSbjBgliL73Qcatg==\n-----END CERTIFICATE-----\n",
+              "namespace": "default",
+              "token": "eyJhbGciOiJSUzI1NiIsImtpZCI6InlQeVBhN2h3eWtveXRKbTlzZWRKb0ZBa2RPLTZLQjVtNG1FWVBISGFKVXcifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6Im1hc3Nkcml2ZXItY2xvdWQtcHJvdmlzaW9uZXItdG9rZW4tYzh2bHIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoibWFzc2RyaXZlci1jbG91ZC1wcm92aXNpb25lciIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjU1MjM1ZGQzLTI0NWItNGFkOS1iNTc3LTFkOWI1ZDY4NmI3MiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0Om1hc3Nkcml2ZXItY2xvdWQtcHJvdmlzaW9uZXIifQ.gEnmpRTACVLaHpUu2epDzYUdtZdSM4NNsuukt5Y0W34ObMQei5A4_-LkaDl4w8A4VKQbFA14vLseIQVnCSU0HItpSE21TvakoenwYhhaHt3xoBQYdZwnAUuPZt2Y5HzwJihJ1EiulVK-tp9fI8nrYeT98-R-4i3_f0Uz15HY2RYsbYHWd8KLmOUwyQYvywYG70_5fEzXU3sYdLfqDdTPcYYCRSoROGpk__gc5Jzal7EKERyShmd8IDL7bMFkuTTcZbE68AUUuNkeNO20mWNPFg7fs3-GahakjuDs0Cz1Hh-dNrkSJIJEpvVHsLyBFeFiwbHo9VDhlf3kzcVJOoCCO27KgMZMvwz-rTe7sBa7vljrzBV7EZv_M1BE7OnU2jyS1scY3zmnAFICjL61hErgifEYHFPjmadZiR2zN6dCaUOTc-DGva-UFAT-hygcLbOl6x8xM5zOkVIsu0tszJuJGpgvJqXG0V9RL39-ic7GPrlksKQNllksDwvS6GG7yQqz76TDNcMA7zF1IAvKbTjtPGA9J368ngnioyhZY9Q4QNMaRywoP0SLYZiT2p_KAD1-V2Vvk4zgNldzc1qWKMxpc36p39JeRiKW1PC4V0O166HCWEe_0JQxHqSuODvzS75-rntBTaXTm17hg0TwyQR5Owi0JOAW0X-4fqscKg_RM0w"
+            },
+            "id": "default/massdriver-cloud-provisioner-token-c8vlr",
+            "immutable": false,
+            "metadata": [
+              {
+                "annotations": {},
+                "generation": 0,
+                "labels": {},
+                "name": "massdriver-cloud-provisioner-token-c8vlr",
+                "namespace": "default",
+                "resource_version": "47910",
+                "uid": "90264a06-f0b2-484c-bb91-0cc5723f366c"
+              }
+            ],
+            "type": "kubernetes.io/service-account-token"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "kubernetes_cluster_role_binding",
+      "name": "massdriver-cloud-provisioner",
+      "provider": "provider[\"registry.terraform.io/hashicorp/kubernetes\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "massdriver-cloud-provisioner",
+            "metadata": [
+              {
+                "annotations": null,
+                "generation": 0,
+                "labels": {
+                  "md-manifest": "aks",
+                  "md-project": "local",
+                  "md-target": "dev"
+                },
+                "name": "massdriver-cloud-provisioner",
+                "resource_version": "47922",
+                "uid": "8d239a60-6bf2-4b2c-8a7c-8f415f16f4cb"
+              }
+            ],
+            "role_ref": [
+              {
+                "api_group": "rbac.authorization.k8s.io",
+                "kind": "ClusterRole",
+                "name": "cluster-admin"
+              }
+            ],
+            "subject": [
+              {
+                "api_group": "",
+                "kind": "ServiceAccount",
+                "name": "massdriver-cloud-provisioner",
+                "namespace": "default"
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.azurerm_kubernetes_cluster.cluster",
+            "kubernetes_service_account.massdriver-cloud-provisioner"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "kubernetes_namespace",
+      "name": "md-core-services",
+      "provider": "provider[\"registry.terraform.io/hashicorp/kubernetes\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "md-core-services",
+            "metadata": [
+              {
+                "annotations": null,
+                "generate_name": "",
+                "generation": 0,
+                "labels": {
+                  "md-manifest": "aks",
+                  "md-project": "local",
+                  "md-target": "dev"
+                },
+                "name": "md-core-services",
+                "resource_version": "47908",
+                "uid": "2daa6451-b473-4b7a-b9fb-d031242b02a8"
+              }
+            ],
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjozMDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "data.azurerm_kubernetes_cluster.cluster"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "kubernetes_namespace",
+      "name": "md-observability",
+      "provider": "provider[\"registry.terraform.io/hashicorp/kubernetes\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "md-observability",
+            "metadata": [
+              {
+                "annotations": null,
+                "generate_name": "",
+                "generation": 0,
+                "labels": {
+                  "md-manifest": "aks",
+                  "md-project": "local",
+                  "md-target": "dev"
+                },
+                "name": "md-observability",
+                "resource_version": "47907",
+                "uid": "a19c84eb-1c2c-496b-a184-d1105381d952"
+              }
+            ],
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjozMDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "data.azurerm_kubernetes_cluster.cluster"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "kubernetes_service_account",
+      "name": "massdriver-cloud-provisioner",
+      "provider": "provider[\"registry.terraform.io/hashicorp/kubernetes\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "automount_service_account_token": true,
+            "default_secret_name": "massdriver-cloud-provisioner-token-c8vlr",
+            "id": "default/massdriver-cloud-provisioner",
+            "image_pull_secret": [],
+            "metadata": [
+              {
+                "annotations": null,
+                "generate_name": "",
+                "generation": 0,
+                "labels": {
+                  "md-manifest": "aks",
+                  "md-project": "local",
+                  "md-target": "dev"
+                },
+                "name": "massdriver-cloud-provisioner",
+                "namespace": "default",
+                "resource_version": "47911",
+                "uid": "55235dd3-245b-4ad9-b577-1d9b5d686b72"
+              }
+            ],
+            "secret": [],
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "data.azurerm_kubernetes_cluster.cluster"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "massdriver_artifact",
+      "name": "kubernetes_cluster",
+      "provider": "provider[\"registry.terraform.io/massdriver-cloud/massdriver\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "artifact": "{\"data\":{\"authentication\":{\"cluster\":{\"certificate-authority-data\":\"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUU2VENDQXRHZ0F3SUJBZ0lSQU9tT3B0UmpKZkJ0TFhWM0dUb2llUnd3RFFZSktvWklodmNOQVFFTEJRQXcKRFRFTE1Ba0dBMVVFQXhNQ1kyRXdJQmNOTWpJd05USXdNVGd5T1RFNFdoZ1BNakExTWpBMU1qQXhPRE01TVRoYQpNQTB4Q3pBSkJnTlZCQU1UQW1OaE1JSUNJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBZzhBTUlJQ0NnS0NBZ0VBCjQ2R0UreVVwQVpyZkcxVUpxRHhIb1pJZzN3MkwrOU1wdUNkYm9xeUs1dW0zd0ExSUdFNHpsbEJyR0N2aEc4bU4KRGQveElac3BsRDRpOFF1Q2ExSzlLRlFUSitlZkpwSis2cW9HRHJ3NWo4V2liWjlpWnlBejF1aWRONE9acEFLeApCU2FVd1NSM2c0WjYvWDErS20zdU1LOHdaUUVaWVJCelI4c1lWZjJsRlM4Y3ZLVHl1ZWM3dUQ2Ujg5M0hab2prCmZ5bVJoMldVcjNGM1FoNy9kemVmeGFPNVZVTks0L0NoZC9sb0tnUGppMVBGNmdWWFV2anhKRS9kZ1N6SG5JTTQKczRYME9UYWZLMXdzL0l3MEJ6aHdocTVmVkJ0TTEwajlTL2tTNXZ2c2pyL0Z4VXFmMDdWZi95b25xQWJwUkFCNQpiQStOTmFzVFl4U0d3NVZ4QmQvQlBIa2pBdFNzS1c2Vld3cEEvaitwdnlSaHNpRDNoc3ZWaW1zSDA5NUd4N1JxCk5YZlFzMWdhTjQ5TXp0T1BPRDFZVTgvbEM1N0lUK2xpekVlaEhNUlEzd2FSZUhUSUZlZnYwc0tRdFpNVFpUNUUKT2t4Wmh3TkJmMnBwMmJneEJQL0hyQXpKSHlYc3E2N3lkNnRrT29DQXVZcS9pai9LUC9BRmRVTlE3REZUU2tvLwpCN3pYTittNHNXSm9DY2tXQ0QzUHNHbU5PV1U3ckgrU2ZmU2ttNytreEFWSUE3WmJCMldaSjkyZ1l4Tk1sWlFtCmI0ZXdjSVRmbnVOSFZHNVBXdjdPT3RZd095VUNlRzR3MGF0Q2E1L1JQSVpSSXZvM3Y0RmxjZTNaNS9UcHVXdlQKZmFMTnNWQ25ZV1NGZVpOdS9EdEVGaDU0QUFiS2FYWm9yYjJXamtaVjBjOENBd0VBQWFOQ01FQXdEZ1lEVlIwUApBUUgvQkFRREFnS2tNQThHQTFVZEV3RUIvd1FGTUFNQkFmOHdIUVlEVlIwT0JCWUVGSjNCcEdSeTh1L0hnTlRFCkR6TFRqK1NVd29KcE1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQ0FRQkFxZWl0QnhsV01LRUREN1lCSit0TXR3S1kKK3drK2RVaUdFVXJyK1I3Y1BPNnhvRHV4Nmx2NS9GbUdsNVpCNDZkaUNaMDA2R2wwWjYrQTQyQmgvT0ZZWVhkTQpUMWNhdTAyZDcwVytWZTJTeGhnRFVEWjZDazVaSTA0aEpCOUZIS1k3bnQ2R0NOZG9TMkFOeExWMGw3UElVVW9mCnNEYzZId2p5RkVmZHdzSmJPdFNNbTVna3ZjRUJNdTdDU0xjdVhyMG04VHlGWWhRMWlwaFA0ejV5a00xNDFWdGYKWXdic3J2U085S1FQckp6T1lRb0VES21hTVdGVGF0Nlo1SkgwNmVoOE1ML0p5YWlIaVdmeU5KZHQyd2VPVHRaYwpvVWhrWHZxSnoxcWJRUkQ0Wit1b2JyT0E0T2JVc3c1REhhT2VuL0JXVHA3QkIxTnhJSkdCMm5sSm02SEdldXlZCmo3T3hlc1VwYUUzWXNITTRqRmRZQ1pEWTQ4WXdMYUdZbi84NVZTUGhWWWduUUwxZzFHSFI1UTBUQ1ZtNElLNmkKMmxpbFVEdGFIWnhTaUgvR1VzbXlVV1pSOG0yYWdZM1lYeGNYeFZINWVTVE80aElqeHVKeEFwVjhpL01ENDB2cgpIREhEUjVrNE5lNTVXMzZPT3A0R3pteGl1dDd5YWJSaUt4VXFGS1JuVTduNDBMUFJ3VmxGOUhVeXcwK1NmdkVyCmZzQ3JVQlcrSVZFM0xyR3ZmamZvTC9DbkVhUlF1Wm8zdmNuRHVtS0tWR3VnSlNDR1U1NVdURVRwOWszdmJocnkKWjJyWW81ZGpoa2VlM1pOTEJjUGtSZnhnblp2QmRMcGFJanlUZXJTZWJrYUNQcHdQUTU3Ym9XSUhCOUR2ZGdYMgpDSXdTYmpCZ2xpTDczUWNhdGc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==\",\"server\":\"https://local-dev-aks-0000-dns-7cad5b0e.hcp.eastus.azmk8s.io:443\"},\"user\":{\"token\":\"eyJhbGciOiJSUzI1NiIsImtpZCI6InlQeVBhN2h3eWtveXRKbTlzZWRKb0ZBa2RPLTZLQjVtNG1FWVBISGFKVXcifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6Im1hc3Nkcml2ZXItY2xvdWQtcHJvdmlzaW9uZXItdG9rZW4tYzh2bHIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoibWFzc2RyaXZlci1jbG91ZC1wcm92aXNpb25lciIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjU1MjM1ZGQzLTI0NWItNGFkOS1iNTc3LTFkOWI1ZDY4NmI3MiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0Om1hc3Nkcml2ZXItY2xvdWQtcHJvdmlzaW9uZXIifQ.gEnmpRTACVLaHpUu2epDzYUdtZdSM4NNsuukt5Y0W34ObMQei5A4_-LkaDl4w8A4VKQbFA14vLseIQVnCSU0HItpSE21TvakoenwYhhaHt3xoBQYdZwnAUuPZt2Y5HzwJihJ1EiulVK-tp9fI8nrYeT98-R-4i3_f0Uz15HY2RYsbYHWd8KLmOUwyQYvywYG70_5fEzXU3sYdLfqDdTPcYYCRSoROGpk__gc5Jzal7EKERyShmd8IDL7bMFkuTTcZbE68AUUuNkeNO20mWNPFg7fs3-GahakjuDs0Cz1Hh-dNrkSJIJEpvVHsLyBFeFiwbHo9VDhlf3kzcVJOoCCO27KgMZMvwz-rTe7sBa7vljrzBV7EZv_M1BE7OnU2jyS1scY3zmnAFICjL61hErgifEYHFPjmadZiR2zN6dCaUOTc-DGva-UFAT-hygcLbOl6x8xM5zOkVIsu0tszJuJGpgvJqXG0V9RL39-ic7GPrlksKQNllksDwvS6GG7yQqz76TDNcMA7zF1IAvKbTjtPGA9J368ngnioyhZY9Q4QNMaRywoP0SLYZiT2p_KAD1-V2Vvk4zgNldzc1qWKMxpc36p39JeRiKW1PC4V0O166HCWEe_0JQxHqSuODvzS75-rntBTaXTm17hg0TwyQR5Owi0JOAW0X-4fqscKg_RM0w\"}},\"infrastructure\":{\"ari\":\"/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f/resourceGroups/local-dev/providers/Microsoft.ContainerService/managedClusters/local-dev-aks-0000\"}},\"specs\":{\"kubernetes\":{\"cloud\":\"azure\",\"distribution\":\"aks\",\"platform_version\":\"\",\"version\":\"1.23.3\"}}}",
+            "field": "kubernetes_cluster",
+            "id": "2022-04-29T17:29:47Z",
+            "last_updated": "Friday, 20-May-22 21:50:09 UTC",
+            "name": "AKS Cluster Credentials local-dev-aks-0000 [eastus]",
+            "provider_resource_id": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f/resourceGroups/local-dev/providers/Microsoft.ContainerService/managedClusters/local-dev-aks-0000",
+            "schema_path": "../schema-artifacts.json",
+            "type": "kubernetes-cluster"
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "artifact"
+              }
+            ]
+          ],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.azurerm_kubernetes_cluster.cluster",
+            "data.kubernetes_secret.massdriver-cloud-provisioner_service-account_secret",
+            "kubernetes_service_account.massdriver-cloud-provisioner"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.cert_manager[0]",
+      "mode": "data",
+      "type": "azurerm_client_config",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "client_id": "6a6404bf-e10d-485f-b493-9a57d095b934",
+            "id": "2022-05-20 21:40:41.7517645 +0000 UTC",
+            "object_id": "d6de4c18-d1de-4c8b-b862-7eb4679b6d4f",
+            "subscription_id": "4718857a-5dbe-452c-a172-21a3ae74304f",
+            "tenant_id": "565f19fb-40ea-44d1-8ae8-9912a017ef09",
+            "timeouts": null
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "module": "module.cert_manager[0]",
+      "mode": "managed",
+      "type": "azuread_application",
+      "name": "cert_manager",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azuread\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "api": [
+              {
+                "known_client_applications": [],
+                "mapped_claims_enabled": false,
+                "oauth2_permission_scope": [],
+                "requested_access_token_version": 1
+              }
+            ],
+            "app_role": [],
+            "app_role_ids": {},
+            "application_id": "70c007c2-4e3e-4680-b4ac-1afb476d0e94",
+            "device_only_auth_enabled": false,
+            "disabled_by_microsoft": "\u003cnil\u003e",
+            "display_name": "local-dev-aks-0000-certmanager",
+            "fallback_public_client_enabled": false,
+            "feature_tags": [
+              {
+                "custom_single_sign_on": false,
+                "enterprise": false,
+                "gallery": false,
+                "hide": false
+              }
+            ],
+            "group_membership_claims": null,
+            "id": "732ee2d9-f31d-4be6-9ad8-918ab9d06026",
+            "identifier_uris": null,
+            "logo_image": "",
+            "logo_url": "",
+            "marketing_url": "",
+            "oauth2_permission_scope_ids": {},
+            "oauth2_post_response_required": false,
+            "object_id": "732ee2d9-f31d-4be6-9ad8-918ab9d06026",
+            "optional_claims": [
+              {
+                "access_token": [],
+                "id_token": [],
+                "saml2_token": []
+              }
+            ],
+            "owners": null,
+            "prevent_duplicate_names": false,
+            "privacy_statement_url": "",
+            "public_client": [
+              {
+                "redirect_uris": []
+              }
+            ],
+            "publisher_domain": "massdriver.cloud",
+            "required_resource_access": [],
+            "sign_in_audience": "AzureADMyOrg",
+            "single_page_application": [
+              {
+                "redirect_uris": []
+              }
+            ],
+            "support_url": "",
+            "tags": [],
+            "template_id": "",
+            "terms_of_service_url": "",
+            "timeouts": null,
+            "web": [
+              {
+                "homepage_url": "",
+                "implicit_grant": [
+                  {
+                    "access_token_issuance_enabled": false,
+                    "id_token_issuance_enabled": false
+                  }
+                ],
+                "logout_url": "",
+                "redirect_uris": []
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJyZWFkIjozMDAwMDAwMDAwMDAsInVwZGF0ZSI6NjAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0="
+        }
+      ]
+    },
+    {
+      "module": "module.cert_manager[0]",
+      "mode": "managed",
+      "type": "azuread_service_principal",
+      "name": "cert_manager",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azuread\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "account_enabled": true,
+            "alternative_names": null,
+            "app_role_assignment_required": false,
+            "app_role_ids": {},
+            "app_roles": [],
+            "application_id": "70c007c2-4e3e-4680-b4ac-1afb476d0e94",
+            "application_tenant_id": "565f19fb-40ea-44d1-8ae8-9912a017ef09",
+            "description": "",
+            "display_name": "local-dev-aks-0000-certmanager",
+            "feature_tags": [
+              {
+                "custom_single_sign_on": false,
+                "enterprise": false,
+                "gallery": false,
+                "hide": false
+              }
+            ],
+            "features": [
+              {
+                "custom_single_sign_on_app": false,
+                "enterprise_application": false,
+                "gallery_application": false,
+                "visible_to_users": true
+              }
+            ],
+            "homepage_url": "",
+            "id": "77cfdf06-d051-4976-a6be-5ca02519cd33",
+            "login_url": "",
+            "logout_url": "",
+            "notes": "",
+            "notification_email_addresses": null,
+            "oauth2_permission_scope_ids": {},
+            "oauth2_permission_scopes": [],
+            "object_id": "77cfdf06-d051-4976-a6be-5ca02519cd33",
+            "owners": null,
+            "preferred_single_sign_on_mode": "",
+            "redirect_uris": [],
+            "saml_metadata_url": "",
+            "saml_single_sign_on": [
+              {
+                "relay_state": ""
+              }
+            ],
+            "service_principal_names": [],
+            "sign_in_audience": "AzureADMyOrg",
+            "tags": [],
+            "timeouts": null,
+            "type": "Application",
+            "use_existing": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJyZWFkIjozMDAwMDAwMDAwMDAsInVwZGF0ZSI6NjAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.cert_manager.azuread_application.cert_manager"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.cert_manager[0]",
+      "mode": "managed",
+      "type": "azuread_service_principal_password",
+      "name": "cert_manager",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azuread\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "display_name": null,
+            "end_date": "2024-05-20T21:50:04Z",
+            "end_date_relative": null,
+            "id": "77cfdf06-d051-4976-a6be-5ca02519cd33/password/44fbf062-2977-4794-b8c0-c5e7fa5218c8",
+            "key_id": "44fbf062-2977-4794-b8c0-c5e7fa5218c8",
+            "rotate_when_changed": null,
+            "service_principal_id": "77cfdf06-d051-4976-a6be-5ca02519cd33",
+            "start_date": "2022-05-20T21:50:04Z",
+            "timeouts": null,
+            "value": "SWO8Q~86tJHUXhWGjd-6wW_euOOy4iB~ju-GpcV3"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJyZWFkIjozMDAwMDAwMDAwMDAsInVwZGF0ZSI6MzAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "module.cert_manager.azuread_application.cert_manager",
+            "module.cert_manager.azuread_service_principal.cert_manager"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.cert_manager[0]",
+      "mode": "managed",
+      "type": "azurerm_role_assignment",
+      "name": "cert_manager",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "index_key": "DNS Zone Contributor",
+          "schema_version": 0,
+          "attributes": {
+            "condition": "",
+            "condition_version": "",
+            "delegated_managed_identity_resource_id": "",
+            "description": "",
+            "id": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f/providers/Microsoft.Authorization/roleAssignments/ee16a473-f055-e600-4ae2-484f44c5a7c3",
+            "name": "ee16a473-f055-e600-4ae2-484f44c5a7c3",
+            "principal_id": "77cfdf06-d051-4976-a6be-5ca02519cd33",
+            "principal_type": "ServicePrincipal",
+            "role_definition_id": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f/providers/Microsoft.Authorization/roleDefinitions/befefa01-2a29-4197-83a8-272ff33ce314",
+            "role_definition_name": "DNS Zone Contributor",
+            "scope": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f",
+            "skip_service_principal_aad_check": null,
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.cert_manager.azuread_application.cert_manager",
+            "module.cert_manager.azuread_service_principal.cert_manager",
+            "module.cert_manager.data.azurerm_client_config.current"
+          ]
+        },
+        {
+          "index_key": "Reader",
+          "schema_version": 0,
+          "attributes": {
+            "condition": "",
+            "condition_version": "",
+            "delegated_managed_identity_resource_id": "",
+            "description": "",
+            "id": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f/providers/Microsoft.Authorization/roleAssignments/15848f8a-84ef-4c78-0330-c9df6d13a584",
+            "name": "15848f8a-84ef-4c78-0330-c9df6d13a584",
+            "principal_id": "77cfdf06-d051-4976-a6be-5ca02519cd33",
+            "principal_type": "ServicePrincipal",
+            "role_definition_id": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7",
+            "role_definition_name": "Reader",
+            "scope": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f",
+            "skip_service_principal_aad_check": null,
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.cert_manager.azuread_application.cert_manager",
+            "module.cert_manager.azuread_service_principal.cert_manager",
+            "module.cert_manager.data.azurerm_client_config.current"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.cert_manager[0]",
+      "mode": "managed",
+      "type": "kubernetes_secret",
+      "name": "cert_manager",
+      "provider": "provider[\"registry.terraform.io/hashicorp/kubernetes\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "binary_data": null,
+            "data": {
+              "client-cert": "SWO8Q~86tJHUXhWGjd-6wW_euOOy4iB~ju-GpcV3"
+            },
+            "id": "md-core-services/cert-manager-auth",
+            "immutable": false,
+            "metadata": [
+              {
+                "annotations": null,
+                "generate_name": "",
+                "generation": 0,
+                "labels": {
+                  "md-manifest": "aks",
+                  "md-project": "local",
+                  "md-target": "dev"
+                },
+                "name": "cert-manager-auth",
+                "namespace": "md-core-services",
+                "resource_version": "47927",
+                "uid": "eea5e208-ab6b-4750-9c42-97b74afc083d"
+              }
+            ],
+            "type": "Opaque"
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "data"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": "client-cert",
+                  "type": "string"
+                }
+              }
+            ]
+          ],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.azurerm_kubernetes_cluster.cluster",
+            "kubernetes_namespace.md-core-services",
+            "module.cert_manager.azuread_application.cert_manager",
+            "module.cert_manager.azuread_service_principal.cert_manager",
+            "module.cert_manager.azuread_service_principal_password.cert_manager"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.cert_manager[0].module.cert-manager",
+      "mode": "managed",
+      "type": "helm_release",
+      "name": "cert-manager",
+      "provider": "provider[\"registry.terraform.io/hashicorp/helm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "atomic": false,
+            "chart": "cert-manager",
+            "cleanup_on_fail": false,
+            "create_namespace": true,
+            "dependency_update": false,
+            "description": null,
+            "devel": null,
+            "disable_crd_hooks": false,
+            "disable_openapi_validation": false,
+            "disable_webhooks": false,
+            "force_update": false,
+            "id": "cert-manager",
+            "keyring": null,
+            "lint": false,
+            "manifest": null,
+            "max_history": 0,
+            "metadata": [
+              {
+                "app_version": "v1.7.1",
+                "chart": "cert-manager",
+                "name": "cert-manager",
+                "namespace": "md-core-services",
+                "revision": 1,
+                "values": "{\"additionalLabels\":{\"md-manifest\":\"aks\",\"md-project\":\"local\",\"md-target\":\"dev\"},\"cainjector\":{\"resources\":{\"requests\":{\"cpu\":\"10m\",\"memory\":\"32Mi\"}}},\"extraArgs\":[\"--enable-certificate-owner-ref=true\"],\"global\":{\"leaderElection\":{\"namespace\":\"md-core-services\"}},\"ingressShim\":{\"defaultIssuerGroup\":\"cert-manager.io\",\"defaultIssuerKind\":\"ClusterIssuer\",\"defaultIssuerName\":\"letsencrypt-prod\"},\"installCRDs\":true,\"resources\":{\"requests\":{\"cpu\":\"10m\",\"memory\":\"32Mi\"}},\"securityContext\":{\"fsGroup\":1000,\"runAsNonRoot\":true,\"runAsUser\":1000},\"serviceAccount\":{\"name\":\"cert-manager\"},\"startupapicheck\":{\"resources\":{\"requests\":{\"cpu\":\"10m\",\"memory\":\"32Mi\"}}},\"webhook\":{\"resources\":{\"requests\":{\"cpu\":\"10m\",\"memory\":\"32Mi\"}}}}",
+                "version": "v1.7.1"
+              }
+            ],
+            "name": "cert-manager",
+            "namespace": "md-core-services",
+            "postrender": [],
+            "recreate_pods": false,
+            "render_subchart_notes": true,
+            "replace": false,
+            "repository": "https://charts.jetstack.io",
+            "repository_ca_file": null,
+            "repository_cert_file": null,
+            "repository_key_file": null,
+            "repository_password": null,
+            "repository_username": null,
+            "reset_values": false,
+            "reuse_values": false,
+            "set": [],
+            "set_sensitive": [],
+            "skip_crds": false,
+            "status": "deployed",
+            "timeout": 300,
+            "values": [
+              "installCRDs: true\n\nextraArgs:\n  # When this flag is enabled, secrets will be automatically removed when the certificate resource is deleted\n  - --enable-certificate-owner-ref=true\n\n# fsGroup/runAsUser needed so container can read mounted serviceAccount tokens\nsecurityContext:\n  fsGroup: 1000\n  runAsUser: 1000\n  runAsNonRoot: true\n\nresources:\n  requests:\n    cpu: 10m\n    memory: 32Mi\n\nwebhook:\n resources:\n    requests:\n      cpu: 10m\n      memory: 32Mi\n\ncainjector:\n  resources:\n    requests:\n      cpu: 10m\n      memory: 32Mi\n\nstartupapicheck:\n  resources:\n    requests:\n      cpu: 10m\n      memory: 32Mi\n\ningressShim:\n  defaultIssuerName: letsencrypt-prod\n  defaultIssuerKind: ClusterIssuer\n  defaultIssuerGroup: cert-manager.io",
+              "\"additionalLabels\":\n  \"md-manifest\": \"aks\"\n  \"md-project\": \"local\"\n  \"md-target\": \"dev\"\n\"global\":\n  \"leaderElection\":\n    \"namespace\": \"md-core-services\"\n\"serviceAccount\":\n  \"name\": \"cert-manager\"\n",
+              "{}\n"
+            ],
+            "verify": false,
+            "version": "v1.7.1",
+            "wait": true,
+            "wait_for_jobs": false
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.azurerm_kubernetes_cluster.cluster",
+            "kubernetes_namespace.md-core-services"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.external_dns[0]",
+      "mode": "data",
+      "type": "azurerm_client_config",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "client_id": "6a6404bf-e10d-485f-b493-9a57d095b934",
+            "id": "2022-05-20 21:40:41.7519505 +0000 UTC",
+            "object_id": "d6de4c18-d1de-4c8b-b862-7eb4679b6d4f",
+            "subscription_id": "4718857a-5dbe-452c-a172-21a3ae74304f",
+            "tenant_id": "565f19fb-40ea-44d1-8ae8-9912a017ef09",
+            "timeouts": null
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "module": "module.external_dns[0]",
+      "mode": "managed",
+      "type": "azuread_application",
+      "name": "external_dns",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azuread\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "api": [
+              {
+                "known_client_applications": [],
+                "mapped_claims_enabled": false,
+                "oauth2_permission_scope": [],
+                "requested_access_token_version": 1
+              }
+            ],
+            "app_role": [],
+            "app_role_ids": {},
+            "application_id": "754afb48-f24d-40ae-a91f-58053c595716",
+            "device_only_auth_enabled": false,
+            "disabled_by_microsoft": "\u003cnil\u003e",
+            "display_name": "local-dev-aks-0000-externaldns",
+            "fallback_public_client_enabled": false,
+            "feature_tags": [
+              {
+                "custom_single_sign_on": false,
+                "enterprise": false,
+                "gallery": false,
+                "hide": false
+              }
+            ],
+            "group_membership_claims": null,
+            "id": "414c121b-3d3c-43d0-afb3-28d0b124f99f",
+            "identifier_uris": null,
+            "logo_image": "",
+            "logo_url": "",
+            "marketing_url": "",
+            "oauth2_permission_scope_ids": {},
+            "oauth2_post_response_required": false,
+            "object_id": "414c121b-3d3c-43d0-afb3-28d0b124f99f",
+            "optional_claims": [
+              {
+                "access_token": [],
+                "id_token": [],
+                "saml2_token": []
+              }
+            ],
+            "owners": null,
+            "prevent_duplicate_names": false,
+            "privacy_statement_url": "",
+            "public_client": [
+              {
+                "redirect_uris": []
+              }
+            ],
+            "publisher_domain": "massdriver.cloud",
+            "required_resource_access": [],
+            "sign_in_audience": "AzureADMyOrg",
+            "single_page_application": [
+              {
+                "redirect_uris": []
+              }
+            ],
+            "support_url": "",
+            "tags": [],
+            "template_id": "",
+            "terms_of_service_url": "",
+            "timeouts": null,
+            "web": [
+              {
+                "homepage_url": "",
+                "implicit_grant": [
+                  {
+                    "access_token_issuance_enabled": false,
+                    "id_token_issuance_enabled": false
+                  }
+                ],
+                "logout_url": "",
+                "redirect_uris": []
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJyZWFkIjozMDAwMDAwMDAwMDAsInVwZGF0ZSI6NjAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0="
+        }
+      ]
+    },
+    {
+      "module": "module.external_dns[0]",
+      "mode": "managed",
+      "type": "azuread_service_principal",
+      "name": "external_dns",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azuread\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "account_enabled": true,
+            "alternative_names": null,
+            "app_role_assignment_required": false,
+            "app_role_ids": {},
+            "app_roles": [],
+            "application_id": "754afb48-f24d-40ae-a91f-58053c595716",
+            "application_tenant_id": "565f19fb-40ea-44d1-8ae8-9912a017ef09",
+            "description": "",
+            "display_name": "local-dev-aks-0000-externaldns",
+            "feature_tags": [
+              {
+                "custom_single_sign_on": false,
+                "enterprise": false,
+                "gallery": false,
+                "hide": false
+              }
+            ],
+            "features": [
+              {
+                "custom_single_sign_on_app": false,
+                "enterprise_application": false,
+                "gallery_application": false,
+                "visible_to_users": true
+              }
+            ],
+            "homepage_url": "",
+            "id": "88998366-6d7c-4795-9ae6-579272d154c4",
+            "login_url": "",
+            "logout_url": "",
+            "notes": "",
+            "notification_email_addresses": null,
+            "oauth2_permission_scope_ids": {},
+            "oauth2_permission_scopes": [],
+            "object_id": "88998366-6d7c-4795-9ae6-579272d154c4",
+            "owners": null,
+            "preferred_single_sign_on_mode": "",
+            "redirect_uris": [],
+            "saml_metadata_url": "",
+            "saml_single_sign_on": [
+              {
+                "relay_state": ""
+              }
+            ],
+            "service_principal_names": [],
+            "sign_in_audience": "AzureADMyOrg",
+            "tags": [],
+            "timeouts": null,
+            "type": "Application",
+            "use_existing": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJyZWFkIjozMDAwMDAwMDAwMDAsInVwZGF0ZSI6NjAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.external_dns.azuread_application.external_dns"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.external_dns[0]",
+      "mode": "managed",
+      "type": "azuread_service_principal_password",
+      "name": "external_dns",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azuread\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "display_name": null,
+            "end_date": "2024-05-20T21:50:03Z",
+            "end_date_relative": null,
+            "id": "88998366-6d7c-4795-9ae6-579272d154c4/password/5f867825-f219-42f2-a4c7-967c25cb2657",
+            "key_id": "5f867825-f219-42f2-a4c7-967c25cb2657",
+            "rotate_when_changed": null,
+            "service_principal_id": "88998366-6d7c-4795-9ae6-579272d154c4",
+            "start_date": "2022-05-20T21:50:03Z",
+            "timeouts": null,
+            "value": "~lz8Q~3RZG5utpT4WdiCxrHdVdQ~4VMPBk4DGb20"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJyZWFkIjozMDAwMDAwMDAwMDAsInVwZGF0ZSI6MzAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "module.external_dns.azuread_application.external_dns",
+            "module.external_dns.azuread_service_principal.external_dns"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.external_dns[0]",
+      "mode": "managed",
+      "type": "azurerm_role_assignment",
+      "name": "external_dns",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "index_key": "DNS Zone Contributor",
+          "schema_version": 0,
+          "attributes": {
+            "condition": "",
+            "condition_version": "",
+            "delegated_managed_identity_resource_id": "",
+            "description": "",
+            "id": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f/providers/Microsoft.Authorization/roleAssignments/5f1c6f51-c577-7608-c37d-394d2ef5fb47",
+            "name": "5f1c6f51-c577-7608-c37d-394d2ef5fb47",
+            "principal_id": "88998366-6d7c-4795-9ae6-579272d154c4",
+            "principal_type": "ServicePrincipal",
+            "role_definition_id": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f/providers/Microsoft.Authorization/roleDefinitions/befefa01-2a29-4197-83a8-272ff33ce314",
+            "role_definition_name": "DNS Zone Contributor",
+            "scope": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f",
+            "skip_service_principal_aad_check": null,
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.external_dns.azuread_application.external_dns",
+            "module.external_dns.azuread_service_principal.external_dns",
+            "module.external_dns.data.azurerm_client_config.current"
+          ]
+        },
+        {
+          "index_key": "Reader",
+          "schema_version": 0,
+          "attributes": {
+            "condition": "",
+            "condition_version": "",
+            "delegated_managed_identity_resource_id": "",
+            "description": "",
+            "id": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f/providers/Microsoft.Authorization/roleAssignments/7fd4b409-46f2-9eac-36bb-1345cab93e81",
+            "name": "7fd4b409-46f2-9eac-36bb-1345cab93e81",
+            "principal_id": "88998366-6d7c-4795-9ae6-579272d154c4",
+            "principal_type": "ServicePrincipal",
+            "role_definition_id": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7",
+            "role_definition_name": "Reader",
+            "scope": "/subscriptions/4718857a-5dbe-452c-a172-21a3ae74304f",
+            "skip_service_principal_aad_check": null,
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.external_dns.azuread_application.external_dns",
+            "module.external_dns.azuread_service_principal.external_dns",
+            "module.external_dns.data.azurerm_client_config.current"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.external_dns[0]",
+      "mode": "managed",
+      "type": "kubernetes_secret",
+      "name": "external_dns",
+      "provider": "provider[\"registry.terraform.io/hashicorp/kubernetes\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "binary_data": null,
+            "data": {
+              "azure.json": "{\"aadClientId\":\"754afb48-f24d-40ae-a91f-58053c595716\",\"aadClientSecret\":\"~lz8Q~3RZG5utpT4WdiCxrHdVdQ~4VMPBk4DGb20\",\"resourceGroup\":\"local-dev\",\"subscriptionId\":\"4718857a-5dbe-452c-a172-21a3ae74304f\",\"tenantId\":\"565f19fb-40ea-44d1-8ae8-9912a017ef09\"}"
+            },
+            "id": "md-core-services/external-dns-auth",
+            "immutable": false,
+            "metadata": [
+              {
+                "annotations": null,
+                "generate_name": "",
+                "generation": 0,
+                "labels": {
+                  "md-manifest": "aks",
+                  "md-project": "local",
+                  "md-target": "dev"
+                },
+                "name": "external-dns-auth",
+                "namespace": "md-core-services",
+                "resource_version": "47924",
+                "uid": "f8dc86dc-1ae8-4c3d-931b-2f3dc71ace08"
+              }
+            ],
+            "type": "Opaque"
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "data"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": "azure.json",
+                  "type": "string"
+                }
+              }
+            ]
+          ],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.azurerm_kubernetes_cluster.cluster",
+            "kubernetes_namespace.md-core-services",
+            "module.external_dns.azuread_application.external_dns",
+            "module.external_dns.azuread_service_principal.external_dns",
+            "module.external_dns.azuread_service_principal_password.external_dns",
+            "module.external_dns.data.azurerm_client_config.current"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.external_dns[0].module.external-dns",
+      "mode": "managed",
+      "type": "helm_release",
+      "name": "external-dns",
+      "provider": "provider[\"registry.terraform.io/hashicorp/helm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "atomic": false,
+            "chart": "external-dns",
+            "cleanup_on_fail": false,
+            "create_namespace": true,
+            "dependency_update": false,
+            "description": null,
+            "devel": null,
+            "disable_crd_hooks": false,
+            "disable_openapi_validation": false,
+            "disable_webhooks": false,
+            "force_update": false,
+            "id": "external-dns",
+            "keyring": null,
+            "lint": false,
+            "manifest": null,
+            "max_history": 0,
+            "metadata": [
+              {
+                "app_version": "0.10.2",
+                "chart": "external-dns",
+                "name": "external-dns",
+                "namespace": "md-core-services",
+                "revision": 1,
+                "values": "{\"additionalLabels\":{\"md-manifest\":\"aks\",\"md-project\":\"local\",\"md-target\":\"dev\"},\"domainFilters\":[\"mdazuresbx.com\"],\"extraVolumeMounts\":[{\"mountPath\":\"/etc/kubernetes\",\"name\":\"azure-config-file\",\"readOnly\":true}],\"extraVolumes\":[{\"name\":\"azure-config-file\",\"secret\":{\"items\":[{\"key\":\"azure.json\",\"path\":\"azure.json\"}],\"secretName\":\"external-dns-auth\"}}],\"policy\":\"sync\",\"provider\":\"azure\",\"resources\":{\"requests\":{\"cpu\":\"10m\",\"memory\":\"32Mi\"}},\"serviceAccount\":{\"name\":\"external-dns\"}}",
+                "version": "1.7.1"
+              }
+            ],
+            "name": "external-dns",
+            "namespace": "md-core-services",
+            "postrender": [],
+            "recreate_pods": false,
+            "render_subchart_notes": true,
+            "replace": false,
+            "repository": "https://kubernetes-sigs.github.io/external-dns/",
+            "repository_ca_file": null,
+            "repository_cert_file": null,
+            "repository_key_file": null,
+            "repository_password": null,
+            "repository_username": null,
+            "reset_values": false,
+            "reuse_values": false,
+            "set": [],
+            "set_sensitive": [],
+            "skip_crds": false,
+            "status": "deployed",
+            "timeout": 300,
+            "values": [
+              "resources:\n  requests:\n    cpu: 10m\n    memory: 32Mi\n\npolicy: sync",
+              "\"additionalLabels\":\n  \"md-manifest\": \"aks\"\n  \"md-project\": \"local\"\n  \"md-target\": \"dev\"\n\"domainFilters\":\n- \"mdazuresbx.com\"\n\"provider\": \"azure\"\n\"serviceAccount\":\n  \"name\": \"external-dns\"\n",
+              "\"extraVolumeMounts\":\n- \"mountPath\": \"/etc/kubernetes\"\n  \"name\": \"azure-config-file\"\n  \"readOnly\": true\n\"extraVolumes\":\n- \"name\": \"azure-config-file\"\n  \"secret\":\n    \"items\":\n    - \"key\": \"azure.json\"\n      \"path\": \"azure.json\"\n    \"secretName\": \"external-dns-auth\"\n"
+            ],
+            "verify": false,
+            "version": "1.7.1",
+            "wait": true,
+            "wait_for_jobs": false
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.azurerm_kubernetes_cluster.cluster",
+            "kubernetes_namespace.md-core-services",
+            "module.external_dns.azuread_application.external_dns",
+            "module.external_dns.azuread_service_principal.external_dns",
+            "module.external_dns.azuread_service_principal_password.external_dns",
+            "module.external_dns.data.azurerm_client_config.current",
+            "module.external_dns.kubernetes_secret.external_dns"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.ingress_nginx[0]",
+      "mode": "managed",
+      "type": "helm_release",
+      "name": "ingress-nginx",
+      "provider": "provider[\"registry.terraform.io/hashicorp/helm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "atomic": false,
+            "chart": "ingress-nginx",
+            "cleanup_on_fail": false,
+            "create_namespace": true,
+            "dependency_update": false,
+            "description": null,
+            "devel": null,
+            "disable_crd_hooks": false,
+            "disable_openapi_validation": false,
+            "disable_webhooks": false,
+            "force_update": false,
+            "id": "ingress-nginx",
+            "keyring": null,
+            "lint": false,
+            "manifest": null,
+            "max_history": 0,
+            "metadata": [
+              {
+                "app_version": "1.1.1",
+                "chart": "ingress-nginx",
+                "name": "ingress-nginx",
+                "namespace": "md-core-services",
+                "revision": 1,
+                "values": "{\"additionalLabels\":{\"md-manifest\":\"aks\",\"md-project\":\"local\",\"md-target\":\"dev\"},\"cloudProvider\":\"azure\",\"controller\":{\"autoscaling\":{\"enabled\":true,\"targetMemoryUtilizationPercentage\":null},\"ingressClassResource\":{\"default\":true},\"lifecycle\":{\"preStop\":{\"exec\":{\"command\":[\"/bin/sh\",\"-c\",\"sleep 5; /usr/local/openresty/nginx/sbin/nginx -c /etc/nginx/nginx.conf -s quit; while pgrep -x nginx; do sleep 1; done\"]}}},\"resources\":{\"requests\":{\"cpu\":\"1000m\",\"memory\":\"200Mi\"}},\"terminationGracePeriodSeconds\":600},\"rbac\":{\"serviceAccount\":{\"name\":\"ingress-nginx\"}}}",
+                "version": "4.0.17"
+              }
+            ],
+            "name": "ingress-nginx",
+            "namespace": "md-core-services",
+            "postrender": [],
+            "recreate_pods": false,
+            "render_subchart_notes": true,
+            "replace": false,
+            "repository": "https://kubernetes.github.io/ingress-nginx",
+            "repository_ca_file": null,
+            "repository_cert_file": null,
+            "repository_key_file": null,
+            "repository_password": null,
+            "repository_username": null,
+            "reset_values": false,
+            "reuse_values": false,
+            "set": [],
+            "set_sensitive": [],
+            "skip_crds": false,
+            "status": "deployed",
+            "timeout": 300,
+            "values": [
+              "# enable HPA on controller\ncontroller:\n  resources:\n    requests:\n      cpu: 1000m\n      memory: 200Mi\n  autoscaling:\n    enabled: true\n    targetMemoryUtilizationPercentage: null\n  ingressClassResource:\n    default: true\n\n# ensure 0 downtime restarts https://medium.com/codecademy-engineering/kubernetes-nginx-and-zero-downtime-in-production-2c910c6a5ed8\n  lifecycle:\n    preStop:\n      exec:\n        command: [\"/bin/sh\", \"-c\", \"sleep 5; /usr/local/openresty/nginx/sbin/nginx -c /etc/nginx/nginx.conf -s quit; while pgrep -x nginx; do sleep 1; done\"]\n  terminationGracePeriodSeconds: 600",
+              "\"additionalLabels\":\n  \"md-manifest\": \"aks\"\n  \"md-project\": \"local\"\n  \"md-target\": \"dev\"\n\"cloudProvider\": \"azure\"\n\"rbac\":\n  \"serviceAccount\":\n    \"name\": \"ingress-nginx\"\n",
+              "{}\n"
+            ],
+            "verify": false,
+            "version": "4.0.17",
+            "wait": true,
+            "wait_for_jobs": true
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.azurerm_kubernetes_cluster.cluster",
+            "data.kubernetes_secret.massdriver-cloud-provisioner_service-account_secret",
+            "kubernetes_namespace.md-core-services",
+            "kubernetes_service_account.massdriver-cloud-provisioner"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.kube-state-metrics[0]",
+      "mode": "managed",
+      "type": "helm_release",
+      "name": "kube-state-metrics",
+      "provider": "provider[\"registry.terraform.io/hashicorp/helm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "atomic": false,
+            "chart": "kube-state-metrics",
+            "cleanup_on_fail": false,
+            "create_namespace": true,
+            "dependency_update": false,
+            "description": null,
+            "devel": null,
+            "disable_crd_hooks": false,
+            "disable_openapi_validation": false,
+            "disable_webhooks": false,
+            "force_update": true,
+            "id": "kube-state-metrics",
+            "keyring": null,
+            "lint": false,
+            "manifest": null,
+            "max_history": 0,
+            "metadata": [
+              {
+                "app_version": "2.3.0",
+                "chart": "kube-state-metrics",
+                "name": "kube-state-metrics",
+                "namespace": "md-observability",
+                "revision": 1,
+                "values": "{\"customLabels\":{\"md-manifest\":\"aks\",\"md-project\":\"local\",\"md-target\":\"dev\"}}",
+                "version": "4.4.3"
+              }
+            ],
+            "name": "kube-state-metrics",
+            "namespace": "md-observability",
+            "postrender": [],
+            "recreate_pods": false,
+            "render_subchart_notes": true,
+            "replace": false,
+            "repository": "https://prometheus-community.github.io/helm-charts",
+            "repository_ca_file": null,
+            "repository_cert_file": null,
+            "repository_key_file": null,
+            "repository_password": null,
+            "repository_username": null,
+            "reset_values": false,
+            "reuse_values": false,
+            "set": [],
+            "set_sensitive": [],
+            "skip_crds": false,
+            "status": "deployed",
+            "timeout": 300,
+            "values": [
+              "\"customLabels\":\n  \"md-manifest\": \"aks\"\n  \"md-project\": \"local\"\n  \"md-target\": \"dev\"\n"
+            ],
+            "verify": false,
+            "version": "4.4.3",
+            "wait": true,
+            "wait_for_jobs": false
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "data.azurerm_kubernetes_cluster.cluster",
+            "kubernetes_namespace.md-observability"
+          ]
+        }
+      ]
+    }
+  ]
+}
