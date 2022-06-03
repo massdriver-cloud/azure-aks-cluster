@@ -15,14 +15,14 @@ steps:
 
 params:
   examples:
-    - __name: Dev/Test ($)
+    - __name: Development
       kubernetes_version: "1.22.6"
       node_groups:
         - name: shared
           node_size: B2s (2 vCores, 4 GiB memory)
           min_size: 1
           max_size: 10
-    - __name: Standard ($$)
+    - __name: Production
       kubernetes_version: "1.22.6"
       node_groups:
         - name: shared
