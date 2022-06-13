@@ -6,7 +6,7 @@ resource "kubernetes_namespace" "md-observability" {
 }
 
 module "kube-state-metrics" {
-  source = "../../../provisioners/terraform/modules/k8s-kube-state-metrics"
+  source = "github.com/massdriver-cloud/terraform-modules//k8s-kube-state-metrics?ref=54da4ef"
   count  = true ? 1 : 0
 
   md_metadata = var.md_metadata
