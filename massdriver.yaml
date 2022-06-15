@@ -162,7 +162,7 @@ params:
               description: The name of the Azure DNS zone for the AKS Cluster.
               items:
                 type: string
-                pattern: "[a-zA-Z0-9]+\\.[a-zA-Z]"
+                pattern: "^(?:[a-zA-Z0-9]+\\.)+(?:[a-zA-Z]+)$"
                 message:
                   pattern: Must be a valid domain name.
             resource_group:
