@@ -1,34 +1,4 @@
 locals {
-  size_map = {
-    "B2s (2 vCores, 4 GiB memory)"     = "B2s"
-    "B2ms (2 vCores, 8 GiB memory)"    = "B2ms"
-    "B4ms (4vCores, 16 GiB memory)"    = "B4ms"
-    "B8ms (8 vCores, 32 GiB memory)"   = "B8ms"
-    "B16ms (16 vCores, 64 GiB memory)" = "B16ms"
-    "DS2 (2 vCores, 7 GiB memory)"     = "DS2_v2"
-    "DS3 (4 vCores, 14 GiB memory)"    = "DS3_v2"
-    "D2s (2 vCores, 8 GiB memory)"     = "D2s_v3"
-    "D4s (4 vCores, 16 GiB memory)"    = "D4s_v3"
-    "D8s (8 vCores, 32 GiB memory)"    = "D8s_v3"
-    "D16s (16 vCores, 64 GiB memory)"  = "D16s_v3"
-    "D32s (32 vCores, 64 GiB memory)"  = "D32s_v3"
-    "D64s (64 vCores, 256 GiB memory)" = "D64s_v3"
-    "E2s (2 vCores, 16 GiB memory)"    = "E2s_v3"
-    "E4s (4 vCores, 32 GiB memory)"    = "E4s_v3"
-    "E8s (8 vCores, 64 GiB memory)"    = "E8s_v3"
-    "E16s (8 vCores, 128 GiB memory)"  = "E16s_v3"
-    "E32s (32 vCores, 256 GiB memory)" = "E32s_v3"
-    "E64s (64 vCores, 432 GiB memory)" = "E64s_v3"
-    "F2s (2 vCores, 4 GiB memory)"     = "F2s_v2"
-    "F4s (4 vCores, 8 GiB memory)"     = "F4s_v2"
-    "F8s (8 vCores, 16 GiB memory)"    = "F8s_v2"
-    "F16s (16 vCores, 32 GiB memory)"  = "F16s_v2"
-    "F32s (32 vCores, 64 GiB memory)"  = "F32s_v2"
-    "F64s (64 vCores, 128 GiB memory)" = "F64s_v2"
-  }
-
-  family = "Standard"
-
   aks_name = var.md_metadata.name_prefix
 
   network_profile = {
@@ -60,7 +30,7 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   default_node_pool {
     name           = "default"
-    vm_size        = "${local.family}_${local.size_map[var.node_groups[0].node_size]}"
+    vm_size        = var.node_groups[0].node_size
     node_count     = 1
     vnet_subnet_id = var.vnet.data.infrastructure.default_subnet_id
   }
@@ -84,7 +54,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
   for_each              = { for ng in var.node_groups : ng.name => ng }
   name                  = each.value.name
   kubernetes_cluster_id = azurerm_kubernetes_cluster.main.id
-  vm_size               = "${local.family}_${local.size_map[each.value.node_size]}"
+  vm_size               = each.value.node_size
   vnet_subnet_id        = var.vnet.data.infrastructure.default_subnet_id
   enable_auto_scaling   = true
   max_count             = each.value.max_size
