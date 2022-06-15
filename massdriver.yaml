@@ -19,14 +19,14 @@ params:
       kubernetes_version: "1.22.6"
       node_groups:
         - name: shared
-          node_size: B2s (2 vCores, 4 GiB memory)
+          node_size: Standard_B2s
           min_size: 1
           max_size: 10
     - __name: Production
       kubernetes_version: "1.22.6"
       node_groups:
         - name: shared
-          node_size: D8s (8 vCores, 32 GiB memory)
+          node_size: Standard_D2s_v3
           min_size: 1
           max_size: 10
   required:
@@ -63,8 +63,8 @@ params:
             title: Name
             description: The name of this node group.
             pattern: "[a-z]{1,}[a-z0-9]{0,11}"
-            minlength: 1
-            maxlength: 12
+            message:
+              pattern: This field only accepts lowercase letters and numbers, with a max length of 12 characters.
           min_size:
             type: number
             title: Minimum size
@@ -83,32 +83,57 @@ params:
             type: string
             title: Compute size
             description: Compute size to use in the primary node group (B = Burstable, D = General Purpose, E = Memory Optimized, F = Compute Optimized).
-            enum:
-              - B2s (2 vCores, 4 GiB memory)
-              - B2ms (2 vCores, 8 GiB memory)
-              - B4ms (4vCores, 16 GiB memory)
-              - B8ms (8 vCores, 32 GiB memory)
-              - B16ms (16 vCores, 64 GiB memory)
-              - DS2 (2 vCores, 7 GiB memory)
-              - DS3 (4 vCores, 14 GiB memory)
-              - D2s (2 vCores, 8 GiB memory)
-              - D4s (4 vCores, 16 GiB memory)
-              - D8s (8 vCores, 32 GiB memory)
-              - D16s (16 vCores, 64 GiB memory)
-              - D32s (32 vCores, 64 GiB memory)
-              - D64s (64 vCores, 256 GiB memory)
-              - E2s (2 vCores, 16 GiB memory)
-              - E4s (4 vCores, 32 GiB memory)
-              - E8s (8 vCores, 64 GiB memory)
-              - E16s (8 vCores, 128 GiB memory)
-              - E32s (32 vCores, 256 GiB memory)
-              - E64s (64 vCores, 432 GiB memory)
-              - F2s (2 vCores, 4 GiB memory)
-              - F4s (4 vCores, 8 GiB memory)
-              - F8s (8 vCores, 16 GiB memory)
-              - F16s (16 vCores, 32 GiB memory)
-              - F32s (32 vCores, 64 GiB memory)
-              - F64s (64 vCores, 128 GiB memory)
+            oneOf:
+              - title: B2s (2 vCores, 4 GiB memory)
+                const: Standard_B2s
+              - title: B2ms (2 vCores, 8 GiB memory)
+                const: Standard_B2ms
+              - title: B4ms (4vCores, 16 GiB memory)
+                const: Standard_B4ms
+              - title: B8ms (8 vCores, 32 GiB memory)
+                const: Standard_B8ms
+              - title: B16ms (16 vCores, 64 GiB memory)
+                const: Standard_B16ms
+              - title: DS2 (2 vCores, 7 GiB memory)
+                const: Standard_DS2_v2
+              - title: DS3 (4 vCores, 14 GiB memory)
+                const: Standard_DS3_v2
+              - title: D2s (2 vCores, 8 GiB memory)
+                const: Standard_D2s_v3
+              - title: D4s (4 vCores, 16 GiB memory)
+                const: Standard_D4s_v3
+              - title: D8s (8 vCores, 32 GiB memory)
+                const: Standard_D8s_v3
+              - title: D16s (16 vCores, 64 GiB memory)
+                const: Standard_D16s_v3
+              - title: D32s (32 vCores, 64 GiB memory)
+                const: Standard_D32s_v3
+              - title: D64s (64 vCores, 256 GiB memory)
+                const: Standard_D64s_v3
+              - title: E2s (2 vCores, 16 GiB memory)
+                const: Standard_E2s_v3
+              - title: E4s (4 vCores, 32 GiB memory)
+                const: Standard_E4s_v3
+              - title: E8s (8 vCores, 64 GiB memory)
+                const: Standard_E8s_v3
+              - title: E16s (8 vCores, 128 GiB memory)
+                const: Standard_E16s_v3
+              - title: E32s (32 vCores, 256 GiB memory)
+                const: Standard_E32s_v3
+              - title: E64s (64 vCores, 432 GiB memory)
+                const: Standard_E64s_v3
+              - title: F2s (2 vCores, 4 GiB memory)
+                const: Standard_F2s_v2
+              - title: F4s (4 vCores, 8 GiB memory)
+                const: Standard_F4s_v2
+              - title: F8s (8 vCores, 16 GiB memory)
+                const: Standard_F8s_v2
+              - title: F16s (16 vCores, 32 GiB memory)
+                const: Standard_F16s_v2
+              - title: F32s (32 vCores, 64 GiB memory)
+                const: Standard_F32s_v2
+              - title: F64s (64 vCores, 128 GiB memory)
+                const: Standard_F64s_v2
     core_services:
       type: object
       title: Core Services
@@ -137,13 +162,16 @@ params:
               description: The name of the Azure DNS zone for the AKS Cluster.
               items:
                 type: string
-                pattern: "[a-zA-Z]+\\.[a-zA-Z]+"
+                pattern: "[a-zA-Z]+\\.[a-zA-Z]"
+                message:
+                  pattern: Must be a valid domain name.
             resource_group:
               type: string
               title: Resource Group name
               description: The name of the Resource Group the Azure DNS zones are in (all zones must share the same Resource Group).
-              minlength: 1
-              maxlength: 90
+              pattern: "[a-zA-Z0-9-_.()]{1,}[a-zA-Z0-9-_()]{0,89}$"
+              message:
+                pattern: Must be a valid Resource Group name.
 
 connections:
   required:
