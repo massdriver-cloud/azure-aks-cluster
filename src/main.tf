@@ -29,10 +29,12 @@ resource "azurerm_kubernetes_cluster" "main" {
   }
 
   default_node_pool {
-    name           = "default"
-    vm_size        = var.node_groups[0].node_size
-    node_count     = 1
-    vnet_subnet_id = var.vnet.data.infrastructure.default_subnet_id
+    name                = var.default_node_group.name
+    vm_size             = var.default_node_group.node_size
+    min_count           = var.default_node_group.min_size
+    max_count           = var.default_node_group.max_size
+    vnet_subnet_id      = var.vnet.data.infrastructure.default_subnet_id
+    enable_auto_scaling = true
   }
 
   identity {
@@ -51,7 +53,7 @@ resource "azurerm_kubernetes_cluster" "main" {
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "main" {
-  for_each              = { for ng in var.node_groups : ng.name => ng }
+  for_each              = { for ng in var.additional_node_groups : ng.name => ng }
   name                  = each.value.name
   kubernetes_cluster_id = azurerm_kubernetes_cluster.main.id
   vm_size               = each.value.node_size
