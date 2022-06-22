@@ -171,7 +171,7 @@ params:
           node_size:
             type: string
             title: Compute size
-            description: Compute size to use in the additional node group (B = Burstable, D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a new resource to be created.
+            description: Compute size to use in the node group (B = Burstable, D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
             oneOf:
               - title: B2s (2 vCores, 4 GiB memory)
                 const: Standard_B2s
