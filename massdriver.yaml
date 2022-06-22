@@ -140,7 +140,7 @@ params:
       items:
         type: object
         title: Node group
-        description: Configuration of an additional node group.
+        description: Configuration of the node group.
         required:
           - name
           - node_size
