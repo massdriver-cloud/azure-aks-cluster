@@ -49,105 +49,16 @@ params:
         - "1.21.9"
         - "1.21.7"
     node_groups:
-      type: array
+      type: object
       title: Node groups
       description: The node groups that should be used for this cluster.
       required:
         - default_node_group
-      default_node_group:
-        type: object
-        title: Default node group
-        description: Configuration of the node group.
-        required:
-          - name
-          - node_size
-          - min_size
-          - max_size
-        properties:
-          name:
-            type: string
-            title: Name
-            description: The name of the node group.
-            pattern: "[a-z]{1,}[a-z0-9]{0,11}"
-            message:
-              pattern: This field only accepts lowercase letters and numbers, with a max length of 12 characters. Changing this forces a deletion and re-creation of the node group.
-          min_size:
-            type: number
-            title: Minimum size
-            description: Minimum number of instances in the node group.
-            default: 1
-            minimum: 1
-            maximum: 1000
-          max_size:
-            type: number
-            title: Maximum size
-            description: Maximum number of instances in the node group.
-            default: 10
-            minimum: 1
-            maximum: 1000
-          node_size:
-            type: string
-            title: Compute size
-            description: Compute size to use in the node group (B = Burstable, D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
-            oneOf:
-              - title: B2s (2 vCores, 4 GiB memory)
-                const: Standard_B2s
-              - title: B2ms (2 vCores, 8 GiB memory)
-                const: Standard_B2ms
-              - title: B4ms (4vCores, 16 GiB memory)
-                const: Standard_B4ms
-              - title: B8ms (8 vCores, 32 GiB memory)
-                const: Standard_B8ms
-              - title: B16ms (16 vCores, 64 GiB memory)
-                const: Standard_B16ms
-              - title: DS2 (2 vCores, 7 GiB memory)
-                const: Standard_DS2_v2
-              - title: DS3 (4 vCores, 14 GiB memory)
-                const: Standard_DS3_v2
-              - title: D2s (2 vCores, 8 GiB memory)
-                const: Standard_D2s_v3
-              - title: D4s (4 vCores, 16 GiB memory)
-                const: Standard_D4s_v3
-              - title: D8s (8 vCores, 32 GiB memory)
-                const: Standard_D8s_v3
-              - title: D16s (16 vCores, 64 GiB memory)
-                const: Standard_D16s_v3
-              - title: D32s (32 vCores, 64 GiB memory)
-                const: Standard_D32s_v3
-              - title: D64s (64 vCores, 256 GiB memory)
-                const: Standard_D64s_v3
-              - title: E2s (2 vCores, 16 GiB memory)
-                const: Standard_E2s_v3
-              - title: E4s (4 vCores, 32 GiB memory)
-                const: Standard_E4s_v3
-              - title: E8s (8 vCores, 64 GiB memory)
-                const: Standard_E8s_v3
-              - title: E16s (8 vCores, 128 GiB memory)
-                const: Standard_E16s_v3
-              - title: E32s (32 vCores, 256 GiB memory)
-                const: Standard_E32s_v3
-              - title: E64s (64 vCores, 432 GiB memory)
-                const: Standard_E64s_v3
-              - title: F2s (2 vCores, 4 GiB memory)
-                const: Standard_F2s_v2
-              - title: F4s (4 vCores, 8 GiB memory)
-                const: Standard_F4s_v2
-              - title: F8s (8 vCores, 16 GiB memory)
-                const: Standard_F8s_v2
-              - title: F16s (16 vCores, 32 GiB memory)
-                const: Standard_F16s_v2
-              - title: F32s (32 vCores, 64 GiB memory)
-                const: Standard_F32s_v2
-              - title: F64s (64 vCores, 128 GiB memory)
-                const: Standard_F64s_v2
-      additional_node_groups:
-        type: array
-        title: Additional node groups
-        description: Additional node groups to provision.
-        items:
+      properties:
+        default_node_group:
           type: object
-          title: Node group
-          description: Configuration of a node group.
+          title: Default node group
+          description: Configuration of the node group.
           required:
             - name
             - node_size
@@ -157,7 +68,7 @@ params:
             name:
               type: string
               title: Name
-              description: The name of this node group.
+              description: The name of the node group.
               pattern: "[a-z]{1,}[a-z0-9]{0,11}"
               message:
                 pattern: This field only accepts lowercase letters and numbers, with a max length of 12 characters. Changing this forces a deletion and re-creation of the node group.
@@ -230,6 +141,96 @@ params:
                   const: Standard_F32s_v2
                 - title: F64s (64 vCores, 128 GiB memory)
                   const: Standard_F64s_v2
+        additional_node_groups:
+          type: array
+          title: Additional node groups
+          description: Additional node groups to provision.
+          items:
+            type: object
+            title: Node group
+            description: Configuration of a node group.
+            required:
+              - name
+              - node_size
+              - min_size
+              - max_size
+            properties:
+              name:
+                type: string
+                title: Name
+                description: The name of this node group.
+                pattern: "[a-z]{1,}[a-z0-9]{0,11}"
+                message:
+                  pattern: This field only accepts lowercase letters and numbers, with a max length of 12 characters. Changing this forces a deletion and re-creation of the node group.
+              min_size:
+                type: number
+                title: Minimum size
+                description: Minimum number of instances in the node group.
+                default: 1
+                minimum: 1
+                maximum: 1000
+              max_size:
+                type: number
+                title: Maximum size
+                description: Maximum number of instances in the node group.
+                default: 10
+                minimum: 1
+                maximum: 1000
+              node_size:
+                type: string
+                title: Compute size
+                description: Compute size to use in the node group (B = Burstable, D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
+                oneOf:
+                  - title: B2s (2 vCores, 4 GiB memory)
+                    const: Standard_B2s
+                  - title: B2ms (2 vCores, 8 GiB memory)
+                    const: Standard_B2ms
+                  - title: B4ms (4vCores, 16 GiB memory)
+                    const: Standard_B4ms
+                  - title: B8ms (8 vCores, 32 GiB memory)
+                    const: Standard_B8ms
+                  - title: B16ms (16 vCores, 64 GiB memory)
+                    const: Standard_B16ms
+                  - title: DS2 (2 vCores, 7 GiB memory)
+                    const: Standard_DS2_v2
+                  - title: DS3 (4 vCores, 14 GiB memory)
+                    const: Standard_DS3_v2
+                  - title: D2s (2 vCores, 8 GiB memory)
+                    const: Standard_D2s_v3
+                  - title: D4s (4 vCores, 16 GiB memory)
+                    const: Standard_D4s_v3
+                  - title: D8s (8 vCores, 32 GiB memory)
+                    const: Standard_D8s_v3
+                  - title: D16s (16 vCores, 64 GiB memory)
+                    const: Standard_D16s_v3
+                  - title: D32s (32 vCores, 64 GiB memory)
+                    const: Standard_D32s_v3
+                  - title: D64s (64 vCores, 256 GiB memory)
+                    const: Standard_D64s_v3
+                  - title: E2s (2 vCores, 16 GiB memory)
+                    const: Standard_E2s_v3
+                  - title: E4s (4 vCores, 32 GiB memory)
+                    const: Standard_E4s_v3
+                  - title: E8s (8 vCores, 64 GiB memory)
+                    const: Standard_E8s_v3
+                  - title: E16s (8 vCores, 128 GiB memory)
+                    const: Standard_E16s_v3
+                  - title: E32s (32 vCores, 256 GiB memory)
+                    const: Standard_E32s_v3
+                  - title: E64s (64 vCores, 432 GiB memory)
+                    const: Standard_E64s_v3
+                  - title: F2s (2 vCores, 4 GiB memory)
+                    const: Standard_F2s_v2
+                  - title: F4s (4 vCores, 8 GiB memory)
+                    const: Standard_F4s_v2
+                  - title: F8s (8 vCores, 16 GiB memory)
+                    const: Standard_F8s_v2
+                  - title: F16s (16 vCores, 32 GiB memory)
+                    const: Standard_F16s_v2
+                  - title: F32s (32 vCores, 64 GiB memory)
+                    const: Standard_F32s_v2
+                  - title: F64s (64 vCores, 128 GiB memory)
+                    const: Standard_F64s_v2
     core_services:
       type: object
       title: Core Services
