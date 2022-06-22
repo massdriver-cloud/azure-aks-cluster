@@ -34,7 +34,6 @@ locals {
 resource "massdriver_artifact" "kubernetes_cluster" {
   field                = "kubernetes_cluster"
   provider_resource_id = data.azurerm_kubernetes_cluster.cluster.id
-  type                 = "kubernetes-cluster"
   name                 = "AKS Cluster Credentials ${data.azurerm_kubernetes_cluster.cluster.name} [${var.vnet.specs.azure.region}]"
   artifact             = jsonencode(local.kubernetes_cluster_artifact)
 }
