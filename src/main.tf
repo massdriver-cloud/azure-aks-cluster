@@ -35,6 +35,7 @@ resource "azurerm_kubernetes_cluster" "main" {
     max_count           = var.default_node_group.max_size
     vnet_subnet_id      = var.vnet.data.infrastructure.default_subnet_id
     enable_auto_scaling = true
+    tags                = var.md_metadata.default_tags
   }
 
   identity {
