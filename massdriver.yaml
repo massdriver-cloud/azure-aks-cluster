@@ -136,7 +136,7 @@ params:
     additional_node_groups:
       type: array
       title: Additional node groups
-      description: Number of additional node groups to provision.
+      description: Additional node groups to provision.
       items:
         type: object
         title: Node group
