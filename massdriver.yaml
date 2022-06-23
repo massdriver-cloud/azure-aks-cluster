@@ -16,22 +16,24 @@ steps:
 params:
   examples:
     - __name: Development
-      default_node_group:
-        name: default
-        min_nodes: 1
-        max_nodes: 10
-        node_size: Standard_B2s
+      node_groups:
+        default_node_group:
+          name: default
+          min_nodes: 1
+          max_nodes: 10
+          node_size: Standard_B2s
     - __name: Production
-      default_node_group:
-        name: default
-        min_nodes: 1
-        max_nodes: 10
-        node_size: Standard_D2s_v3
-      additional_node_groups:
-        - name: shared
+      node_groups:
+        default_node_group:
+          name: default
+          min_nodes: 1
+          max_nodes: 10
           node_size: Standard_D2s_v3
-          min_size: 1
-          max_size: 10
+        additional_node_groups:
+          - name: shared
+            node_size: Standard_D2s_v3
+            min_size: 1
+            max_size: 10
   required:
     - kubernetes_version
     - node_groups
