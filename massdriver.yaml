@@ -19,15 +19,15 @@ params:
       node_groups:
         default_node_group:
           name: default
-          min_nodes: 1
-          max_nodes: 10
+          min_size: 1
+          max_size: 10
           node_size: Standard_B2s
     - __name: Production
       node_groups:
         default_node_group:
           name: default
-          min_nodes: 1
-          max_nodes: 10
+          min_size: 1
+          max_size: 10
           node_size: Standard_D2s_v3
         additional_node_groups:
           - name: shared
