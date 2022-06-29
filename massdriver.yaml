@@ -41,7 +41,7 @@ params:
     kubernetes_version:
       type: string
       title: Kubernetes version
-      description: The version of Kubernetes that should be used for this cluster. You will be able to upgrade this version after creating the cluster.
+      description: The version of Kubernetes that should be used for this cluster. You will be able to upgrade this version after creating the cluster, but you cannot downgrade the version.
       default: "1.23.5"
       enum:
         - "1.23.5"
