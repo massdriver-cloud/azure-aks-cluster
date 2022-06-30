@@ -21,17 +21,17 @@ params:
           name: default
           min_size: 1
           max_size: 10
-          node_size: Standard_B2s
+          node_size: Standard_D2s_v3
     - __name: Production
       node_groups:
         default_node_group:
           name: default
           min_size: 1
           max_size: 10
-          node_size: Standard_D2s_v3
+          node_size: Standard_D8s_v3
         additional_node_groups:
           - name: shared
-            node_size: Standard_D2s_v3
+            node_size: Standard_D8s_v3
             min_size: 1
             max_size: 10
   required:
@@ -91,22 +91,8 @@ params:
             node_size:
               type: string
               title: Compute size
-              description: Compute size to use in the node group (B = Burstable, D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
+              description: Compute size to use in the node group (D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
               oneOf:
-                - title: B2s (2 vCores, 4 GiB memory)
-                  const: Standard_B2s
-                - title: B2ms (2 vCores, 8 GiB memory)
-                  const: Standard_B2ms
-                - title: B4ms (4vCores, 16 GiB memory)
-                  const: Standard_B4ms
-                - title: B8ms (8 vCores, 32 GiB memory)
-                  const: Standard_B8ms
-                - title: B16ms (16 vCores, 64 GiB memory)
-                  const: Standard_B16ms
-                - title: DS2 (2 vCores, 7 GiB memory)
-                  const: Standard_DS2_v2
-                - title: DS3 (4 vCores, 14 GiB memory)
-                  const: Standard_DS3_v2
                 - title: D2s (2 vCores, 8 GiB memory)
                   const: Standard_D2s_v3
                 - title: D4s (4 vCores, 16 GiB memory)
@@ -182,22 +168,8 @@ params:
               node_size:
                 type: string
                 title: Compute size
-                description: Compute size to use in the node group (B = Burstable, D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
+                description: Compute size to use in the node group (D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
                 oneOf:
-                  - title: B2s (2 vCores, 4 GiB memory)
-                    const: Standard_B2s
-                  - title: B2ms (2 vCores, 8 GiB memory)
-                    const: Standard_B2ms
-                  - title: B4ms (4vCores, 16 GiB memory)
-                    const: Standard_B4ms
-                  - title: B8ms (8 vCores, 32 GiB memory)
-                    const: Standard_B8ms
-                  - title: B16ms (16 vCores, 64 GiB memory)
-                    const: Standard_B16ms
-                  - title: DS2 (2 vCores, 7 GiB memory)
-                    const: Standard_DS2_v2
-                  - title: DS3 (4 vCores, 14 GiB memory)
-                    const: Standard_DS3_v2
                   - title: D2s (2 vCores, 8 GiB memory)
                     const: Standard_D2s_v3
                   - title: D4s (4 vCores, 16 GiB memory)
