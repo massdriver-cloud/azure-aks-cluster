@@ -75,7 +75,7 @@ params:
           description: IP address within the Kubernetes service address range above that will be used by cluster service discovery (kube-dns). This cannot be changed after creation.
           $md.immutable: true
           default: "172.16.0.10"
-          pattern: "^(?:[0-9]|[0-9]{2}|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(?:\\.(?:[0-9]|[0-9]{2}|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$"
+          $ref: https://raw.githubusercontent.com/massdriver-cloud/artifact-definitions/main/definitions/types/ip-address.json
           message:
             pattern: Invalid IP address. Must be an IP address within the Service CIDR address range using private networking space (10.X.X.X, 172.16-31.X.X, 192.168.X.X).
         docker_bridge_cidr:
