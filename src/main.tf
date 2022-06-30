@@ -1,6 +1,4 @@
 locals {
-  aks_name = var.md_metadata.name_prefix
-
   network_profile = {
     network_plugin = "azure"
     network_policy = "azure"
@@ -13,10 +11,10 @@ resource "azurerm_resource_group" "main" {
 }
 
 resource "azurerm_kubernetes_cluster" "main" {
-  name                = local.aks_name
+  name                = var.md_metadata.name_prefix
   location            = var.vnet.specs.azure.region
   resource_group_name = azurerm_resource_group.main.name
-  dns_prefix          = "${local.aks_name}-dns"
+  dns_prefix          = "${var.md_metadata.name_prefix}-dns"
   oidc_issuer_enabled = false
   kubernetes_version  = var.kubernetes_version
 
