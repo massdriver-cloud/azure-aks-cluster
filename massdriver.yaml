@@ -147,6 +147,7 @@ params:
           type: array
           title: Additional node groups
           description: Additional node groups to provision.
+          default: []
           items:
             type: object
             title: Node group
