@@ -2,11 +2,8 @@ locals {
   aks_name = var.md_metadata.name_prefix
 
   network_profile = {
-    network_plugin     = "azure"
-    network_policy     = "azure"
-    dns_service_ip     = "10.1.0.10"
-    docker_bridge_cidr = "170.10.0.1/16"
-    service_cidr       = "10.1.0.0/16"
+    network_plugin = "azure"
+    network_policy = "azure"
   }
 }
 
@@ -45,9 +42,9 @@ resource "azurerm_kubernetes_cluster" "main" {
   network_profile {
     network_plugin     = local.network_profile.network_plugin
     network_policy     = local.network_profile.network_policy
-    dns_service_ip     = local.network_profile.dns_service_ip
-    docker_bridge_cidr = local.network_profile.docker_bridge_cidr
-    service_cidr       = local.network_profile.service_cidr
+    dns_service_ip     = var.network_profile.dns_service_ip
+    docker_bridge_cidr = var.network_profile.docker_bridge_cidr
+    service_cidr       = var.network_profile.service_cidr
   }
 
   tags = var.md_metadata.default_tags

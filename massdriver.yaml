@@ -36,6 +36,7 @@ params:
             max_size: 10
   required:
     - kubernetes_version
+    - network_profile
     - node_groups
   properties:
     kubernetes_version:
@@ -50,6 +51,42 @@ params:
         - "1.22.4"
         - "1.21.9"
         - "1.21.7"
+    network_profile:
+      type: object
+      title: Cluster network profile
+      description: The network profile that should be used for this cluster.
+      required:
+        - dns_service_ip
+        - docker_bridge_cidr
+        - service_cidr
+      properties:
+        service_cidr:
+          type: string
+          title: Service CIDR
+          description: The Network Range (/16 in size) used by the Kubernetes service. This cannot be changed after creation.
+          $md.immutable: true
+          default: "172.16.0.0/16"
+          $ref: https://raw.githubusercontent.com/massdriver-cloud/artifact-definitions/main/definitions/types/cidr.json
+          message:
+            pattern: Invalid CIDR. Must be a /16 private networking space (10.X.X.X/16, 172.16-31.X.X/16, 192.168.X.X/16) that does not conflict with your VNet address space.
+        dns_service_ip:
+          type: string
+          title: DNS service IP
+          description: IP address within the Kubernetes service address range that will be used by cluster service discovery (kube-dns). This cannot be changed after creation.
+          $md.immutable: true
+          default: "172.16.0.10"
+          pattern: "^(?:[0-9]|[0-9]{2}|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(?:\\.(?:[0-9]|[0-9]{2}|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$"
+          message:
+            pattern: Invalid IP address. Must be an IP address within the Service CIDR address range using private networking space (10.X.X.X, 172.16-31.X.X, 192.168.X.X).
+        docker_bridge_cidr:
+          type: string
+          title: Docker bridge CIDR
+          description: IP address range used as the Docker bridge IP address on nodes. This cannot be changed after creation.
+          $md.immutable: true
+          default: "170.10.0.1/16"
+          pattern: "^170\\.[0-9]+\\.0\\.1/16$"
+          message:
+            pattern: Invalid CIDR. Must be a CIDR that uses the format of 170.x.0.1/16.
     node_groups:
       type: object
       title: Node groups
@@ -265,9 +302,15 @@ artifacts:
 ui:
   ui:order:
     - kubernetes_version
+    - network_profile
     - node_groups
     - core_services
     - "*"
+  network_profile:
+    ui:order:
+      - service_cidr
+      - dns_service_ip
+      - docker_bridge_cidr
   node_groups:
     ui:order:
       - default_node_group
