@@ -1,7 +1,10 @@
 locals {
-  network_profile = {
+  service_ip = join(".", slice(split(".", element(split("/", var.networking.service_cidr), 0)), 0, 3))
+
+  networking = {
     network_plugin = "azure"
     network_policy = "azure"
+    dns_service_ip = "${local.service_ip}.10"
   }
 }
 
@@ -38,11 +41,11 @@ resource "azurerm_kubernetes_cluster" "main" {
   }
 
   network_profile {
-    network_plugin     = local.network_profile.network_plugin
-    network_policy     = local.network_profile.network_policy
-    dns_service_ip     = var.network_profile.dns_service_ip
-    docker_bridge_cidr = var.network_profile.docker_bridge_cidr
-    service_cidr       = var.network_profile.service_cidr
+    network_plugin     = local.networking.network_plugin
+    network_policy     = local.networking.network_policy
+    dns_service_ip     = local.networking.dns_service_ip
+    docker_bridge_cidr = var.networking.docker_bridge_cidr
+    service_cidr       = var.networking.service_cidr
   }
 
   tags = var.md_metadata.default_tags
