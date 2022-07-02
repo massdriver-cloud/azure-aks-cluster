@@ -1,7 +1,7 @@
 schema: draft-07
 name: azure-aks-cluster
 description: "Azure Kubernetes Service (AKS) is a fully managed container orchestration service. AKS offers serverless Kubernetes, an integrated continuous integration and continuous delivery (CI/CD) experience, and enterprise-grade security and governance."
-ref: github.com/massdriver-cloud/massdriver-bundles/bundles/azure-aks-cluster
+ref: github.com/massdriver-cloud/azure-aks-cluster
 access: "public"
 type: bundle
 
@@ -36,7 +36,6 @@ params:
             max_size: 10
   required:
     - kubernetes_version
-    - networking
     - node_groups
   properties:
     kubernetes_version:
@@ -51,32 +50,6 @@ params:
         - "1.22.4"
         - "1.21.9"
         - "1.21.7"
-    networking:
-      type: object
-      title: Cluster network profile
-      description: The network profile that should be used for this cluster.
-      required:
-        - docker_bridge_cidr
-        - service_cidr
-      properties:
-        service_cidr:
-          type: string
-          title: Service CIDR
-          description: The Network Range (10.0-255.0.0/16, 172.16-29.0.0/16, 192.168.0.0/16) used by the Kubernetes service. This cannot be changed after creation.
-          $md.immutable: true
-          default: "172.16.0.0/16"
-          pattern: ^(?:10(?:\.(?:[0-9]|[0-9]{2}|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))|172(?:\.(?:1[6-9]|2[0-9]))|192(?:\.(?:168)))\.0\.0\/16$
-          message:
-            pattern: Invalid CIDR. Must be a /16 private networking space (10.0-255.0.0/16, 172.16-29.0.0/16, 192.168.0.0/16) that does not conflict with your VNet address space.
-        docker_bridge_cidr:
-          type: string
-          title: Docker bridge CIDR
-          description: IP address range (170.0-255.0.1/16) used as the Docker bridge IP address on nodes. This cannot be changed after creation.
-          $md.immutable: true
-          default: "170.10.0.1/16"
-          pattern: ^170(?:\.(?:[0-9]|[0-9]{2}|1[-0-9]{2}|2[0-5]{2}))\.0\.1\/16$
-          message:
-            pattern: Invalid CIDR. Must be a CIDR that uses the format of 170.0-255.0.1/16.
     node_groups:
       type: object
       title: Node groups
@@ -292,14 +265,9 @@ artifacts:
 ui:
   ui:order:
     - kubernetes_version
-    - networking
     - node_groups
     - core_services
     - "*"
-  networking:
-    ui:order:
-      - service_cidr
-      - docker_bridge_cidr
   node_groups:
     ui:order:
       - default_node_group
