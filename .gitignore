@@ -1,41 +1,75 @@
-###### Massdriver
+# Created by https://www.toptal.com/developers/gitignore/api/terraform,osx,windows,linux
+# Edit at https://www.toptal.com/developers/gitignore?templates=terraform,osx,windows,linux
 
-# locally generated files during development
-schema-params.json
-schema-connections.json
-schema-artifacts.json
-schema-ui.json
-artifacts.json
-_*_variables.tf.json
-dev.tfvars.json
-dev.*.tfvars.json
+### Linux ###
+*~
 
-# Auth files will be generated at runtime, shouldn't be checked in
-**/auth/*
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
 
-# Sandbox artifact.json files are backed up here
-sandbox
+# KDE directory preferences
+.directory
 
-# Dereferenced artifacts are dropped here during development
-tmp/
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
 
-###### Terraform
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+### OSX ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### VS Code###
+# Plugins
+.infracost
+
+### Terraform ###
 # Local .terraform directories
-**/.terraform*
+**/.terraform/*
+
+# Terraform lock file
+.terraform.lock.hcl
+
 # .tfstate files
 *.tfstate
 *.tfstate.*
-*.code-workspace
-.terraform.lock.hcl
 
 # Crash log files
 crash.log
+crash.*.log
 
-# Ignore any .tfvars files that are generated automatically for each Terraform run. Most
-# .tfvars files are managed as part of configuration and so should be included in
-# version control.
-#
-# example.tfvars
+# Exclude all .tfvars files, which are likely to contain sensitive data, such as
+# password, private keys, and other secrets. These should not be part of version
+# control as they are data points which are potentially sensitive and subject
+# to change depending on the environment.
+*.tfvars
+*.tfvars.json
 
 # Ignore override files as they are usually used to override resources locally and so
 # are not checked in
@@ -45,43 +79,48 @@ override.tf.json
 *_override.tf.json
 
 # Include override files you do wish to add to version control using negated pattern
-#
 # !example_override.tf
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
 
-###### NPM / Node
-# dependencies
-**/node_modules
-/.pnp
-.pnp.js
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
 
-# testing
-/coverage
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
 
-# production
-/build
+# Dump file
+*.stackdump
 
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Folder config file
+[Dd]esktop.ini
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
 
-*.swp
-sandbox
-.yarn
-.yarnrc.yml
+# Windows Installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
 
+# Windows shortcuts
+*.lnk
 
-# vscode settings
-.vscode/
+# End of https://www.toptal.com/developers/gitignore/api/terraform,osx,windows,linux
 
-# yarn build-storybook
-storybook-static
+# Massdriver generated files
+schema-artifacts.json
+schema-connections.json
+schema-params.json
+schema-ui.json
+*/_connections_variables.tf.json
+*/_md_variables.tf.json
+*/_params_variables.tf.json

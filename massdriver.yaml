@@ -132,12 +132,10 @@ params:
         additional_node_groups:
           type: array
           title: Additional node groups
-          description: Additional node groups to provision.
           default: []
           items:
             type: object
             title: Node group
-            description: Configuration of a node group.
             required:
               - name
               - node_size
@@ -147,7 +145,6 @@ params:
               name:
                 type: string
                 title: Name
-                description: The name of this node group.
                 pattern: "[a-z]{1,}[a-z0-9]{0,11}"
                 message:
                   pattern: This field only accepts lowercase letters and numbers, with a max length of 12 characters. Changing this forces a deletion and re-creation of the node group.
@@ -272,6 +269,7 @@ ui:
     ui:order:
       - default_node_group
       - additional_node_groups
+      - "*"
     default_node_group:
       ui:order:
         - name
