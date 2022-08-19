@@ -38,6 +38,67 @@ params:
     - kubernetes_version
     - node_groups
   properties:
+    observability:
+      type: object
+      title: Observability
+      description: Configure logging and metrics collection and delivery for your entire cluster
+      required:
+        -  logging
+      properties:
+        logging:
+          type: object
+          title: Logging
+          description: Configure logging for your cluster
+          required:
+            - destination 
+          properties:
+            destination:
+              type: string
+              title: Destination
+              description: Where to send logs
+              oneOf:
+              - title: "OpenSearch (in cluster)"
+                const: "opensearch"
+              - title: "Disabled"
+                const: "disabled"
+          dependencies:
+            destination:
+              oneOf:
+                - properties:
+                    destination:
+                      const: "opensearch"
+                    opensearch:
+                      type: object
+                      title: OpenSearch
+                      required:
+                        - persistence_size
+                        - retention_days
+                        - enable_dashboards
+                      properties:
+                        persistence_size:
+                          type: integer
+                          title: Persistence Size GiB
+                          description: Size of the persistent volume to use for OpenSearch
+                          minimum: 2
+                          maximum: 1000
+                          default: 10
+                        retention_days:
+                          type: integer
+                          title: Retention Days
+                          description: Number of days to retain logs and metrics in an OpenSearch Index
+                          minimum: 1
+                          maximum: 365
+                          default: 7
+                        enable_dashboards:
+                          type: boolean
+                          title: Enable Dashboards
+                          description: Enable OpenSearch Dashboards
+                          default: true
+                  required:
+                    - opensearch
+                - properties:
+                    destination:
+                      const: "Disabled" 
     kubernetes_version:
       type: string
       title: Kubernetes version
@@ -292,3 +353,9 @@ ui:
       - enable_ingress
       - azure_dns_zones
       - "*"
+  observability:
+    opensearch:
+      persistence_size:
+        ui:field: conversionFieldData
+        default: Gibabytes
+
