@@ -27,7 +27,7 @@ module "opensearch" {
         size = var.observability.logging.opensearch.persistence_size
     }
   } 
-  enable_dashboards = var.observability.logging.opensearch.enable_dashboards
+  enable_dashboards = true
   // this adds a retention policy to move indexes to warm after 1 day and delete them after a user configurable number of days
   ism_policies = {
     "hot-warm-delete": templatefile("${path.module}/logging/opensearch/ism_hot_warm_delete.json.tftpl", {"log_retention_days": var.observability.logging.opensearch.retention_days})
