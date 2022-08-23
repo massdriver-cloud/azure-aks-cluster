@@ -51,7 +51,6 @@ Security and compliance scanning of our bundles is performed using [Bridgecrew](
 | [![NIST-800-53](https://www.bridgecrew.cloud/badges/github/massdriver-cloud/azure-aks-cluster/nist)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=massdriver-cloud%2Fazure-aks-cluster&benchmark=NIST-800-53) | National Institute of Standards and Technology Compliance |
 | [![ISO27001](https://www.bridgecrew.cloud/badges/github/massdriver-cloud/azure-aks-cluster/iso)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=massdriver-cloud%2Fazure-aks-cluster&benchmark=ISO27001) | Information Security Management System, ISO/IEC 27001 Compliance |
 | [![SOC2](https://www.bridgecrew.cloud/badges/github/massdriver-cloud/azure-aks-cluster/soc2)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=massdriver-cloud%2Fazure-aks-cluster&benchmark=SOC2)| Service Organization Control 2 Compliance |
-| [![CIS GCP](https://www.bridgecrew.cloud/badges/github/massdriver-cloud/azure-aks-cluster/cis_gcp)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=massdriver-cloud%2Fazure-aks-cluster&benchmark=CIS+GCP+V1.1) | Center for Internet Security, GCP Compliance |
 | [![HIPAA](https://www.bridgecrew.cloud/badges/github/massdriver-cloud/azure-aks-cluster/hipaa)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=massdriver-cloud%2Fazure-aks-cluster&benchmark=HIPAA) | Health Insurance Portability and Accountability Compliance |
 
 <!-- COMPLIANCE:END -->
@@ -139,6 +138,7 @@ Please connect with us!
 [![LinkedIn][linkedin_shield]][linkedin_url]
 [![Twitter][twitter_shield]][twitter_url]
 [![YouTube][youtube_shield]][youtube_url]
+[![Reddit][reddit_shield]][reddit_url]
 
 <!-- markdownlint-disable -->
 
