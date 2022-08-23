@@ -16,8 +16,7 @@ module "kube-state-metrics" {
 
 module "opensearch" {
   count       = var.observability.logging.destination == "opensearch" ? 1 : 0
-  # TODO replace ref with a SHA once k8s-opensearch is merged
-  source      = "github.com/massdriver-cloud/terraform-modules//k8s-opensearch?ref=opensearch"
+  source      = "github.com/massdriver-cloud/terraform-modules//k8s-opensearch?ref=2400d29"
   md_metadata = var.md_metadata
   release     = "opensearch"
   namespace   = "md-observability" # TODO should this be monitoring?
