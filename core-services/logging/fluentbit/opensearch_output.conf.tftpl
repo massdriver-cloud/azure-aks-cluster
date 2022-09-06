@@ -1,0 +1,27 @@
+[OUTPUT]
+    Name  opensearch
+    Match kube.*
+    Host  opensearch-cluster-master.${namespace}.svc.cluster.local
+    Port  9200
+    HTTP_User admin
+    HTTP_Passwd admin
+    Logstash_Format True
+    Logstash_Prefix namespace
+    Logstash_Prefix_Key kubernetes_namespace_name
+    Retry_Limit False
+    tls on
+    tls.verify off
+    Suppress_Type_Name on
+[OUTPUT]
+    Name  opensearch
+    Match host.*
+    Host  opensearch-cluster-master.${namespace}.svc.cluster.local
+    Port  9200
+    HTTP_User admin
+    HTTP_Passwd admin
+    Logstash_Format True
+    Logstash_Prefix k8s-node-logs
+    Retry_Limit False
+    tls on
+    tls.verify off
+    Suppress_Type_Name on
