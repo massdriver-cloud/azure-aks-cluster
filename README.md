@@ -106,6 +106,12 @@ Form input parameters for configuring a bundle for deployment.
         - F16s (16 vCores, 32 GiB memory)
         - F32s (32 vCores, 64 GiB memory)
         - F64s (64 vCores, 128 GiB memory)
+- **`observability`** *(object)*: Configure logging and metrics collection and delivery for your entire cluster.
+  - **`logging`** *(object)*: Configure logging for your cluster.
+    - **`destination`** *(string)*: Where to send logs. Default: `disabled`.
+      - **One of**
+        - OpenSearch (in cluster)
+        - Disabled
 ## Examples
 
   ```json
