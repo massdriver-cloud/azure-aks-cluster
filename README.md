@@ -37,28 +37,6 @@ Our bundles aren't intended to be used locally, outside of testing. Instead, our
 
 Bundles are the basic building blocks of infrastructure, applications, and architectures in [Massdriver][website]. Read more [here](https://docs.massdriver.cloud/concepts/bundles).
 
-## Security & Compliance
-
-<!-- COMPLIANCE:START -->
-
-Security and compliance scanning of our bundles is performed using [Bridgecrew](https://www.bridgecrew.cloud/). Massdriver also offers security and compliance scanning of operational infrastructure configured and deployed using the platform.
-
-| Benchmark | Description |
-|--------|---------------|
-| [![Infrastructure Security](https://www.bridgecrew.cloud/badges/github/massdriver-cloud/azure-aks-cluster/general)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=massdriver-cloud%2Fazure-aks-cluster&benchmark=INFRASTRUCTURE+SECURITY) | Infrastructure Security Compliance |
-| [![CIS AZURE](https://www.bridgecrew.cloud/badges/github/massdriver-cloud/azure-aks-cluster/cis_azure)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=massdriver-cloud%2Fazure-aks-cluster&benchmark=CIS+AZURE+V1.1) | Center for Internet Security, AZURE Compliance |
-| [![PCI-DSS](https://www.bridgecrew.cloud/badges/github/massdriver-cloud/azure-aks-cluster/pci)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=massdriver-cloud%2Fazure-aks-cluster&benchmark=PCI-DSS+V3.2) | Payment Card Industry Data Security Standards Compliance |
-| [![NIST-800-53](https://www.bridgecrew.cloud/badges/github/massdriver-cloud/azure-aks-cluster/nist)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=massdriver-cloud%2Fazure-aks-cluster&benchmark=NIST-800-53) | National Institute of Standards and Technology Compliance |
-| [![ISO27001](https://www.bridgecrew.cloud/badges/github/massdriver-cloud/azure-aks-cluster/iso)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=massdriver-cloud%2Fazure-aks-cluster&benchmark=ISO27001) | Information Security Management System, ISO/IEC 27001 Compliance |
-| [![SOC2](https://www.bridgecrew.cloud/badges/github/massdriver-cloud/azure-aks-cluster/soc2)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=massdriver-cloud%2Fazure-aks-cluster&benchmark=SOC2)| Service Organization Control 2 Compliance |
-| [![CIS GCP](https://www.bridgecrew.cloud/badges/github/massdriver-cloud/azure-aks-cluster/cis_gcp)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=massdriver-cloud%2Fazure-aks-cluster&benchmark=CIS+GCP+V1.1) | Center for Internet Security, GCP Compliance |
-| [![HIPAA](https://www.bridgecrew.cloud/badges/github/massdriver-cloud/azure-aks-cluster/hipaa)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=massdriver-cloud%2Fazure-aks-cluster&benchmark=HIPAA) | Health Insurance Portability and Accountability Compliance |
-
-<!-- COMPLIANCE:END -->
-
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
 ## Bundle
 
 ### Params
@@ -69,8 +47,108 @@ Form input parameters for configuring a bundle for deployment.
 <summary>View</summary>
 
 <!-- PARAMS:START -->
+## Properties
 
-**Params coming soon**
+- **`core_services`** *(object)*: Configure core services in Kubernetes for Massdriver to manage.
+  - **`azure_dns_zones`** *(object)*: List any Azure DNS Zones associated with this cluster to allow the Kubernetes to automatically manage DNS records and SSL certificates.
+    - **`dns_zones`** *(array)*: The name of the Azure DNS zone for the AKS Cluster.
+      - **Items** *(string)*
+    - **`resource_group`** *(string)*: The name of the Resource Group the Azure DNS zones are in (all zones must share the same Resource Group).
+  - **`enable_ingress`** *(boolean)*: Enabling this will create an NGINX Ingress Controller in the cluster, allowing internet traffic to flow into web accessible services within the cluster. Default: `False`.
+- **`kubernetes_version`** *(string)*: The version of Kubernetes that should be used for this cluster. You will be able to upgrade this version after creating the cluster, but you cannot downgrade the version. Must be one of: `['1.23.5', '1.23.3', '1.22.6', '1.22.4', '1.21.9', '1.21.7']`. Default: `1.23.5`.
+- **`node_groups`** *(object)*: The node groups that should be used for this cluster.
+  - **`additional_node_groups`** *(array)*: Default: `[]`.
+    - **Items** *(object)*
+      - **`max_size`** *(number)*: Maximum number of instances in the node group. Minimum: `1`. Maximum: `1000`. Default: `10`.
+      - **`min_size`** *(number)*: Minimum number of instances in the node group. Minimum: `1`. Maximum: `1000`. Default: `1`.
+      - **`name`** *(string)*
+      - **`node_size`** *(string)*: Compute size to use in the node group (D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
+        - **One of**
+          - D2s (2 vCores, 8 GiB memory)
+          - D4s (4 vCores, 16 GiB memory)
+          - D8s (8 vCores, 32 GiB memory)
+          - D16s (16 vCores, 64 GiB memory)
+          - D32s (32 vCores, 64 GiB memory)
+          - D64s (64 vCores, 256 GiB memory)
+          - E2s (2 vCores, 16 GiB memory)
+          - E4s (4 vCores, 32 GiB memory)
+          - E8s (8 vCores, 64 GiB memory)
+          - E16s (8 vCores, 128 GiB memory)
+          - E32s (32 vCores, 256 GiB memory)
+          - E64s (64 vCores, 432 GiB memory)
+          - F2s (2 vCores, 4 GiB memory)
+          - F4s (4 vCores, 8 GiB memory)
+          - F8s (8 vCores, 16 GiB memory)
+          - F16s (16 vCores, 32 GiB memory)
+          - F32s (32 vCores, 64 GiB memory)
+          - F64s (64 vCores, 128 GiB memory)
+  - **`default_node_group`** *(object)*: Configuration of the node group.
+    - **`max_size`** *(number)*: Maximum number of instances in the node group. Minimum: `1`. Maximum: `1000`. Default: `10`.
+    - **`min_size`** *(number)*: Minimum number of instances in the node group. Minimum: `1`. Maximum: `1000`. Default: `1`.
+    - **`name`** *(string)*: The name of the node group.
+    - **`node_size`** *(string)*: Compute size to use in the node group (D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
+      - **One of**
+        - D2s (2 vCores, 8 GiB memory)
+        - D4s (4 vCores, 16 GiB memory)
+        - D8s (8 vCores, 32 GiB memory)
+        - D16s (16 vCores, 64 GiB memory)
+        - D32s (32 vCores, 64 GiB memory)
+        - D64s (64 vCores, 256 GiB memory)
+        - E2s (2 vCores, 16 GiB memory)
+        - E4s (4 vCores, 32 GiB memory)
+        - E8s (8 vCores, 64 GiB memory)
+        - E16s (8 vCores, 128 GiB memory)
+        - E32s (32 vCores, 256 GiB memory)
+        - E64s (64 vCores, 432 GiB memory)
+        - F2s (2 vCores, 4 GiB memory)
+        - F4s (4 vCores, 8 GiB memory)
+        - F8s (8 vCores, 16 GiB memory)
+        - F16s (16 vCores, 32 GiB memory)
+        - F32s (32 vCores, 64 GiB memory)
+        - F64s (64 vCores, 128 GiB memory)
+- **`observability`** *(object)*: Configure logging and metrics collection and delivery for your entire cluster.
+  - **`logging`** *(object)*: Configure logging for your cluster.
+    - **`destination`** *(string)*: Where to send logs. Default: `disabled`.
+      - **One of**
+        - OpenSearch (in cluster)
+        - Disabled
+## Examples
+
+  ```json
+  {
+      "__name": "Development",
+      "node_groups": {
+          "default_node_group": {
+              "max_size": 10,
+              "min_size": 1,
+              "name": "default",
+              "node_size": "Standard_D2s_v3"
+          }
+      }
+  }
+  ```
+
+  ```json
+  {
+      "__name": "Production",
+      "node_groups": {
+          "additional_node_groups": [
+              {
+                  "max_size": 10,
+                  "min_size": 1,
+                  "name": "shared",
+                  "node_size": "Standard_D8s_v3"
+              }
+          ],
+          "default_node_group": {
+              "max_size": 10,
+              "min_size": 1,
+              "name": "default",
+              "node_size": "Standard_D8s_v3"
+          }
+      }
+  }
+  ```
 
 <!-- PARAMS:END -->
 
@@ -84,9 +162,69 @@ Connections from other bundles that this bundle depends on.
 <summary>View</summary>
 
 <!-- CONNECTIONS:START -->
+## Properties
 
-**Connections coming soon**
+- **`azure_service_principal`** *(object)*: . Cannot contain additional properties.
+  - **`data`** *(object)*
+    - **`client_id`** *(string)*: A valid UUID field.
 
+      Examples:
+      ```json
+      "123xyz99-ab34-56cd-e7f8-456abc1q2w3e"
+      ```
+
+    - **`client_secret`** *(string)*
+    - **`subscription_id`** *(string)*: A valid UUID field.
+
+      Examples:
+      ```json
+      "123xyz99-ab34-56cd-e7f8-456abc1q2w3e"
+      ```
+
+    - **`tenant_id`** *(string)*: A valid UUID field.
+
+      Examples:
+      ```json
+      "123xyz99-ab34-56cd-e7f8-456abc1q2w3e"
+      ```
+
+  - **`specs`** *(object)*
+- **`vnet`** *(object)*: . Cannot contain additional properties.
+  - **`data`** *(object)*
+    - **`infrastructure`** *(object)*
+      - **`cidr`** *(string)*
+
+        Examples:
+        ```json
+        "10.100.0.0/16"
+        ```
+
+        ```json
+        "192.24.12.0/22"
+        ```
+
+      - **`default_subnet_id`** *(string)*: Azure Resource ID.
+
+        Examples:
+        ```json
+        "/subscriptions/12345678-1234-1234-abcd-1234567890ab/resourceGroups/resource-group-name/providers/Microsoft.Network/virtualNetworks/network-name"
+        ```
+
+      - **`id`** *(string)*: Azure Resource ID.
+
+        Examples:
+        ```json
+        "/subscriptions/12345678-1234-1234-abcd-1234567890ab/resourceGroups/resource-group-name/providers/Microsoft.Network/virtualNetworks/network-name"
+        ```
+
+  - **`specs`** *(object)*
+    - **`azure`** *(object)*: .
+      - **`region`** *(string)*: Select the Azure region you'd like to provision your resources in.
+        - **One of**
+          - East US
+          - North Central US
+          - South Central US
+          - West US
 <!-- CONNECTIONS:END -->
 
 </details>
@@ -99,9 +237,83 @@ Resources created by this bundle that can be connected to other bundles.
 <summary>View</summary>
 
 <!-- ARTIFACTS:START -->
+## Properties
 
-**Artifacts coming soon**
+- **`kubernetes_cluster`** *(object)*: Kubernetes cluster authentication and cloud-specific configuration. Cannot contain additional properties.
+  - **`data`** *(object)*
+    - **`authentication`** *(object)*
+      - **`cluster`** *(object)*
+        - **`certificate-authority-data`** *(string)*
+        - **`server`** *(string)*
+      - **`user`** *(object)*
+        - **`token`** *(string)*
+    - **`infrastructure`** *(object)*: Cloud specific Kubernetes configuration data.
+      - **One of**
+        - AWS EKS infrastructure config*object*: . Cannot contain additional properties.
+          - **`arn`** *(string)*: Amazon Resource Name.
 
+            Examples:
+            ```json
+            "arn:aws:rds::ACCOUNT_NUMBER:db/prod"
+            ```
+
+            ```json
+            "arn:aws:ec2::ACCOUNT_NUMBER:vpc/vpc-foo"
+            ```
+
+          - **`oidc_issuer_url`** *(string)*: An HTTPS endpoint URL.
+
+            Examples:
+            ```json
+            "https://example.com/some/path"
+            ```
+
+            ```json
+            "https://massdriver.cloud"
+            ```
+
+        - Azure Infrastructure Resource ID*object*: Minimal Azure Infrastructure Config. Cannot contain additional properties.
+          - **`ari`** *(string)*: Azure Resource ID.
+
+            Examples:
+            ```json
+            "/subscriptions/12345678-1234-1234-abcd-1234567890ab/resourceGroups/resource-group-name/providers/Microsoft.Network/virtualNetworks/network-name"
+            ```
+
+        - GCP Infrastructure GRN*object*: Minimal GCP Infrastructure Config. Cannot contain additional properties.
+          - **`grn`** *(string)*: GCP Resource Name (GRN).
+
+            Examples:
+            ```json
+            "projects/my-project/global/networks/my-global-network"
+            ```
+
+            ```json
+            "projects/my-project/regions/us-west2/subnetworks/my-subnetwork"
+            ```
+
+            ```json
+            "projects/my-project/topics/my-pubsub-topic"
+            ```
+
+            ```json
+            "projects/my-project/subscriptions/my-pubsub-subscription"
+            ```
+
+            ```json
+            "projects/my-project/locations/us-west2/instances/my-redis-instance"
+            ```
+
+            ```json
+            "projects/my-project/locations/us-west2/clusters/my-gke-cluster"
+            ```
+
+  - **`specs`** *(object)*
+    - **`kubernetes`** *(object)*: Kubernetes distribution and version specifications.
+      - **`cloud`** *(string)*: Must be one of: `['aws', 'gcp', 'azure']`.
+      - **`distribution`** *(string)*: Must be one of: `['eks', 'gke', 'aks']`.
+      - **`platform_version`** *(string)*
+      - **`version`** *(string)*
 <!-- ARTIFACTS:END -->
 
 </details>
@@ -139,6 +351,7 @@ Please connect with us!
 [![LinkedIn][linkedin_shield]][linkedin_url]
 [![Twitter][twitter_shield]][twitter_url]
 [![YouTube][youtube_shield]][youtube_url]
+[![Reddit][reddit_shield]][reddit_url]
 
 <!-- markdownlint-disable -->
 
