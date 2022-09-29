@@ -22,7 +22,6 @@ resource "azurerm_kubernetes_cluster" "main" {
   azure_policy_enabled              = true
   local_account_disabled            = true
   role_based_access_control_enabled = true
-  disk_encryption_set_id            = azurerm_disk_encryption_set.main.id
   tags                              = var.md_metadata.default_tags
 
   azure_active_directory_role_based_access_control {
@@ -58,10 +57,6 @@ resource "azurerm_kubernetes_cluster" "main" {
     docker_bridge_cidr = "172.17.0.1/16"
     service_cidr       = "172.20.0.0/16"
   }
-
-  depends_on = [
-    azurerm_key_vault_access_policy.disk
-  ]
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "main" {
