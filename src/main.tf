@@ -9,6 +9,7 @@ resource "azurerm_log_analytics_workspace" "main" {
   name                = var.md_metadata.name_prefix
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_resource_group.main.location
+  tags                = var.md_metadata.name_prefix
 }
 
 resource "azurerm_kubernetes_cluster" "main" {
