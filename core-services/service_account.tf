@@ -1,7 +1,8 @@
 resource "kubernetes_service_account" "massdriver-cloud-provisioner" {
   metadata {
-    name   = "massdriver-cloud-provisioner"
-    labels = var.md_metadata.default_tags
+    name      = "massdriver-cloud-provisioner"
+    namespace = kubernetes_namespace.md-core-services.metadata.0.name
+    labels    = var.md_metadata.default_tags
   }
 }
 
@@ -24,7 +25,8 @@ resource "kubernetes_cluster_role_binding" "massdriver-cloud-provisioner" {
 
 data "kubernetes_secret" "massdriver-cloud-provisioner_service-account_secret" {
   metadata {
-    name   = kubernetes_service_account.massdriver-cloud-provisioner.default_secret_name
-    labels = var.md_metadata.default_tags
+    name      = kubernetes_service_account.massdriver-cloud-provisioner.default_secret_name
+    namespace = kubernetes_namespace.md-core-services.metadata.0.name
+    labels    = var.md_metadata.default_tags
   }
 }
