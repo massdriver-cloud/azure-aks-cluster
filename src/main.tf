@@ -9,7 +9,7 @@ resource "azurerm_log_analytics_workspace" "main" {
   name                = var.md_metadata.name_prefix
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_resource_group.main.location
-  tags                = var.md_metadata.name_prefix
+  tags                = var.md_metadata.default_tags
 }
 
 resource "azurerm_kubernetes_cluster" "main" {
@@ -19,9 +19,7 @@ resource "azurerm_kubernetes_cluster" "main" {
   dns_prefix                        = "${var.md_metadata.name_prefix}-dns"
   kubernetes_version                = var.cluster.kubernetes_version
   oidc_issuer_enabled               = false
-  private_cluster_enabled           = true
   azure_policy_enabled              = true
-  local_account_disabled            = true
   role_based_access_control_enabled = true
   tags                              = var.md_metadata.default_tags
 
