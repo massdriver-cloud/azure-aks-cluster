@@ -35,78 +35,30 @@ params:
             min_size: 1
             max_size: 10
   required:
-    - kubernetes_version
+    - cluster
     - node_groups
     - observability
   properties:
-    observability:
+    cluster:
+      title: Cluster
+      description: Configure the Kubernetes cluster
       type: object
-      title: Observability
-      description: Configure logging and metrics collection and delivery for your entire cluster
       required:
-        -  logging
+        - kubernetes_version
       properties:
-        logging:
-          type: object
-          title: Logging
-          description: Configure logging for your cluster
-          required:
-            - destination
-          properties:
-            destination:
-              type: string
-              title: Destination
-              description: Where to send logs
-              default: "disabled"
-              oneOf:
-              - title: "OpenSearch (in cluster)"
-                const: "opensearch"
-              - title: "Disabled"
-                const: "disabled"
-          dependencies:
-            destination:
-              oneOf:
-                - properties:
-                    destination:
-                      const: "opensearch"
-                    opensearch:
-                      type: object
-                      title: OpenSearch
-                      required:
-                        - persistence_size
-                        - retention_days
-                      properties:
-                        persistence_size:
-                          type: integer
-                          title: Persistence Size GiB
-                          description: Size of the persistent volume to use for OpenSearch
-                          minimum: 1
-                          maximum: 10000
-                          default: 10
-                        retention_days:
-                          type: integer
-                          title: Retention Days
-                          description: Number of days to retain logs and metrics in an OpenSearch Index
-                          minimum: 1
-                          maximum: 365
-                          default: 7
-                  required:
-                    - opensearch
-                - properties:
-                    destination:
-                      const: "disabled"
-    kubernetes_version:
-      type: string
-      title: Kubernetes version
-      description: The version of Kubernetes that should be used for this cluster. You will be able to upgrade this version after creating the cluster, but you cannot downgrade the version.
-      default: "1.23.5"
-      enum:
-        - "1.23.5"
-        - "1.23.3"
-        - "1.22.6"
-        - "1.22.4"
-        - "1.21.9"
-        - "1.21.7"
+        kubernetes_version:
+          type: string
+          title: Kubernetes version
+          description: The version of Kubernetes that should be used for this cluster. You will be able to upgrade this version after creating the cluster, but you cannot downgrade the version.
+          default: "1.23"
+          enum:
+            - "1.23"
+            - "1.22"
+        enable_log_analytics:
+          type: boolean
+          title: Enable Log Analytics
+          description: Enable Log Analytics for this cluster.
+          default: false
     node_groups:
       type: object
       title: Node groups
@@ -298,6 +250,62 @@ params:
               pattern: "[a-zA-Z0-9-_.()]{1,}[a-zA-Z0-9-_()]{0,89}$"
               message:
                 pattern: Must be a valid Resource Group name.
+    observability:
+      type: object
+      title: Observability
+      description: Configure logging and metrics collection and delivery for your entire cluster
+      required:
+        -  logging
+      properties:
+        logging:
+          type: object
+          title: Logging
+          description: Configure logging for your cluster
+          required:
+            - destination
+          properties:
+            destination:
+              type: string
+              title: Destination
+              description: Where to send logs
+              default: disabled
+              oneOf:
+              - title: OpenSearch (in cluster)
+                const: opensearch
+              - title: Disabled
+                const: disabled
+          dependencies:
+            destination:
+              oneOf:
+                - properties:
+                    destination:
+                      const: opensearch
+                    opensearch:
+                      type: object
+                      title: OpenSearch
+                      required:
+                        - persistence_size
+                        - retention_days
+                      properties:
+                        persistence_size:
+                          type: integer
+                          title: Persistence Size GiB
+                          description: Size of the persistent volume to use for OpenSearch
+                          minimum: 1
+                          maximum: 10000
+                          default: 10
+                        retention_days:
+                          type: integer
+                          title: Retention Days
+                          description: Number of days to retain logs and metrics in an OpenSearch Index
+                          minimum: 1
+                          maximum: 365
+                          default: 7
+                  required:
+                    - opensearch
+                - properties:
+                    destination:
+                      const: disabled
 
 connections:
   required:
@@ -318,11 +326,15 @@ artifacts:
 
 ui:
   ui:order:
-    - kubernetes_version
+    - cluster
     - node_groups
     - core_services
     - observability
     - "*"
+  cluster:
+    ui:order:
+      - kubernetes_version
+      - enable_log_analytics
   node_groups:
     ui:order:
       - default_node_group
@@ -347,4 +359,8 @@ ui:
     ui:order:
       - enable_ingress
       - azure_dns_zones
+      - "*"
+  observability:
+    ui:order:
+      - logging
       - "*"

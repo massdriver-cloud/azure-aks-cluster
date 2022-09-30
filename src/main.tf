@@ -1,29 +1,38 @@
-locals {
-  network_profile = {
-    network_plugin     = "azure"
-    network_policy     = "azure"
-    dns_service_ip     = "172.20.0.10"
-    docker_bridge_cidr = "172.17.0.1/16"
-    service_cidr       = "172.20.0.0/16"
-  }
-}
-
 resource "azurerm_resource_group" "main" {
   name     = var.md_metadata.name_prefix
   location = var.vnet.specs.azure.region
+  tags     = var.md_metadata.default_tags
+}
+
+resource "azurerm_log_analytics_workspace" "main" {
+  count               = var.cluster.enable_log_analytics ? 1 : 0
+  name                = var.md_metadata.name_prefix
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
+  tags                = var.md_metadata.default_tags
 }
 
 resource "azurerm_kubernetes_cluster" "main" {
-  name                = var.md_metadata.name_prefix
-  location            = var.vnet.specs.azure.region
-  resource_group_name = azurerm_resource_group.main.name
-  dns_prefix          = "${var.md_metadata.name_prefix}-dns"
-  oidc_issuer_enabled = false
-  kubernetes_version  = var.kubernetes_version
+  name                              = var.md_metadata.name_prefix
+  location                          = var.vnet.specs.azure.region
+  resource_group_name               = azurerm_resource_group.main.name
+  dns_prefix                        = "${var.md_metadata.name_prefix}-dns"
+  kubernetes_version                = var.cluster.kubernetes_version
+  oidc_issuer_enabled               = false
+  azure_policy_enabled              = true
+  role_based_access_control_enabled = true
+  tags                              = var.md_metadata.default_tags
 
   azure_active_directory_role_based_access_control {
     managed            = true
     azure_rbac_enabled = true
+  }
+
+  dynamic "oms_agent" {
+    for_each = var.cluster.enable_log_analytics ? toset(["enabled"]) : toset([])
+    content {
+      log_analytics_workspace_id = azurerm_log_analytics_workspace.main[0].id
+    }
   }
 
   default_node_pool {
@@ -41,14 +50,12 @@ resource "azurerm_kubernetes_cluster" "main" {
   }
 
   network_profile {
-    network_plugin     = local.network_profile.network_plugin
-    network_policy     = local.network_profile.network_policy
-    dns_service_ip     = local.network_profile.dns_service_ip
-    docker_bridge_cidr = local.network_profile.docker_bridge_cidr
-    service_cidr       = local.network_profile.service_cidr
+    network_plugin     = "azure"
+    network_policy     = "azure"
+    dns_service_ip     = "172.20.0.10"
+    docker_bridge_cidr = "172.17.0.1/16"
+    service_cidr       = "172.20.0.0/16"
   }
-
-  tags = var.md_metadata.default_tags
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "main" {
