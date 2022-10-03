@@ -1,7 +1,8 @@
 locals {
-  dns_zones           = try(var.core_services.azure_dns_zones.dns_zones, [])
-  dns_resource_group  = try(var.core_services.azure_dns_zones.resource_group, "")
-  enable_cert_manager = length(local.dns_zones) > 0 && length(local.dns_resource_group) > 0
+  zone_split_id       = try(split("/", var.core_services.azure_dns_zone.dns_zone))
+  dns_zone_names      = try(element(local.zone_split_id, index(local.zone_split_id, "dnszones") + 1))
+  dns_resource_group  = try(element(local.zone_split_id, index(local.zone_split_id, "resourceGroups") + 1))
+  enable_cert_manager = length(local.dns_zone_names) > 0 && length(local.dns_resource_group) > 0
 }
 
 data "azurerm_client_config" "current" {
@@ -28,7 +29,7 @@ resource "kubernetes_manifest" "cluster_issuer" {
         "privateKeySecretRef" = {
           "name" : "letsencrypt-prod-issuer-account-key"
         },
-        "solvers" = concat([for zone in var.core_services.azure_dns_zones.dns_zones : {
+        "solvers" = concat([for zone in var.core_services.azure_dns_zone.dns_zone : {
           "selector" = {
             "dnsZones" = [
               zone
@@ -43,7 +44,7 @@ resource "kubernetes_manifest" "cluster_issuer" {
               }
               subscriptionID    = data.azurerm_client_config.current.subscription_id
               tenantID          = data.azurerm_client_config.current.tenant_id
-              resourceGroupName = var.core_services.azure_dns_zones.resource_group
+              resourceGroupName = var.core_services.azure_dns_zone.resource_group
               hostedZoneName    = zone
             }
           }

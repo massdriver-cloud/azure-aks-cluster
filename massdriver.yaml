@@ -216,40 +216,29 @@ params:
       type: object
       title: Core Services
       description: Configure core services in Kubernetes for Massdriver to manage.
-      required: []
+      required:
+        - enable_ingress
       properties:
         enable_ingress:
           type: boolean
           title: Enable Ingress Controller
           description: Enabling this will create an NGINX Ingress Controller in the cluster, allowing internet traffic to flow into web accessible services within the cluster.
           default: false
-        azure_dns_zones:
-          type: object
-          title: Azure DNS Zones
-          description: List any Azure DNS Zones associated with this cluster to allow the Kubernetes to automatically manage DNS records and SSL certificates.
-          # not supported by our current MUI implementation, but useful once it is: https://json-schema.org/understanding-json-schema/reference/conditionals.html#id5
-          dependentRequired:
-            dns_zones:
-              - resource_group
-            resource_group:
-              - dns_zones
-          properties:
-            dns_zones:
-              type: array
-              title: Azure DNS zone
-              description: The name of the Azure DNS zone for the AKS Cluster.
-              items:
-                type: string
-                pattern: "^(?:[a-zA-Z0-9]+\\.)+(?:[a-zA-Z]+)$"
-                message:
-                  pattern: Must be a valid domain name.
-            resource_group:
-              type: string
-              title: Resource Group name
-              description: The name of the Resource Group the Azure DNS zones are in (all zones must share the same Resource Group).
-              pattern: "[a-zA-Z0-9-_.()]{1,}[a-zA-Z0-9-_()]{0,89}$"
-              message:
-                pattern: Must be a valid Resource Group name.
+      dependencies:
+        enable_ingress:
+          oneOf:
+            - properties:
+                enable_ingress:
+                  const: true
+                azure_dns_zone:
+                  type: array
+                  title: Azure DNS Zone
+                  description: Select Azure DNS Zones associated with this cluster to allow the Kubernetes to automatically manage DNS records and SSL certificates.
+                  items:
+                    type: string
+            - properties:
+                enable_ingress:
+                  const: false
     observability:
       type: object
       title: Observability
@@ -358,8 +347,11 @@ ui:
   core_services:
     ui:order:
       - enable_ingress
-      - azure_dns_zones
+      - azure_dns_zone
       - "*"
+    azure_dns_zone:
+      ui:field: dnsZonesDropdown
+      cloud: azure
   observability:
     ui:order:
       - logging
