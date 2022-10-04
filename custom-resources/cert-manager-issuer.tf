@@ -8,15 +8,6 @@ locals {
   enable_cert_manager = local.enable_azure_dns
 }
 
-# │ Error: Unsupported attribute
-# │
-# │   on cert-manager-issuer.tf line 50, in resource "kubernetes_manifest" "cluster_issuer":
-# │   50:               resourceGroupName = var.core_services.azure_dns_zones.resource_group
-# │     ├────────────────
-# │     │ var.core_services.azure_dns_zones is object with 1 attribute "dns_zone"
-# │
-# │ This object does not have an attribute named "resource_group".
-
 data "azurerm_client_config" "current" {
 }
 
