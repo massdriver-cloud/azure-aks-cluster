@@ -216,29 +216,26 @@ params:
       type: object
       title: Core Services
       description: Configure core services in Kubernetes for Massdriver to manage.
-      required:
-        - enable_ingress
+      required: []
       properties:
         enable_ingress:
           type: boolean
           title: Enable Ingress Controller
           description: Enabling this will create an NGINX Ingress Controller in the cluster, allowing internet traffic to flow into web accessible services within the cluster.
           default: false
-      dependencies:
-        enable_ingress:
-          oneOf:
-            - properties:
-                enable_ingress:
-                  const: true
-                azure_dns_zone:
-                  type: array
-                  title: Azure DNS Zone
-                  description: Select Azure DNS Zones associated with this cluster to allow the Kubernetes to automatically manage DNS records and SSL certificates.
-                  items:
-                    type: string
-            - properties:
-                enable_ingress:
-                  const: false
+        azure_dns_zones:
+          type: object
+          title: Azure DNS Zones
+          description: List any Azure DNS Zones associated with this cluster to allow the Kubernetes to automatically manage DNS records and SSL certificates.
+          # not supported by our current MUI implementation, but useful once it is: https://json-schema.org/understanding-json-schema/reference/conditionals.html#id5
+          properties:
+            dns_zone:
+              type: array
+              title: Azure DNS zone
+              description: The name of the Azure DNS zone for the AKS Cluster.
+              maxItems: 1
+              items:
+                type: string
     observability:
       type: object
       title: Observability
@@ -347,9 +344,9 @@ ui:
   core_services:
     ui:order:
       - enable_ingress
-      - azure_dns_zone
+      - azure_dns_zones
       - "*"
-    azure_dns_zone:
+    azure_dns_zones:
       ui:field: dnsZonesDropdown
       cloud: azure
   observability:
