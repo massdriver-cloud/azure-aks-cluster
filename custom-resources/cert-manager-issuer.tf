@@ -32,7 +32,7 @@ resource "kubernetes_manifest" "cluster_issuer" {
         "privateKeySecretRef" = {
           "name" : "letsencrypt-prod-issuer-account-key"
         },
-        "solvers" =  {
+        "solvers" = [{
           "selector" = {
             "dnsZones" = [
               local.azure_dns_zones.dns_zones
@@ -51,7 +51,7 @@ resource "kubernetes_manifest" "cluster_issuer" {
               hostedZoneName    = local.azure_dns_zones.dns_zones
             }
           }
-        }
+        }]
       }
     }
   }
