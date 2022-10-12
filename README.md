@@ -53,10 +53,8 @@ Form input parameters for configuring a bundle for deployment.
   - **`enable_log_analytics`** *(boolean)*: Enable Log Analytics for this cluster. Default: `False`.
   - **`kubernetes_version`** *(string)*: The version of Kubernetes that should be used for this cluster. You will be able to upgrade this version after creating the cluster, but you cannot downgrade the version. Must be one of: `['1.23', '1.22']`. Default: `1.23`.
 - **`core_services`** *(object)*: Configure core services in Kubernetes for Massdriver to manage.
-  - **`azure_dns_zones`** *(object)*: List any Azure DNS Zones associated with this cluster to allow the Kubernetes to automatically manage DNS records and SSL certificates.
-    - **`dns_zones`** *(array)*: The name of the Azure DNS zone for the AKS Cluster.
-      - **Items** *(string)*
-    - **`resource_group`** *(string)*: The name of the Resource Group the Azure DNS zones are in (all zones must share the same Resource Group).
+  - **`azure_dns_zones`** *(array)*: Add an Azure DNS Zone associated with this cluster to allow Kubernetes to automatically manage DNS records and SSL certificates.
+    - **Items** *(string)*
   - **`enable_ingress`** *(boolean)*: Enabling this will create an NGINX Ingress Controller in the cluster, allowing internet traffic to flow into web accessible services within the cluster. Default: `False`.
 - **`node_groups`** *(object)*: The node groups that should be used for this cluster.
   - **`additional_node_groups`** *(array)*: Default: `[]`.
