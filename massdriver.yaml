@@ -224,18 +224,12 @@ params:
           description: Enabling this will create an NGINX Ingress Controller in the cluster, allowing internet traffic to flow into web accessible services within the cluster.
           default: false
         azure_dns_zones:
-          type: object
-          title: Azure DNS Zones
-          description: List any Azure DNS Zones associated with this cluster to allow the Kubernetes to automatically manage DNS records and SSL certificates.
-          # not supported by our current MUI implementation, but useful once it is: https://json-schema.org/understanding-json-schema/reference/conditionals.html#id5
-          properties:
-            dns_zone:
-              type: array
-              title: Azure DNS zone
-              description: The name of the Azure DNS zone for the AKS Cluster.
-              maxItems: 1
-              items:
-                type: string
+          type: array
+          title: Azure DNS Zone
+          description: Add an Azure DNS Zone associated with this cluster to allow Kubernetes to automatically manage DNS records and SSL certificates.
+          maxItems: 1
+          items:
+            type: string
     observability:
       type: object
       title: Observability
@@ -347,8 +341,9 @@ ui:
       - azure_dns_zones
       - "*"
     azure_dns_zones:
-      ui:field: dnsZonesDropdown
-      cloud: azure
+      items:
+        ui:field: dnsZonesDropdown
+        cloud: azure
   observability:
     ui:order:
       - logging
