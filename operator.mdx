@@ -1,0 +1,52 @@
+# azure-aks-cluster
+
+Azure Kubernetes Service (AKS) is a simple means of creating a managed Kubernetes cluster in Microsoft Azure. Rather than manually configuring the cluster, you allow Azure to manage the Kubernetes masters and handle most of the mundane but critical tasks including health monitoring and maintenance, leaving you responsible only for the agent nodes. AKS enables rapid development and deployment of cloud-native apps with less management effort and the added protection of interoperability with Microsoft Azure security.
+
+## Use Cases 
+When you deploy an AKS cluster, the Kubernetes control plane and all nodes are deployed and configured for you. Azure handles management of the masters, allowing you to focus on the agent nodes.
+### Web applications
+Serve your web application out of Kubernetes, and leverage the high availability of running across availability zones and the ease of autoscaling your servers with web traffic.
+### Microservices
+Build large complex systems out of many small microservices, increasing your overall resiliency by isolating failure domains.
+### Workflows
+Gain the power of the open-source community by using services like Kubeflow and Argo Workflows for ETL (extract, transform, load) or machine-learning capabilities.
+### Cloud agnostic
+If your application can run on Kubernetes, you can run on any cluster, whether it's Amazon Elastic Kubernetes (EKS), Google Kubernetes Engine (GKE), AKS, or even your own on-premises cluster.
+
+## Configuration Presets 
+### Development
+The development preset creates the default node group using a two-core burstable vCPU with 4 GB of memory. No additional node groups are created. Use this preset for development only.
+### Production
+The production preset creates a default node group using an autoscaling standard vCPU (starting with two cores) with 8 GB of memory. One additional node group is also created using another autoscaling standard vCPU (starting with two cores) with 8 GB of memory. This preset has sufficient performance for production environments.
+
+## Design 
+Our bundle includes the following design choices to help simplify your deployment:
+### Cluster Autoscaling
+The AKS Cluster Autoscaler is enabled by default to adjust automatically the number of nodes that run your workloads. The cluster autoscaler component can watch for pods in your cluster that cannot be scheduled because of resource constraints. When the autoscaler detects issues, it will increase the number of nodes in a node pool to meet the application demand.
+### Azure CNI
+With Azure Container Networking Interface (CNI), every pod gets an IP address from the subnet and can be accessed directly. These IP addresses must be unique across your network space and can be used to connect resources together.
+### Ingress Controller
+The Ingress is a Kubernetes resource that lets you configure an HTTP load balancer for applications running on Kubernetes, represented by one or more Services, which are abstractions to permit these applications to appear as network services. Such a load balancer is necessary to deliver those applications to clients outside of the Kubernetes cluster.
+### DNS and SSL
+If you choose to specify an Azure DNS Zone, external-dns and cert-manager will be automatically installed to manage your DNS records dynamically and to generate SSL certificates to ensure that all internet traffic is encrypted.
+
+## Best Practices
+The bundle includes a number of best practices without needing any additional work on your part. It uses Azure CNI instead of Kubenet so that other resources can use node IPs. We have also enabled autoscaling for all node pools. For monitoring and collecting metrics, we have set up metrics-server and kube-state-metrics.
+
+## Security 
+To improve security, node groups are deployed into a private subnet. Also, an Azure service principal with minimal privileges is created for AKS to manage Azure DNS zones and Azure Container Registry.
+
+## Observability 
+Both metrics-server and kube-state-metrics are installed automatically to provide you with metrics.
+
+## Trade-offs 
+* Currently, we serve only four regions, and depending on your region or subscription plan, not all VM sizes may be available.
+* We provide simplified guided configuration options based on the advanced AKS configurations available in the bundle.
+* Please note that a default node group must be created and cannot be manipulated, as there can be only one default node group. Additional node groups can be provisioned as needed.
+* We do not currently support filtering compute size options by region or subscription-plan availability.
+* We do not support the following:
+* API server availability with SLA configuration
+* Kubenet network configuration
+* Enabling Azure Policy
+* Integrating AKS and Azure Key Vault
+* AKS pod identities are also not available, but we will be using workload identity federation as soon as it is out of preview.
