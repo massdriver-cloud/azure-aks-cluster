@@ -1,11 +1,14 @@
 locals {
-  enable_azure_dns = length(var.core_services.azure_dns_zones.dns_zone) > 0
-  split_zone_id    = split("/", var.core_services.azure_dns_zones.dns_zone[0])
-  azure_dns_zones = local.enable_azure_dns ? { # This is hardcoded to expect a single element. Will need to change this when multiple DNS zones are supported by external DNS.
-    dns_zones      = element(local.split_zone_id, index(local.split_zone_id, "dnszones") + 1)
-    resource_group = element(local.split_zone_id, index(local.split_zone_id, "resourceGroups") + 1)
-  } : null
-  enable_cert_manager = local.enable_azure_dns
+  dns_zones           = try(var.core_services.azure_dns_zones, [])
+  enable_cert_manager = length(local.dns_zones) > 0
+
+  # The zone id returned by the dropdown is the entire resource id.
+  zones_with_resource_group = [
+    for zone_id in local.dns_zones : {
+      name           = element(split("/", zone_id), index(split("/", zone_id), "dnszones") + 1)
+      resource_group = element(split("/", zone_id), index(split("/", zone_id), "resourceGroups") + 1)
+    }
+  ]
 }
 
 data "azurerm_client_config" "current" {
@@ -32,10 +35,10 @@ resource "kubernetes_manifest" "cluster_issuer" {
         "privateKeySecretRef" = {
           "name" : "letsencrypt-prod-issuer-account-key"
         },
-        "solvers" = [{
+        "solvers" = concat([for zone in local.zones_with_resource_group : {
           "selector" = {
             "dnsZones" = [
-              local.azure_dns_zones.dns_zones
+              zone.name
             ]
           },
           "dns01" = {
@@ -47,11 +50,12 @@ resource "kubernetes_manifest" "cluster_issuer" {
               }
               subscriptionID    = data.azurerm_client_config.current.subscription_id
               tenantID          = data.azurerm_client_config.current.tenant_id
-              resourceGroupName = local.azure_dns_zones.resource_group
-              hostedZoneName    = local.azure_dns_zones.dns_zones
+              resourceGroupName = zone.resource_group
+              hostedZoneName    = zone.name
             }
           }
-        }]
+          }], [ // could put other solvers here
+        ])
       }
     }
   }

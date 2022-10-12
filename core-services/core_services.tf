@@ -1,12 +1,14 @@
 locals {
-  enable_azure_dns = length(var.core_services.azure_dns_zones) > 0
-  split_zone_id    = split("/", var.core_services.azure_dns_zones.dns_zone[0])
-  azure_dns_zones = local.enable_azure_dns ? { # This is hardcoded to expect a single element. Will need to change this when multiple DNS zones are supported by external DNS.
-    dns_zones      = toset([element(split("/", local.split_zone_id), index(split("/", local.split_zone_id), "dnszones") + 1)])
-    resource_group = element(split("/", local.split_zone_id), index(split("/", local.split_zone_id), "resourceGroups") + 1)
-  } : null
-  enable_cert_manager = local.enable_azure_dns
-  enable_external_dns = local.enable_azure_dns
+  dns_zones           = try(var.core_services.azure_dns_zones, [])
+  enable_cert_manager = length(local.dns_zones) > 0
+  enable_external_dns = length(local.dns_zones) > 0
+
+  zones_with_resource_group = [
+    for zone_id in local.dns_zones : {
+      name           = element(split("/", zone_id), index(split("/", zone_id), "dnszones") + 1)
+      resource_group = element(split("/", zone_id), index(split("/", zone_id), "resourceGroups") + 1)
+    }
+  ]
 }
 
 resource "kubernetes_namespace" "md-core-services" {
@@ -32,7 +34,13 @@ module "external_dns" {
   md_metadata        = var.md_metadata
   release            = "external-dns"
   namespace          = kubernetes_namespace.md-core-services.metadata.0.name
-  azure_dns_zones    = local.azure_dns_zones
+  # This is hard-coded to one zone for now.
+  # We might be able to for_each this module and call it good but we have to come back to this.
+  # https://github.com/massdriver-cloud/azure-aks-cluster/issues/34
+  azure_dns_zones = {
+    dns_zones      = [local.zones_with_resource_group[0].name]
+    resource_group = local.zones_with_resource_group[0].resource_group
+  }
 }
 
 module "cert_manager" {
