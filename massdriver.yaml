@@ -228,28 +228,14 @@ params:
           title: Azure DNS Zones
           description: List any Azure DNS Zones associated with this cluster to allow the Kubernetes to automatically manage DNS records and SSL certificates.
           # not supported by our current MUI implementation, but useful once it is: https://json-schema.org/understanding-json-schema/reference/conditionals.html#id5
-          dependentRequired:
-            dns_zones:
-              - resource_group
-            resource_group:
-              - dns_zones
           properties:
-            dns_zones:
+            dns_zone:
               type: array
               title: Azure DNS zone
               description: The name of the Azure DNS zone for the AKS Cluster.
+              maxItems: 1
               items:
                 type: string
-                pattern: "^(?:[a-zA-Z0-9]+\\.)+(?:[a-zA-Z]+)$"
-                message:
-                  pattern: Must be a valid domain name.
-            resource_group:
-              type: string
-              title: Resource Group name
-              description: The name of the Resource Group the Azure DNS zones are in (all zones must share the same Resource Group).
-              pattern: "[a-zA-Z0-9-_.()]{1,}[a-zA-Z0-9-_()]{0,89}$"
-              message:
-                pattern: Must be a valid Resource Group name.
     observability:
       type: object
       title: Observability
@@ -360,6 +346,9 @@ ui:
       - enable_ingress
       - azure_dns_zones
       - "*"
+    azure_dns_zones:
+      ui:field: dnsZonesDropdown
+      cloud: azure
   observability:
     ui:order:
       - logging

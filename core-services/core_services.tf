@@ -1,8 +1,12 @@
 locals {
-  dns_zones           = try(var.core_services.azure_dns_zones.dns_zones, [])
-  dns_resource_group  = try(var.core_services.azure_dns_zones.resource_group, "")
-  enable_cert_manager = length(local.dns_zones) > 0 && length(local.dns_resource_group) > 0
-  enable_external_dns = length(local.dns_zones) > 0 && length(local.dns_resource_group) > 0
+  enable_azure_dns = length(var.core_services.azure_dns_zones) > 0
+  split_zone_id    = split("/", var.core_services.azure_dns_zones.dns_zone[0])
+  azure_dns_zones = local.enable_azure_dns ? { # This is hardcoded to expect a single element. Will need to change this when multiple DNS zones are supported by external DNS.
+    dns_zones      = toset([element(split("/", local.split_zone_id), index(split("/", local.split_zone_id), "dnszones") + 1)])
+    resource_group = element(split("/", local.split_zone_id), index(split("/", local.split_zone_id), "resourceGroups") + 1)
+  } : null
+  enable_cert_manager = local.enable_azure_dns
+  enable_external_dns = local.enable_azure_dns
 }
 
 resource "kubernetes_namespace" "md-core-services" {
@@ -28,7 +32,7 @@ module "external_dns" {
   md_metadata        = var.md_metadata
   release            = "external-dns"
   namespace          = kubernetes_namespace.md-core-services.metadata.0.name
-  azure_dns_zones    = var.core_services.azure_dns_zones
+  azure_dns_zones    = local.azure_dns_zones
 }
 
 module "cert_manager" {
