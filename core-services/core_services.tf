@@ -5,8 +5,8 @@ locals {
 
   zones_with_resource_group = [
     for zone_id in local.dns_zones : {
-      name           = element(zone_id, index(zone_id, "dnszones") + 1)
-      resource_group = element(zone_id, index(zone_id, "resourceGroups") + 1)
+      name           = element(split("/", zone_id), index(split("/", zone_id), "dnszones") + 1)
+      resource_group = element(split("/", zone_id), index(split("/", zone_id), "resourceGroups") + 1)
     }
   ]
 }
