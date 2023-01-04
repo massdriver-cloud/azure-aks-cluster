@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "main" {
   name     = var.md_metadata.name_prefix
-  location = var.vnet.specs.azure.region
+  location = var.azure_virtual_network.specs.azure.region
   tags     = var.md_metadata.default_tags
 }
 
@@ -14,7 +14,7 @@ resource "azurerm_log_analytics_workspace" "main" {
 
 resource "azurerm_kubernetes_cluster" "main" {
   name                              = var.md_metadata.name_prefix
-  location                          = var.vnet.specs.azure.region
+  location                          = var.azure_virtual_network.specs.azure.region
   resource_group_name               = azurerm_resource_group.main.name
   dns_prefix                        = "${var.md_metadata.name_prefix}-dns"
   kubernetes_version                = var.cluster.kubernetes_version
@@ -40,7 +40,7 @@ resource "azurerm_kubernetes_cluster" "main" {
     vm_size             = var.node_groups.default_node_group.node_size
     min_count           = var.node_groups.default_node_group.min_size
     max_count           = var.node_groups.default_node_group.max_size
-    vnet_subnet_id      = var.vnet.data.infrastructure.default_subnet_id
+    vnet_subnet_id      = var.azure_virtual_network.data.infrastructure.default_subnet_id
     enable_auto_scaling = true
     tags                = var.md_metadata.default_tags
   }
@@ -63,7 +63,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
   name                  = each.value.name
   kubernetes_cluster_id = azurerm_kubernetes_cluster.main.id
   vm_size               = each.value.node_size
-  vnet_subnet_id        = var.vnet.data.infrastructure.default_subnet_id
+  vnet_subnet_id        = var.azure_virtual_network.data.infrastructure.default_subnet_id
   enable_auto_scaling   = true
   max_count             = each.value.max_size
   min_count             = each.value.min_size
