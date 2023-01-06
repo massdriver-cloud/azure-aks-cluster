@@ -237,7 +237,7 @@ connections:
   properties:
     azure_service_principal:
       $ref: massdriver/azure-service-principal
-    azure_virtual_network:
+    vnet:
       $ref: massdriver/azure-virtual-network
 
 artifacts:
