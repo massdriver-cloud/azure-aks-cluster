@@ -63,7 +63,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
   name                  = each.value.name
   kubernetes_cluster_id = azurerm_kubernetes_cluster.main.id
   vm_size               = each.value.node_size
-  vnet_subnet_id        = var.azure_virtual_network.data.infrastructure.default_subnet_id
+  vnet_subnet_id        = var.vnet.data.infrastructure.default_subnet_id
   enable_auto_scaling   = true
   max_count             = each.value.max_size
   min_count             = each.value.min_size
