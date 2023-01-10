@@ -198,6 +198,7 @@ ui:
       node_size:
         ui:field: "instanceTypesDropdown"
         query: "connections.vnet.specs.azure.region"
+        service: "Microsoft.Compute"
     additional_node_groups:
       items:
         ui:order:
