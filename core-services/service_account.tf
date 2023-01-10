@@ -25,7 +25,7 @@ resource "kubernetes_cluster_role_binding_v1" "massdriver-cloud-provisioner" {
 
 resource "kubernetes_secret_v1" "massdriver-cloud-provisioner_token" {
   metadata {
-    name      = kubernetes_service_account_v1.massdriver-cloud-provisioner.default_secret_name
+    name      = "massdriver-cloud-provisioner-token"
     namespace = kubernetes_namespace_v1.md-core-services.metadata.0.name
     labels    = var.md_metadata.default_tags
     annotations = {
