@@ -49,10 +49,10 @@ params:
           type: string
           title: Kubernetes version
           description: The version of Kubernetes that should be used for this cluster. You will be able to upgrade this version after creating the cluster, but you cannot downgrade the version.
-          default: "1.23"
+          default: "1.24"
           enum:
+            - "1.24"
             - "1.23"
-            - "1.22"
         enable_log_analytics:
           type: boolean
           title: Enable Log Analytics
