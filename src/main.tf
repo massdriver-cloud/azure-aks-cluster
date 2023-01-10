@@ -18,10 +18,12 @@ resource "azurerm_kubernetes_cluster" "main" {
   resource_group_name               = azurerm_resource_group.main.name
   dns_prefix                        = "${var.md_metadata.name_prefix}-dns"
   kubernetes_version                = var.cluster.kubernetes_version
-  oidc_issuer_enabled               = false
   azure_policy_enabled              = true
   role_based_access_control_enabled = true
   tags                              = var.md_metadata.default_tags
+  # https://github.com/hashicorp/terraform-provider-azurerm/blob/main/CHANGELOG.md#3270-october-13-2022
+  workload_identity_enabled = true
+  oidc_issuer_enabled       = true
 
   azure_active_directory_role_based_access_control {
     managed            = true
