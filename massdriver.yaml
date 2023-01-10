@@ -100,6 +100,43 @@ params:
               type: string
               title: Compute size
               description: Compute size to use in the node group (D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
+              oneOf:
+                - title: D2s (2 vCores, 8 GiB memory)
+                  const: Standard_D2s_v3
+                - title: D4s (4 vCores, 16 GiB memory)
+                  const: Standard_D4s_v3
+                - title: D8s (8 vCores, 32 GiB memory)
+                  const: Standard_D8s_v3
+                - title: D16s (16 vCores, 64 GiB memory)
+                  const: Standard_D16s_v3
+                - title: D32s (32 vCores, 64 GiB memory)
+                  const: Standard_D32s_v3
+                - title: D64s (64 vCores, 256 GiB memory)
+                  const: Standard_D64s_v3
+                - title: E2s (2 vCores, 16 GiB memory)
+                  const: Standard_E2s_v3
+                - title: E4s (4 vCores, 32 GiB memory)
+                  const: Standard_E4s_v3
+                - title: E8s (8 vCores, 64 GiB memory)
+                  const: Standard_E8s_v3
+                - title: E16s (8 vCores, 128 GiB memory)
+                  const: Standard_E16s_v3
+                - title: E32s (32 vCores, 256 GiB memory)
+                  const: Standard_E32s_v3
+                - title: E64s (64 vCores, 432 GiB memory)
+                  const: Standard_E64s_v3
+                - title: F2s (2 vCores, 4 GiB memory)
+                  const: Standard_F2s_v2
+                - title: F4s (4 vCores, 8 GiB memory)
+                  const: Standard_F4s_v2
+                - title: F8s (8 vCores, 16 GiB memory)
+                  const: Standard_F8s_v2
+                - title: F16s (16 vCores, 32 GiB memory)
+                  const: Standard_F16s_v2
+                - title: F32s (32 vCores, 64 GiB memory)
+                  const: Standard_F32s_v2
+                - title: F64s (64 vCores, 128 GiB memory)
+                  const: Standard_F64s_v2
         additional_node_groups:
           type: array
           title: Additional node groups
@@ -137,6 +174,43 @@ params:
                 type: string
                 title: Compute size
                 description: Compute size to use in the node group (D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
+                oneOf:
+                  - title: D2s (2 vCores, 8 GiB memory)
+                    const: Standard_D2s_v3
+                  - title: D4s (4 vCores, 16 GiB memory)
+                    const: Standard_D4s_v3
+                  - title: D8s (8 vCores, 32 GiB memory)
+                    const: Standard_D8s_v3
+                  - title: D16s (16 vCores, 64 GiB memory)
+                    const: Standard_D16s_v3
+                  - title: D32s (32 vCores, 64 GiB memory)
+                    const: Standard_D32s_v3
+                  - title: D64s (64 vCores, 256 GiB memory)
+                    const: Standard_D64s_v3
+                  - title: E2s (2 vCores, 16 GiB memory)
+                    const: Standard_E2s_v3
+                  - title: E4s (4 vCores, 32 GiB memory)
+                    const: Standard_E4s_v3
+                  - title: E8s (8 vCores, 64 GiB memory)
+                    const: Standard_E8s_v3
+                  - title: E16s (8 vCores, 128 GiB memory)
+                    const: Standard_E16s_v3
+                  - title: E32s (32 vCores, 256 GiB memory)
+                    const: Standard_E32s_v3
+                  - title: E64s (64 vCores, 432 GiB memory)
+                    const: Standard_E64s_v3
+                  - title: F2s (2 vCores, 4 GiB memory)
+                    const: Standard_F2s_v2
+                  - title: F4s (4 vCores, 8 GiB memory)
+                    const: Standard_F4s_v2
+                  - title: F8s (8 vCores, 16 GiB memory)
+                    const: Standard_F8s_v2
+                  - title: F16s (16 vCores, 32 GiB memory)
+                    const: Standard_F16s_v2
+                  - title: F32s (32 vCores, 64 GiB memory)
+                    const: Standard_F32s_v2
+                  - title: F64s (64 vCores, 128 GiB memory)
+                    const: Standard_F64s_v2
     core_services:
       type: object
       title: Core Services
@@ -195,10 +269,6 @@ ui:
         - min_size
         - max_size
         - "*"
-      node_size:
-        ui:field: "instanceTypesDropdown"
-        query: "connections.vnet.specs.azure.region"
-        service: "Microsoft.Compute"
     additional_node_groups:
       items:
         ui:order:
@@ -207,10 +277,6 @@ ui:
           - min_size
           - max_size
           - "*"
-        node_size:
-          ui:field: "instanceTypesDropdown"
-          query: "connections.vnet.specs.azure.region"
-          service: "Microsoft.Compute"
   core_services:
     ui:order:
       - enable_ingress
