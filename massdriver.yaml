@@ -210,6 +210,7 @@ ui:
         node_size:
           ui:field: "instanceTypesDropdown"
           query: "connections.vnet.specs.azure.region"
+          service: "Microsoft.Compute"
   core_services:
     ui:order:
       - enable_ingress
