@@ -2,7 +2,7 @@ schema: draft-07
 name: azure-aks-cluster
 description: "Azure Kubernetes Service (AKS) is a fully managed container orchestration service. AKS offers serverless Kubernetes, an integrated continuous integration and continuous delivery (CI/CD) experience, and enterprise-grade security and governance."
 source_url: github.com/massdriver-cloud/azure-aks-cluster
-access: "private"
+access: "public"
 type: bundle
 
 steps:
@@ -12,106 +12,6 @@ steps:
     provisioner: terraform
   - path: custom-resources
     provisioner: terraform
-
-MonitorAlarmMetric: &monitor_alarm_metric
-  required:
-    - severity
-    - frequency
-    - window_size
-    - aggregation
-    - operator
-    - threshold
-  properties:
-    severity:
-      title: Severity
-      description: The severity of the alarm.
-      type: integer
-      default: 1
-      oneOf:
-        - title: Critical
-          const: 0
-        - title: Error
-          const: 1
-        - title: Warning
-          const: 2
-        - title: Information
-          const: 3
-        - title: Verbose
-          const: 4
-    frequency:
-      title: Frequency
-      description: The evaluation frequency of the alarms.
-      type: string
-      default: PT1M
-      oneOf:
-        - title: Every 1 minute
-          const: PT1M
-        - title: Every 5 minutes
-          const: PT5M
-        - title: Every 15 minutes
-          const: PT15M
-        - title: Every 30 minutes
-          const: PT30M
-        - title: Every 1 hour
-          const: PT1H
-    window_size:
-      title: Alarm window
-      description: The time range over which the alarm is evaluated.
-      type: string
-      default: PT5M
-      oneOf:
-        - title: Every 1 minute
-          const: PT1M
-        - title: Every 5 minutes
-          const: PT5M
-        - title: Every 15 minutes
-          const: PT15M
-        - title: Every 30 minutes
-          const: PT30M
-        - title: Every 1 hour
-          const: PT1H
-        - title: Every 6 hours
-          const: PT6H
-        - title: Every 12 hours
-          const: PT12H
-        - title: Every 24 hours
-          const: P1D
-    aggregation:
-      title: Aggregation
-      description: The aggregation type of the alarm.
-      type: string
-      default: Average
-      enum:
-        - Average
-        - Count
-        - Minimum
-        - Maximum
-        - Total
-    operator:
-      title: Operator
-      description: The operator used to compare the metric value to the threshold.
-      type: string
-      default: GreaterThanOrEqual
-      oneOf:
-        - title: Greater than or equal to
-          const: GreaterThanOrEqual
-        - title: Greater than
-          const: GreaterThan
-        - title: Less than or equal to
-          const: LessThanOrEqual
-        - title: Less than
-          const: LessThan
-        - title: Equals
-          const: Equals
-        - title: Not equal to
-          const: NotEquals
-    threshold:
-      title: Threshold
-      description: The percentage threshold for the metric to trigger an alarm.
-      type: integer
-      default: 90
-      minimum: 0
-      maximum: 100
 
 params:
   examples:
@@ -149,10 +49,10 @@ params:
           type: string
           title: Kubernetes version
           description: The version of Kubernetes that should be used for this cluster. You will be able to upgrade this version after creating the cluster, but you cannot downgrade the version.
-          default: "1.24"
+          default: "1.23"
           enum:
-            - "1.24"
             - "1.23"
+            - "1.22"
         enable_log_analytics:
           type: boolean
           title: Enable Log Analytics
@@ -326,54 +226,9 @@ params:
           type: array
           title: Azure DNS Zone
           description: Add an Azure DNS Zone associated with this cluster to allow Kubernetes to automatically manage DNS records and SSL certificates.
-          default: []
           maxItems: 1
           items:
             type: string
-    monitoring:
-      type: object
-      title: Monitoring
-      properties:
-        mode:
-          title: Alarm Mode
-          description: Enable and customize Function App metric alarms.
-          type: string
-          default: AUTOMATED
-          oneOf:
-            - const: AUTOMATED
-              title: Automated
-            - const: CUSTOM
-              title: Custom
-            - const: DISABLED
-              title: Disabled
-      dependencies:
-        mode:
-          oneOf:
-            - properties:
-                mode:
-                  const: AUTOMATED
-            - properties:
-                mode:
-                  const: DISABLED
-            - properties:
-                mode:
-                  const: CUSTOM
-                alarms:
-                  type: object
-                  title: Alarms
-                  properties:
-                    cpu_metric_alert:
-                      title: CPU
-                      type: object
-                      <<: *monitor_alarm_metric
-                    memory_metric_alert:
-                      title: Memory
-                      type: object
-                      <<: *monitor_alarm_metric
-                    storage_metric_alert:
-                      title: Storage
-                      type: object
-                      <<: *monitor_alarm_metric
 
 connections:
   required:
@@ -397,7 +252,6 @@ ui:
     - cluster
     - node_groups
     - core_services
-    - monitoring
     - "*"
   cluster:
     ui:order:
@@ -432,27 +286,3 @@ ui:
       items:
         ui:field: dnsZonesDropdown
         cloud: azure
-  monitoring:
-    ui:order:
-      - mode
-      - alarms
-      - '*'
-    alarms:
-      ui:order:
-        - cpu_metric_alert
-        - memory_metric_alert
-        - storage_metric_alert
-        - '*'
-      cpu_metric_alert: &monitor_alarm_metric_ui
-        ui:order:
-          - severity
-          - operator
-          - aggregation
-          - frequency
-          - window_size
-          - threshold
-          - '*'
-      memory_metric_alert:
-        <<: *monitor_alarm_metric_ui
-      storage_metric_alert:
-        <<: *monitor_alarm_metric_ui
