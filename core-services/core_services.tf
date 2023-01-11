@@ -11,7 +11,7 @@ locals {
   ]
 }
 
-resource "kubernetes_namespace" "md-core-services" {
+resource "kubernetes_namespace_v1" "md-core-services" {
   metadata {
     labels = var.md_metadata.default_tags
     name   = "md-core-services"
@@ -24,7 +24,7 @@ module "ingress_nginx" {
   kubernetes_cluster = local.kubernetes_cluster_artifact
   md_metadata        = var.md_metadata
   release            = "ingress-nginx"
-  namespace          = kubernetes_namespace.md-core-services.metadata.0.name
+  namespace          = kubernetes_namespace_v1.md-core-services.metadata.0.name
 }
 
 module "external_dns" {
@@ -33,7 +33,7 @@ module "external_dns" {
   kubernetes_cluster = local.kubernetes_cluster_artifact
   md_metadata        = var.md_metadata
   release            = "external-dns"
-  namespace          = kubernetes_namespace.md-core-services.metadata.0.name
+  namespace          = kubernetes_namespace_v1.md-core-services.metadata.0.name
   # This is hard-coded to one zone for now.
   # We might be able to for_each this module and call it good but we have to come back to this.
   # https://github.com/massdriver-cloud/azure-aks-cluster/issues/34
@@ -49,5 +49,5 @@ module "cert_manager" {
   kubernetes_cluster = local.kubernetes_cluster_artifact
   md_metadata        = var.md_metadata
   release            = "cert-manager"
-  namespace          = kubernetes_namespace.md-core-services.metadata.0.name
+  namespace          = kubernetes_namespace_v1.md-core-services.metadata.0.name
 }

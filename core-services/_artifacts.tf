@@ -5,7 +5,7 @@ locals {
       certificate-authority-data = data.azurerm_kubernetes_cluster.cluster.kube_config.0.cluster_ca_certificate
     }
     user = {
-      token = lookup(data.kubernetes_secret.massdriver-cloud-provisioner_service-account_secret.data, "token")
+      token = lookup(kubernetes_secret_v1.massdriver-cloud-provisioner_token.data, "token")
     }
   }
   data_infrastructure = {
