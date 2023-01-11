@@ -20,10 +20,9 @@ resource "azurerm_kubernetes_cluster" "main" {
   kubernetes_version                = var.cluster.kubernetes_version
   azure_policy_enabled              = true
   role_based_access_control_enabled = true
+  workload_identity_enabled         = true
+  oidc_issuer_enabled               = true
   tags                              = var.md_metadata.default_tags
-  # https://github.com/hashicorp/terraform-provider-azurerm/blob/main/CHANGELOG.md#3270-october-13-2022
-  workload_identity_enabled = true
-  oidc_issuer_enabled       = true
 
   azure_active_directory_role_based_access_control {
     managed            = true
@@ -51,6 +50,8 @@ resource "azurerm_kubernetes_cluster" "main" {
     type = "SystemAssigned"
   }
 
+  # These are hardcoded so they cannot possibly conflict with anything that
+  # the customer might set as their VNet CIDR.
   network_profile {
     network_plugin     = "azure"
     network_policy     = "azure"

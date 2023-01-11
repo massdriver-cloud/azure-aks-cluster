@@ -9,15 +9,7 @@ locals {
     }
   }
   data_infrastructure = {
-    ari = data.azurerm_kubernetes_cluster.cluster.id
-    # As of Jan 10th this is still in preview.
-    # https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview
-    # https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview#install-the-aks-preview-azure-cli-extension
-    # az extension add --name aks-preview
-    # az extension update --name aks-preview
-    # az feature register --namespace "Microsoft.ContainerService" --name "EnableWorkloadIdentityPreview"
-    # No location, resource group, etc...
-    # There's no way I've found to turn that on in TF outside of a null_resource but it looks global and it's idempotent
+    ari             = data.azurerm_kubernetes_cluster.cluster.id
     oidc_issuer_url = data.azurerm_kubernetes_cluster.cluster.oidc_issuer_url
   }
   specs_kubernetes = {
