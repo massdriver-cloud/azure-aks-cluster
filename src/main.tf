@@ -51,7 +51,8 @@ resource "azurerm_kubernetes_cluster" "main" {
   }
 
   # These are hardcoded so they cannot possibly conflict with anything that
-  # the customer might set as their VNet CIDR.
+  # the customer might set as their VNet CIDR. These are also the defaults for
+  # these parameters when deploying AKS in the Azure Portal.
   network_profile {
     network_plugin     = "azure"
     network_policy     = "azure"
