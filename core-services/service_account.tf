@@ -32,5 +32,6 @@ resource "kubernetes_secret_v1" "massdriver-cloud-provisioner_token" {
       "kubernetes.io/service-account.name" = kubernetes_service_account_v1.massdriver-cloud-provisioner.metadata.0.name
     }
   }
-  type = "kubernetes.io/service-account-token"
+  type                           = "kubernetes.io/service-account-token"
+  wait_for_service_account_token = true
 }
