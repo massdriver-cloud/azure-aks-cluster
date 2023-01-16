@@ -35,11 +35,3 @@ resource "kubernetes_secret_v1" "massdriver-cloud-provisioner_token" {
   type                           = "kubernetes.io/service-account-token"
   wait_for_service_account_token = true
 }
-
-// Doing a data lookup after secret creation so we can get the generated token
-data "kubernetes_secret_v1" "massdriver-cloud-provisioner_token" {
-  metadata {
-    name      = kubernetes_secret_v1.massdriver-cloud-provisioner_token.metadata.0.name
-    namespace = kubernetes_secret_v1.massdriver-cloud-provisioner_token.metadata.0.namespace
-  }
-}
