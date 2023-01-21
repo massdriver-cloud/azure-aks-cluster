@@ -72,6 +72,12 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
   max_count             = each.value.max_size
   min_count             = each.value.min_size
   tags                  = var.md_metadata.default_tags
+
+  dynamic "node_taints" {
+    for_each = each.value.advanced_configuration_enabled ? [each.value.advanced_configuration.taint] : []
+    # TODO: check that the effect is the right casing for the Azure API
+    content = ["${each.value.taint_key}=${each.value.taint_value}:${each.value.effect}"]
+  }
 }
 
 data "azurerm_client_config" "main" {
