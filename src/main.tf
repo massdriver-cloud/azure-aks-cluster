@@ -18,9 +18,10 @@ resource "azurerm_kubernetes_cluster" "main" {
   resource_group_name               = azurerm_resource_group.main.name
   dns_prefix                        = "${var.md_metadata.name_prefix}-dns"
   kubernetes_version                = var.cluster.kubernetes_version
-  oidc_issuer_enabled               = false
   azure_policy_enabled              = true
   role_based_access_control_enabled = true
+  workload_identity_enabled         = true
+  oidc_issuer_enabled               = true
   tags                              = var.md_metadata.default_tags
 
   azure_active_directory_role_based_access_control {
@@ -49,6 +50,9 @@ resource "azurerm_kubernetes_cluster" "main" {
     type = "SystemAssigned"
   }
 
+  # These are hardcoded so they cannot possibly conflict with anything that
+  # the customer might set as their VNet CIDR. These are also the defaults for
+  # these parameters when deploying AKS in the Azure Portal.
   network_profile {
     network_plugin     = "azure"
     network_policy     = "azure"

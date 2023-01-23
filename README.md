@@ -58,7 +58,7 @@ Form input parameters for configuring a bundle for deployment.
 
 - **`cluster`** *(object)*: Configure the Kubernetes cluster.
   - **`enable_log_analytics`** *(boolean)*: Enable Log Analytics for this cluster. Default: `False`.
-  - **`kubernetes_version`** *(string)*: The version of Kubernetes that should be used for this cluster. You will be able to upgrade this version after creating the cluster, but you cannot downgrade the version. Must be one of: `['1.23', '1.22']`. Default: `1.23`.
+  - **`kubernetes_version`** *(string)*: The version of Kubernetes that should be used for this cluster. You will be able to upgrade this version after creating the cluster, but you cannot downgrade the version. Must be one of: `['1.24', '1.23']`. Default: `1.24`.
 - **`core_services`** *(object)*: Configure core services in Kubernetes for Massdriver to manage.
   - **`azure_dns_zones`** *(array)*: Add an Azure DNS Zone associated with this cluster to allow Kubernetes to automatically manage DNS records and SSL certificates.
     - **Items** *(string)*
@@ -92,7 +92,7 @@ Form input parameters for configuring a bundle for deployment.
   - **`default_node_group`** *(object)*: Configuration of the node group.
     - **`max_size`** *(number)*: Maximum number of instances in the node group. Minimum: `1`. Maximum: `1000`. Default: `10`.
     - **`min_size`** *(number)*: Minimum number of instances in the node group. Minimum: `1`. Maximum: `1000`. Default: `1`.
-    - **`name`** *(string)*: The name of the node group.
+    - **`name`** *(string)*
     - **`node_size`** *(string)*: Compute size to use in the node group (D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
       - **One of**
         - D2s (2 vCores, 8 GiB memory)
@@ -113,12 +113,6 @@ Form input parameters for configuring a bundle for deployment.
         - F16s (16 vCores, 32 GiB memory)
         - F32s (32 vCores, 64 GiB memory)
         - F64s (64 vCores, 128 GiB memory)
-- **`observability`** *(object)*: Configure logging and metrics collection and delivery for your entire cluster.
-  - **`logging`** *(object)*: Configure logging for your cluster.
-    - **`destination`** *(string)*: Where to send logs. Default: `disabled`.
-      - **One of**
-        - OpenSearch (in cluster)
-        - Disabled
 ## Examples
 
   ```json
