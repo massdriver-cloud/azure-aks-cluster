@@ -227,11 +227,6 @@ Connections from other bundles that this bundle depends on.
   - **`specs`** *(object)*
     - **`azure`** *(object)*: .
       - **`region`** *(string)*: Select the Azure region you'd like to provision your resources in.
-        - **One of**
-          - East US
-          - North Central US
-          - South Central US
-          - West US
 <!-- CONNECTIONS:END -->
 
 </details>
@@ -279,7 +274,7 @@ Resources created by this bundle that can be connected to other bundles.
             "https://massdriver.cloud"
             ```
 
-        - Azure Infrastructure Resource ID*object*: Minimal Azure Infrastructure Config. Cannot contain additional properties.
+        - Infrastructure Config*object*: Azure AKS Infrastructure Configuration. Cannot contain additional properties.
           - **`ari`** *(string)*: Azure Resource ID.
 
             Examples:
@@ -287,6 +282,7 @@ Resources created by this bundle that can be connected to other bundles.
             "/subscriptions/12345678-1234-1234-abcd-1234567890ab/resourceGroups/resource-group-name/providers/Microsoft.Network/virtualNetworks/network-name"
             ```
 
+          - **`oidc_issuer_url`** *(string)*
         - GCP Infrastructure GRN*object*: Minimal GCP Infrastructure Config. Cannot contain additional properties.
           - **`grn`** *(string)*: GCP Resource Name (GRN).
 
