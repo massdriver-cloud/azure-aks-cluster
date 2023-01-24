@@ -50,9 +50,9 @@ resource "azurerm_kubernetes_cluster" "main" {
     type = "SystemAssigned"
   }
 
-  # These are hardcoded so they cannot possibly conflict with anything that
-  # the customer might set as their VNet CIDR. These are also the defaults for
-  # these parameters when deploying AKS in the Azure Portal.
+  /* These are hardcoded so they cannot possibly conflict with anything that
+  the customer might set as their VNet CIDR. These are also the defaults for
+  these parameters when deploying AKS in the Azure Portal. */
   network_profile {
     network_plugin     = "azure"
     network_policy     = "azure"
@@ -60,6 +60,10 @@ resource "azurerm_kubernetes_cluster" "main" {
     docker_bridge_cidr = "172.17.0.1/16"
     service_cidr       = "172.20.0.0/16"
   }
+
+  depends_on = [
+    data.http.feature
+  ]
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "main" {
