@@ -58,7 +58,7 @@ Form input parameters for configuring a bundle for deployment.
 
 - **`cluster`** *(object)*: Configure the Kubernetes cluster.
   - **`enable_log_analytics`** *(boolean)*: Enable Log Analytics for this cluster. Default: `False`.
-  - **`kubernetes_version`** *(string)*: The version of Kubernetes that should be used for this cluster. You will be able to upgrade this version after creating the cluster, but you cannot downgrade the version. Must be one of: `['1.23', '1.22']`. Default: `1.23`.
+  - **`kubernetes_version`** *(string)*: The version of Kubernetes that should be used for this cluster. You will be able to upgrade this version after creating the cluster, but you cannot downgrade the version. Must be one of: `['1.24', '1.23']`. Default: `1.24`.
 - **`core_services`** *(object)*: Configure core services in Kubernetes for Massdriver to manage.
   - **`azure_dns_zones`** *(array)*: Add an Azure DNS Zone associated with this cluster to allow Kubernetes to automatically manage DNS records and SSL certificates.
     - **Items** *(string)*
@@ -92,7 +92,7 @@ Form input parameters for configuring a bundle for deployment.
   - **`default_node_group`** *(object)*: Configuration of the node group.
     - **`max_size`** *(number)*: Maximum number of instances in the node group. Minimum: `1`. Maximum: `1000`. Default: `10`.
     - **`min_size`** *(number)*: Minimum number of instances in the node group. Minimum: `1`. Maximum: `1000`. Default: `1`.
-    - **`name`** *(string)*: The name of the node group.
+    - **`name`** *(string)*
     - **`node_size`** *(string)*: Compute size to use in the node group (D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
       - **One of**
         - D2s (2 vCores, 8 GiB memory)
@@ -268,7 +268,7 @@ Resources created by this bundle that can be connected to other bundles.
             "https://massdriver.cloud"
             ```
 
-        - Azure Infrastructure Resource ID*object*: Minimal Azure Infrastructure Config. Cannot contain additional properties.
+        - Infrastructure Config*object*: Azure AKS Infrastructure Configuration. Cannot contain additional properties.
           - **`ari`** *(string)*: Azure Resource ID.
 
             Examples:
@@ -276,6 +276,7 @@ Resources created by this bundle that can be connected to other bundles.
             "/subscriptions/12345678-1234-1234-abcd-1234567890ab/resourceGroups/resource-group-name/providers/Microsoft.Network/virtualNetworks/network-name"
             ```
 
+          - **`oidc_issuer_url`** *(string)*
         - GCP Infrastructure GRN*object*: Minimal GCP Infrastructure Config. Cannot contain additional properties.
           - **`grn`** *(string)*: GCP Resource Name (GRN).
 

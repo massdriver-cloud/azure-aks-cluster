@@ -36,6 +36,7 @@ NodeGroup: &node_group
       type: string
       title: Compute size
       description: Compute size to use in the node group (D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
+      $md.immutable: true
       oneOf:
         - title: D2s (2 vCores, 8 GiB memory)
           const: Standard_D2s_v3
