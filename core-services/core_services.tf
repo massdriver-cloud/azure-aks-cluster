@@ -25,6 +25,16 @@ module "ingress_nginx" {
   md_metadata        = var.md_metadata
   release            = "ingress-nginx"
   namespace          = kubernetes_namespace_v1.md-core-services.metadata.0.name
+  helm_additional_values = {
+    controller = {
+      service = {
+        annotations = {
+          "service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path" = "/healthz"
+        }
+        externalTrafficPolicy = "Local"
+      }
+    }
+  }
 }
 
 module "external_dns" {
