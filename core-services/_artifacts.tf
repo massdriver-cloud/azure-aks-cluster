@@ -28,6 +28,7 @@ locals {
     }
     specs = {
       kubernetes = local.specs_kubernetes
+      azure      = local.specs_azure
     }
   }
 }
