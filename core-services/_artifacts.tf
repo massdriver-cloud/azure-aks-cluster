@@ -18,7 +18,9 @@ locals {
     version          = data.azurerm_kubernetes_cluster.cluster.kubernetes_version
     platform_version = ""
   }
-
+  specs_azure = {
+    region = data.azurerm_kubernetes_cluster.cluster.location
+  }
   kubernetes_cluster_artifact = {
     data = {
       infrastructure = local.data_infrastructure
@@ -26,6 +28,7 @@ locals {
     }
     specs = {
       kubernetes = local.specs_kubernetes
+      azure      = local.specs_azure
     }
   }
 }
