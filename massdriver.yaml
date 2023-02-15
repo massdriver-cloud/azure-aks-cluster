@@ -2,7 +2,7 @@ schema: draft-07
 name: azure-aks-cluster
 description: "Azure Kubernetes Service (AKS) is a fully managed container orchestration service. AKS offers serverless Kubernetes, an integrated continuous integration and continuous delivery (CI/CD) experience, and enterprise-grade security and governance."
 source_url: github.com/massdriver-cloud/azure-aks-cluster
-access: "public"
+access: private
 type: infrastructure
 
 NodeGroup: &node_group
@@ -74,6 +74,16 @@ NodeGroup: &node_group
           const: Standard_F32s_v2
         - title: F64s (64 vCores, 128 GiB memory)
           const: Standard_F64s_v2
+        - title: 'GPU: 1 GPU 16GB Memory - Tesla V100'
+          const: Standard_NC6s_v3
+        - title: 'GPU: 2 GPU 32GB Memory - Tesla V100'
+          const: Standard_NC12s_v3
+        - title: 'GPU: 4 GPU 64GB Memory - Tesla V100'
+          const: Standard_NC24s_v3
+        - title: 'GPU: 1 GPU 80GB Memory - NVIDIA A100 80GB'
+          const: Standard_NC24ads_A100_v4
+        - title: 'GPU: 2 GPUs 80GB Memory - NVIDIA A100 80GB'
+          const: Standard_NC48ads_A100_v4
 
 steps:
   - path: src
