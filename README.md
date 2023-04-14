@@ -71,6 +71,7 @@ Form input parameters for configuring a bundle for deployment.
       - **`name`** *(string)*
       - **`node_size`** *(string)*: Compute size to use in the node group (D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
         - **One of**
+          - B2s (2 vCores, 4 GiB memory)
           - D2s (2 vCores, 8 GiB memory)
           - D4s (4 vCores, 16 GiB memory)
           - D8s (8 vCores, 32 GiB memory)
@@ -95,6 +96,7 @@ Form input parameters for configuring a bundle for deployment.
     - **`name`** *(string)*
     - **`node_size`** *(string)*: Compute size to use in the node group (D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
       - **One of**
+        - B2s (2 vCores, 4 GiB memory)
         - D2s (2 vCores, 8 GiB memory)
         - D4s (4 vCores, 16 GiB memory)
         - D8s (8 vCores, 32 GiB memory)
@@ -146,6 +148,27 @@ Form input parameters for configuring a bundle for deployment.
               "min_size": 1,
               "name": "default",
               "node_size": "Standard_D8s_v3"
+          }
+      }
+  }
+  ```
+
+  ```json
+  {
+      "__name": "Wizard",
+      "cluster": {
+          "enable_log_analytics": false,
+          "kubernetes_version": "1.24"
+      },
+      "core_services": {
+          "enable_ingress": false
+      },
+      "node_groups": {
+          "default_node_group": {
+              "max_size": 5,
+              "min_size": 1,
+              "name": "default",
+              "node_size": "Standard_B2s"
           }
       }
   }
