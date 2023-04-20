@@ -117,7 +117,7 @@ params:
           max_size: 5
           node_size: Standard_B2s
       core_services:
-        enable_ingress: false
+        enable_ingress: true
   required:
     - cluster
     - node_groups
