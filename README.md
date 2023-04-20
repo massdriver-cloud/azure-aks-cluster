@@ -161,7 +161,7 @@ Form input parameters for configuring a bundle for deployment.
           "kubernetes_version": "1.24"
       },
       "core_services": {
-          "enable_ingress": false
+          "enable_ingress": true
       },
       "node_groups": {
           "default_node_group": {
