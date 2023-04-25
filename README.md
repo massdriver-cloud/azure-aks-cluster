@@ -161,9 +161,11 @@ Form input parameters for configuring a bundle for deployment.
           "kubernetes_version": "1.24"
       },
       "core_services": {
+          "azure_dns_zones": [],
           "enable_ingress": true
       },
       "node_groups": {
+          "additional_node_groups": [],
           "default_node_group": {
               "max_size": 5,
               "min_size": 1,

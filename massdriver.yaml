@@ -116,8 +116,10 @@ params:
           min_size: 1
           max_size: 5
           node_size: Standard_B2s
+        additional_node_groups: []
       core_services:
         enable_ingress: true
+        azure_dns_zones: []
   required:
     - cluster
     - node_groups
