@@ -69,7 +69,7 @@ Form input parameters for configuring a bundle for deployment.
       - **`max_size`** *(number)*: Maximum number of instances in the node group. Minimum: `1`. Maximum: `1000`. Default: `10`.
       - **`min_size`** *(number)*: Minimum number of instances in the node group. Minimum: `1`. Maximum: `1000`. Default: `1`.
       - **`name`** *(string)*
-      - **`node_size`** *(string)*: Compute size to use in the node group (D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
+      - **`node_size`** *(string)*: Compute size to use in the node group (D = General Purpose, E = Memory Optimized, F = Compute Optimized). **Changing this forces a deletion and re-creation of the node group**.
         - **One of**
           - B2s (2 vCores, 4 GiB memory)
           - D2s (2 vCores, 8 GiB memory)
@@ -94,7 +94,7 @@ Form input parameters for configuring a bundle for deployment.
     - **`max_size`** *(number)*: Maximum number of instances in the node group. Minimum: `1`. Maximum: `1000`. Default: `10`.
     - **`min_size`** *(number)*: Minimum number of instances in the node group. Minimum: `1`. Maximum: `1000`. Default: `1`.
     - **`name`** *(string)*
-    - **`node_size`** *(string)*: Compute size to use in the node group (D = General Purpose, E = Memory Optimized, F = Compute Optimized). Changing this forces a deletion and re-creation of the node group.
+    - **`node_size`** *(string)*: Compute size to use in the node group (D = General Purpose, E = Memory Optimized, F = Compute Optimized). **Changing this forces a deletion and re-creation of the node group**.
       - **One of**
         - B2s (2 vCores, 4 GiB memory)
         - D2s (2 vCores, 8 GiB memory)
