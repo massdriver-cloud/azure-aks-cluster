@@ -37,13 +37,14 @@ resource "azurerm_kubernetes_cluster" "main" {
   }
 
   default_node_pool {
-    name                = var.node_groups.default_node_group.name
-    vm_size             = var.node_groups.default_node_group.node_size
-    min_count           = var.node_groups.default_node_group.min_size
-    max_count           = var.node_groups.default_node_group.max_size
-    vnet_subnet_id      = var.vnet.data.infrastructure.default_subnet_id
-    enable_auto_scaling = true
-    tags                = var.md_metadata.default_tags
+    name                        = var.node_groups.default_node_group.name
+    vm_size                     = var.node_groups.default_node_group.node_size
+    min_count                   = var.node_groups.default_node_group.min_size
+    max_count                   = var.node_groups.default_node_group.max_size
+    vnet_subnet_id              = var.vnet.data.infrastructure.default_subnet_id
+    temporary_name_for_rotation = "${var.node_groups.default_node_group.name}temp"
+    enable_auto_scaling         = true
+    tags                        = var.md_metadata.default_tags
   }
 
   identity {
