@@ -134,8 +134,10 @@ params:
           type: string
           title: Kubernetes version
           description: The version of Kubernetes that should be used for this cluster. You will be able to upgrade this version after creating the cluster, but you cannot downgrade the version.
-          default: "1.24"
+          default: "1.26"
           enum:
+            - "1.26"
+            - "1.25"
             - "1.24"
             - "1.23"
         enable_log_analytics:
@@ -209,6 +211,9 @@ ui:
     ui:order:
       - kubernetes_version
       - enable_log_analytics
+      - "*"
+    kubernetes_version:
+      ui:field: versioningDropdown
   node_groups:
     ui:order:
       - default_node_group
