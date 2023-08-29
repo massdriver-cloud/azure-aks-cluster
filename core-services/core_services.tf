@@ -19,7 +19,7 @@ resource "kubernetes_namespace_v1" "md-core-services" {
 }
 
 module "ingress_nginx" {
-  source             = "github.com/massdriver-cloud/terraform-modules//k8s-ingress-nginx?ref=c5a09b2"
+  source             = "github.com/massdriver-cloud/terraform-modules//k8s-ingress-nginx?ref=41e799c"
   count              = var.core_services.enable_ingress ? 1 : 0
   kubernetes_cluster = local.kubernetes_cluster_artifact
   md_metadata        = var.md_metadata
@@ -34,11 +34,19 @@ module "ingress_nginx" {
         externalTrafficPolicy = "Local"
       }
     }
+    metrics = {
+      enabled = true
+      serviceMonitor = {
+        enabled = true
+      }
+    }
   }
+
+  depends_on = [module.prometheus-observability]
 }
 
 module "external_dns" {
-  source             = "github.com/massdriver-cloud/terraform-modules//k8s-external-dns-azure?ref=c5a09b2"
+  source             = "github.com/massdriver-cloud/terraform-modules//k8s-external-dns-azure?ref=41e799c"
   count              = local.enable_external_dns ? 1 : 0
   kubernetes_cluster = local.kubernetes_cluster_artifact
   md_metadata        = var.md_metadata
@@ -51,13 +59,17 @@ module "external_dns" {
     dns_zones      = [local.zones_with_resource_group[0].name]
     resource_group = local.zones_with_resource_group[0].resource_group
   }
+
+  depends_on = [module.prometheus-observability]
 }
 
 module "cert_manager" {
-  source             = "github.com/massdriver-cloud/terraform-modules//k8s-cert-manager-azure?ref=c5a09b2"
+  source             = "github.com/massdriver-cloud/terraform-modules//k8s-cert-manager-azure?ref=41e799c"
   count              = local.enable_cert_manager ? 1 : 0
   kubernetes_cluster = local.kubernetes_cluster_artifact
   md_metadata        = var.md_metadata
   release            = "cert-manager"
   namespace          = kubernetes_namespace_v1.md-core-services.metadata.0.name
+
+  depends_on = [module.prometheus-observability]
 }
