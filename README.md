@@ -58,7 +58,7 @@ Form input parameters for configuring a bundle for deployment.
 
 - **`cluster`** *(object)*: Configure the Kubernetes cluster.
   - **`enable_log_analytics`** *(boolean)*: Enable Log Analytics for this cluster. Default: `False`.
-  - **`kubernetes_version`** *(string)*: The version of Kubernetes that should be used for this cluster. You will be able to upgrade this version after creating the cluster, but you cannot downgrade the version. Must be one of: `['1.26', '1.25', '1.24', '1.23']`. Default: `1.26`.
+  - **`kubernetes_version`** *(string)*: The version of Kubernetes that should be used for this cluster. You will be able to upgrade this version after creating the cluster, but you cannot downgrade the version. Must be one of: `['1.27', '1.26', '1.25', '1.24', '1.23']`. Default: `1.27`.
 - **`core_services`** *(object)*: Configure core services in Kubernetes for Massdriver to manage.
   - **`azure_dns_zones`** *(array)*: Add an Azure DNS Zone associated with this cluster to allow Kubernetes to automatically manage DNS records and SSL certificates.
     - **Items** *(string)*

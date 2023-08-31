@@ -24,6 +24,10 @@ terraform {
   }
 }
 
+data "azurerm_resource_group" "cluster" {
+  name = var.md_metadata.name_prefix
+}
+
 data "azurerm_kubernetes_cluster" "cluster" {
   name                = var.md_metadata.name_prefix
   resource_group_name = var.md_metadata.name_prefix
