@@ -1,3 +1,8 @@
+locals {
+  node_rg_max_length = 80
+  node_rg_name       = substr("MC_${var.md_metadata.name_prefix}_${var.md_metadata.name_prefix}_${var.vnet.specs.azure.region}", 0, local.node_rg_max_length)
+}
+
 resource "azurerm_resource_group" "main" {
   name     = var.md_metadata.name_prefix
   location = var.vnet.specs.azure.region
@@ -17,6 +22,7 @@ resource "azurerm_kubernetes_cluster" "main" {
   location                          = var.vnet.specs.azure.region
   resource_group_name               = azurerm_resource_group.main.name
   dns_prefix                        = "${var.md_metadata.name_prefix}-dns"
+  node_resource_group               = local.node_rg_name
   kubernetes_version                = var.cluster.kubernetes_version
   azure_policy_enabled              = true
   role_based_access_control_enabled = true
