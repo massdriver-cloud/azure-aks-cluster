@@ -30,7 +30,7 @@ resource "kubernetes_manifest" "cluster_issuer" {
     "spec" = {
       "acme" = {
         // need to get this e-mail from the domain
-        "email" : "support+letsencrypt@massdriver.cloud"
+        "email" : var.md_metadata.contact_email
         "server" : "https://acme-v02.api.letsencrypt.org/directory"
         "privateKeySecretRef" = {
           "name" : "letsencrypt-prod-issuer-account-key"
