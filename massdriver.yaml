@@ -107,7 +107,7 @@ params:
             max_size: 10
     - __name: Wizard
       cluster:
-        kubernetes_version: "1.24"
+        kubernetes_version: "1.27"
         enable_log_analytics: false
       node_groups:
         default_node_group:
