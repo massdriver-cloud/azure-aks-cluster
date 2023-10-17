@@ -107,7 +107,6 @@ params:
             max_size: 10
     - __name: Wizard
       cluster:
-        kubernetes_version: "1.27"
         enable_log_analytics: false
       node_groups:
         default_node_group:
@@ -128,19 +127,8 @@ params:
       description: Configure the Kubernetes cluster
       type: object
       required:
-        - kubernetes_version
+        - enable_log_analytics
       properties:
-        kubernetes_version:
-          type: string
-          title: Kubernetes version
-          description: The version of Kubernetes that should be used for this cluster. You will be able to upgrade this version after creating the cluster, but you cannot downgrade the version.
-          default: "1.27"
-          enum:
-            - "1.27"
-            - "1.26"
-            - "1.25"
-            - "1.24"
-            - "1.23"
         enable_log_analytics:
           type: boolean
           title: Enable Log Analytics
@@ -210,11 +198,8 @@ ui:
     - "*"
   cluster:
     ui:order:
-      - kubernetes_version
       - enable_log_analytics
       - "*"
-    kubernetes_version:
-      ui:field: versioningDropdown
   node_groups:
     ui:order:
       - default_node_group
