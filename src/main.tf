@@ -23,7 +23,7 @@ resource "azurerm_kubernetes_cluster" "main" {
   resource_group_name               = azurerm_resource_group.main.name
   dns_prefix                        = "${var.md_metadata.name_prefix}-dns"
   node_resource_group               = local.node_rg_name
-  kubernetes_version                = var.cluster.kubernetes_version
+  automatic_channel_upgrade         = "stable"
   azure_policy_enabled              = true
   role_based_access_control_enabled = true
   workload_identity_enabled         = true
