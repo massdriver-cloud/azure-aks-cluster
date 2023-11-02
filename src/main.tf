@@ -79,8 +79,10 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
   vm_size               = each.value.node_size
   vnet_subnet_id        = var.vnet.data.infrastructure.default_subnet_id
   enable_auto_scaling   = true
+  mode                  = "User"
   max_count             = each.value.max_size
   min_count             = each.value.min_size
+  node_taints           = [var.node_groups.additional_node_groups.0.compute_type == "GPU" ? "sku=gpu:NoSchedule" : null]
   tags                  = var.md_metadata.default_tags
 }
 

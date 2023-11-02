@@ -65,55 +65,15 @@ Form input parameters for configuring a bundle for deployment.
 - **`node_groups`** *(object)*: The node groups that should be used for this cluster.
   - **`additional_node_groups`** *(array)*: Default: `[]`.
     - **Items** *(object)*
+      - **`compute_type`** *(string)*: Compute type to use in the node group. **Changing this forces a deletion and re-creation of the node group**. Must be one of: `['General Purpose', 'Memory Optimized', 'Compute Optimized', 'Storage Optimized', 'GPU']`.
       - **`max_size`** *(number)*: Maximum number of instances in the node group. Minimum: `1`. Maximum: `1000`. Default: `10`.
       - **`min_size`** *(number)*: Minimum number of instances in the node group. Minimum: `1`. Maximum: `1000`. Default: `1`.
       - **`name`** *(string)*
-      - **`node_size`** *(string)*: Compute size to use in the node group (D = General Purpose, E = Memory Optimized, F = Compute Optimized). **Changing this forces a deletion and re-creation of the node group**.
-        - **One of**
-          - B2s (2 vCores, 4 GiB memory)
-          - D2s (2 vCores, 8 GiB memory)
-          - D4s (4 vCores, 16 GiB memory)
-          - D8s (8 vCores, 32 GiB memory)
-          - D16s (16 vCores, 64 GiB memory)
-          - D32s (32 vCores, 64 GiB memory)
-          - D64s (64 vCores, 256 GiB memory)
-          - E2s (2 vCores, 16 GiB memory)
-          - E4s (4 vCores, 32 GiB memory)
-          - E8s (8 vCores, 64 GiB memory)
-          - E16s (8 vCores, 128 GiB memory)
-          - E32s (32 vCores, 256 GiB memory)
-          - E64s (64 vCores, 432 GiB memory)
-          - F2s (2 vCores, 4 GiB memory)
-          - F4s (4 vCores, 8 GiB memory)
-          - F8s (8 vCores, 16 GiB memory)
-          - F16s (16 vCores, 32 GiB memory)
-          - F32s (32 vCores, 64 GiB memory)
-          - F64s (64 vCores, 128 GiB memory)
   - **`default_node_group`** *(object)*: Configuration of the node group.
+    - **`compute_type`** *(string)*: Compute type to use in the node group. **Changing this forces a deletion and re-creation of the node group**. Must be one of: `['General Purpose', 'Memory Optimized', 'Compute Optimized', 'Storage Optimized', 'GPU']`.
     - **`max_size`** *(number)*: Maximum number of instances in the node group. Minimum: `1`. Maximum: `1000`. Default: `10`.
     - **`min_size`** *(number)*: Minimum number of instances in the node group. Minimum: `1`. Maximum: `1000`. Default: `1`.
     - **`name`** *(string)*
-    - **`node_size`** *(string)*: Compute size to use in the node group (D = General Purpose, E = Memory Optimized, F = Compute Optimized). **Changing this forces a deletion and re-creation of the node group**.
-      - **One of**
-        - B2s (2 vCores, 4 GiB memory)
-        - D2s (2 vCores, 8 GiB memory)
-        - D4s (4 vCores, 16 GiB memory)
-        - D8s (8 vCores, 32 GiB memory)
-        - D16s (16 vCores, 64 GiB memory)
-        - D32s (32 vCores, 64 GiB memory)
-        - D64s (64 vCores, 256 GiB memory)
-        - E2s (2 vCores, 16 GiB memory)
-        - E4s (4 vCores, 32 GiB memory)
-        - E8s (8 vCores, 64 GiB memory)
-        - E16s (8 vCores, 128 GiB memory)
-        - E32s (32 vCores, 256 GiB memory)
-        - E64s (64 vCores, 432 GiB memory)
-        - F2s (2 vCores, 4 GiB memory)
-        - F4s (4 vCores, 8 GiB memory)
-        - F8s (8 vCores, 16 GiB memory)
-        - F16s (16 vCores, 32 GiB memory)
-        - F32s (32 vCores, 64 GiB memory)
-        - F64s (64 vCores, 128 GiB memory)
 ## Examples
 
   ```json
@@ -121,6 +81,7 @@ Form input parameters for configuring a bundle for deployment.
       "__name": "Development",
       "node_groups": {
           "default_node_group": {
+              "compute_type": "General Purpose",
               "max_size": 10,
               "min_size": 1,
               "name": "default",
@@ -136,6 +97,7 @@ Form input parameters for configuring a bundle for deployment.
       "node_groups": {
           "additional_node_groups": [
               {
+                  "compute_type": "General Purpose",
                   "max_size": 10,
                   "min_size": 1,
                   "name": "shared",
@@ -165,6 +127,7 @@ Form input parameters for configuring a bundle for deployment.
       "node_groups": {
           "additional_node_groups": [],
           "default_node_group": {
+              "compute_type": "General Purpose",
               "max_size": 5,
               "min_size": 1,
               "name": "default",
