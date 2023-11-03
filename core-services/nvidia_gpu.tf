@@ -1,16 +1,8 @@
-resource "kubernetes_namespace_v1" "md-gpu-resources" {
-  count = var.node_groups.additional_node_groups.0.compute_type == "GPU" ? 1 : 0
-  metadata {
-    labels = var.md_metadata.default_tags
-    name   = "md-gpu-resources"
-  }
-}
-
 resource "kubernetes_daemonset" "nvidia" {
-  count = var.node_groups.additional_node_groups.0.compute_type == "GPU" ? 1 : 0
+  count = try(var.node_groups.additional_node_groups.0.compute_type == "GPU" ? 1 : 0, 0)
   metadata {
     name      = "nvidia-device-plugin-daemonset"
-    namespace = kubernetes_namespace_v1.md-gpu-resources.0.metadata.0.name
+    namespace = kubernetes_namespace_v1.md-core-services.metadata.0.name
     labels = {
       k8s-app = "nvidia-device-plugin-daemonset"
     }
@@ -34,6 +26,19 @@ resource "kubernetes_daemonset" "nvidia" {
         }
       }
       spec {
+        affinity {
+          node_affinity {
+            required_during_scheduling_ignored_during_execution {
+              node_selector_term {
+                match_expressions {
+                  key      = "sku"
+                  operator = "In"
+                  values   = ["gpu"]
+                }
+              }
+            }
+          }
+        }
         toleration {
           key      = "CriticalAddonsOnly"
           operator = "Exists"
