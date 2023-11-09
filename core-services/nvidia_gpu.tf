@@ -31,9 +31,9 @@ resource "kubernetes_daemonset" "nvidia" {
             required_during_scheduling_ignored_during_execution {
               node_selector_term {
                 match_expressions {
-                  key      = "sku"
+                  key      = "accelerator"
                   operator = "In"
-                  values   = ["gpu"]
+                  values   = ["nvidia"]
                 }
               }
             }
