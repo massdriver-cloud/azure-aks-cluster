@@ -75,6 +75,6 @@ resource "kubernetes_daemonset" "nvidia" {
           }
         }
       }
-    } 
+    }
   }
 }
