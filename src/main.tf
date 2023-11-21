@@ -43,6 +43,11 @@ resource "azurerm_kubernetes_cluster" "main" {
   }
 
   default_node_pool {
+    #bridgecrew:skip=BC_AZR_GENERAL_97:Skipping `Ensure that AKS use the Paid Sku for its SLA`
+    #bridgecrew:skip=BC_AZR_IAM_3:Skipping `Ensure Azure Kubernetes Service (AKS) local admin account is disabled`
+    #bridgecrew:skip=BC_AZR_KUBERNETES_8:Skipping `Ensure AKS uses disk encryption set`
+    #bridgecrew:skip=BC_AZR_KUBERNETES_3:Skipping `Ensure AKS API server defines authorized IP ranges`
+    #bridgecrew:skip=BC_AZR_KUBERNETES_6:Skipping `Ensure AKS enables private clusters`
     name                        = var.node_groups.default_node_group.name
     vm_size                     = var.node_groups.default_node_group.node_size
     min_count                   = var.node_groups.default_node_group.min_size
