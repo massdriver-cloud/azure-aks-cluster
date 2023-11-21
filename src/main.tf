@@ -50,6 +50,7 @@ resource "azurerm_kubernetes_cluster" "main" {
     vnet_subnet_id              = var.vnet.data.infrastructure.default_subnet_id
     temporary_name_for_rotation = "${var.node_groups.default_node_group.name}temp"
     enable_auto_scaling         = true
+    max_pods                    = 50
     tags                        = var.md_metadata.default_tags
   }
 
@@ -80,6 +81,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
   vnet_subnet_id        = var.vnet.data.infrastructure.default_subnet_id
   enable_auto_scaling   = true
   mode                  = "User"
+  max_pods              = 50
   max_count             = each.value.max_size
   min_count             = each.value.min_size
   node_taints           = [var.node_groups.additional_node_groups.0.compute_type == "GPU" ? "sku=gpu:NoSchedule" : null]
