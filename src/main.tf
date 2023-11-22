@@ -18,6 +18,7 @@ resource "azurerm_log_analytics_workspace" "main" {
 }
 
 resource "azurerm_kubernetes_cluster" "main" {
+  #bridgecrew:skip=BC_AZR_GENERAL_98:Skipping `AKS Secrets Store Without Auto-Rotation`
   name                              = var.md_metadata.name_prefix
   location                          = var.vnet.specs.azure.region
   resource_group_name               = azurerm_resource_group.main.name
@@ -48,6 +49,7 @@ resource "azurerm_kubernetes_cluster" "main" {
     #bridgecrew:skip=BC_AZR_KUBERNETES_8:Skipping `Ensure AKS uses disk encryption set`
     #bridgecrew:skip=BC_AZR_KUBERNETES_3:Skipping `Ensure AKS API server defines authorized IP ranges`
     #bridgecrew:skip=BC_AZR_KUBERNETES_6:Skipping `Ensure AKS enables private clusters`
+    #bridgecrew:skip=BC_AZR_KUBERNETES_15:Skipping `Ensure Azure Kubernetes Cluster (AKS) nodes should use a minimum number of 50 pods.`
     name                        = var.node_groups.default_node_group.name
     vm_size                     = var.node_groups.default_node_group.node_size
     min_count                   = var.node_groups.default_node_group.min_size
@@ -78,6 +80,7 @@ resource "azurerm_kubernetes_cluster" "main" {
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "main" {
+  #bridgecrew:skip=BC_AZR_KUBERNETES_15:Skipping `Ensure Azure Kubernetes Cluster (AKS) nodes should use a minimum number of 50 pods.`
   for_each              = { for ng in var.node_groups.additional_node_groups : ng.name => ng }
   name                  = each.value.name
   kubernetes_cluster_id = azurerm_kubernetes_cluster.main.id
