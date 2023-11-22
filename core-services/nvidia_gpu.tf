@@ -3,9 +3,9 @@ resource "kubernetes_daemonset" "nvidia" {
   metadata {
     name      = "nvidia-device-plugin-daemonset"
     namespace = kubernetes_namespace_v1.md-core-services.metadata.0.name
-    labels = {
+    labels = merge(var.md_metadata.default_tags, {
       k8s-app = "nvidia-device-plugin-daemonset"
-    }
+    })
   }
   spec {
     selector {
@@ -18,9 +18,9 @@ resource "kubernetes_daemonset" "nvidia" {
     }
     template {
       metadata {
-        labels = {
-          name = "nvidia-device-plugin-ds"
-        }
+        labels = merge(var.md_metadata.default_tags, {
+          name = "nvidia-devic e-plugin-ds"
+        })
         annotations = {
           "scheduler.alpha.kubernetes.io/critical-pod" : ""
         }
