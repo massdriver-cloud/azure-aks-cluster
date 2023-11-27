@@ -18,6 +18,9 @@ NodeGroup: &node_group
       pattern: "^[a-z]{1,1}[a-z0-9]{0,11}$"
       message:
         pattern: This field only accepts lowercase letters and numbers, with a max length of 12 characters. **Changing this forces a deletion and re-creation of the node group**.
+      not:
+        enum:
+          - "null"
     min_size:
       type: number
       title: Minimum size
