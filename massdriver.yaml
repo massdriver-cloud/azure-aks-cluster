@@ -219,6 +219,8 @@ params:
   required:
     - cluster
     - node_groups
+    - core_services
+    - monitoring
   properties:
     cluster:
       title: Cluster
@@ -270,6 +272,40 @@ params:
           maxItems: 1
           items:
             type: string
+    monitoring:
+      type: object
+      title: Monitoring
+      required:
+        - prometheus
+      properties:
+        prometheus:
+          type: object
+          title: Prometheus Configuration
+          description: Configuration settings for the Prometheus instances that are automatically installed into the cluster to provide monitoring capabilities
+          required:
+            - grafana_enabled
+          properties:
+            grafana_enabled:
+              title: Enable Grafana
+              type: boolean
+              description: Install Grafana into the cluster to provide a metric visualizer
+              default: false
+          dependencies:
+            grafana_enabled:
+              oneOf:
+              - properties:
+                  grafana_enabled:
+                    const: false
+              - properties:
+                  grafana_enabled:
+                    const: true
+                  grafana_password:
+                    title: Grafana Admin Password
+                    description: Set the password for the `admin` user
+                    type: string
+                    format: password
+                required:
+                - grafana_password
 
 connections:
   required:
@@ -293,6 +329,7 @@ ui:
     - cluster
     - node_groups
     - core_services
+    - monitoring
     - "*"
   cluster:
     ui:order:
@@ -329,3 +366,11 @@ ui:
       items:
         ui:field: dnsZonesDropdown
         cloud: azure
+  monitoring:
+    ui:order:
+      - prometheus
+      - "*"
+    prometheus:
+      ui:order:
+        - grafana_enabled
+        - "*"
