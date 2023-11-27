@@ -13,7 +13,7 @@ locals {
 
 module "alarm_channel" {
   count       = true ? 1 : 0
-  source      = "github.com/massdriver-cloud/terraform-modules//k8s/alarm-channel?ref=41e799c"
+  source      = "github.com/massdriver-cloud/terraform-modules//k8s/alarm-channel?ref=b4c1dda"
   md_metadata = var.md_metadata
   namespace   = kubernetes_namespace_v1.md-observability.metadata.0.name
   release     = var.md_metadata.name_prefix
@@ -23,14 +23,14 @@ module "alarm_channel" {
 
 module "azure_alarm_channel" {
   count               = true ? 1 : 0
-  source              = "github.com/massdriver-cloud/terraform-modules//azure/alarm-channel?ref=41e799c"
+  source              = "github.com/massdriver-cloud/terraform-modules//azure/alarm-channel?ref=b4c1dda"
   md_metadata         = var.md_metadata
   resource_group_name = data.azurerm_resource_group.cluster.name
 }
 
 module "application_alarms" {
   count             = true ? 1 : 0
-  source            = "github.com/massdriver-cloud/terraform-modules//massdriver/k8s-application-alarms?ref=41e799c"
+  source            = "github.com/massdriver-cloud/terraform-modules//massdriver/k8s-application-alarms?ref=b4c1dda"
   md_metadata       = var.md_metadata
   pod_alarms        = true
   deployment_alarms = true
@@ -41,7 +41,7 @@ module "application_alarms" {
 
 module "unscheduled_pods_metric_alert" {
   count                   = true ? 1 : 0
-  source                  = "github.com/massdriver-cloud/terraform-modules//azure/monitor-metrics-alarm?ref=41e799c"
+  source                  = "github.com/massdriver-cloud/terraform-modules//azure/monitor-metrics-alarm?ref=b4c1dda"
   scopes                  = [data.azurerm_kubernetes_cluster.cluster.id]
   resource_group_name     = data.azurerm_resource_group.cluster.name
   monitor_action_group_id = module.azure_alarm_channel.0.id
