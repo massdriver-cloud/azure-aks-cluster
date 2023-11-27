@@ -90,7 +90,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
   mode                  = "User"
   max_count             = each.value.max_size
   min_count             = each.value.min_size
-  node_taints           = [var.node_groups.additional_node_groups.0.compute_type == "GPU" ? "sku=gpu:NoSchedule" : null]
+  node_taints           = var.node_groups.additional_node_groups.0.compute_type == "GPU" ? ["sku=gpu:NoSchedule"] : []
   tags                  = var.md_metadata.default_tags
 }
 
