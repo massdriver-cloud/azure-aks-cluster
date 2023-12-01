@@ -91,7 +91,7 @@ kubectl api-resources
 
 ### Grafana
 
-Connecting to Grafana running on your AKS cluster requires setting up `kubectl` from above. After `kubectl` is set up, you can port forward the service locally using: `kubectl port-forward service/massdriver-grafana 3000:80 --namespace=md-observability` and then browsing to `http://localhost:3000`. The username is `admin` and the password is the password you set on the bundle configuration page.
+Connecting to [Grafana](https://grafana.com/docs/grafana/latest/introduction/) on your AKS cluster requires setting up `kubectl` from above. After `kubectl` is set up, you can [port forward](https://grafana.com/docs/grafana/latest/setup-grafana/installation/kubernetes/#access-grafana-on-managed-k8s-providers) the service locally using: `kubectl port-forward service/massdriver-grafana 3000:80 --namespace=md-observability` and then browsing to `http://localhost:3000`. The username is `admin` and the password is the password you set on the bundle configuration page.
 
 ## Trade-offs
 * Please note that a default node group must be created and cannot be manipulated, as there can be only one default node group. Additional node groups can be provisioned as needed.
