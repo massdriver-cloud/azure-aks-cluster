@@ -9,6 +9,12 @@ locals {
       resource_group = element(split("/", zone_id), index(split("/", zone_id), "resourceGroups") + 1)
     }
   ]
+
+  azure_dns_zones_map = {
+    for zone_id in local.dns_zones : element(split("/", zone_id), index(split("/", zone_id), "dnszones") + 1) => {
+      resource_group = element(split("/", zone_id), index(split("/", zone_id), "resourceGroups") + 1)
+    }
+  }
 }
 
 resource "kubernetes_namespace_v1" "md-core-services" {
@@ -46,18 +52,16 @@ module "ingress_nginx" {
 }
 
 module "external_dns" {
+  for_each           = local.azure_dns_zones_map
   source             = "github.com/massdriver-cloud/terraform-modules//k8s-external-dns-azure?ref=b4c1dda"
-  count              = local.enable_external_dns ? 1 : 0
   kubernetes_cluster = local.kubernetes_cluster_artifact
   md_metadata        = var.md_metadata
   release            = "external-dns"
   namespace          = kubernetes_namespace_v1.md-core-services.metadata.0.name
-  # This is hard-coded to one zone for now.
-  # We might be able to for_each this module and call it good but we have to come back to this.
-  # https://github.com/massdriver-cloud/azure-aks-cluster/issues/34
+
   azure_dns_zones = {
-    dns_zones      = [local.zones_with_resource_group[0].name]
-    resource_group = local.zones_with_resource_group[0].resource_group
+    dns_zones      = [each.key]
+    resource_group = each.value.resource_group
   }
 
   depends_on = [module.prometheus-observability]
