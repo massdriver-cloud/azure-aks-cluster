@@ -269,7 +269,6 @@ params:
           type: array
           title: Azure DNS Zone
           description: Add an Azure DNS Zone associated with this cluster to allow Kubernetes to automatically manage DNS records and SSL certificates.
-          maxItems: 1
           items:
             type: string
     monitoring:
