@@ -14,9 +14,10 @@ locals {
 data "azurerm_client_config" "current" {
 }
 
-data "azuread_service_principal" "cert_manager" {
-  count        = local.enable_cert_manager ? 1 : 0
-  display_name = "${var.md_metadata.name_prefix}-certmanager"
+data "azurerm_user_assigned_identity" "cert_manager" {
+  count               = local.enable_cert_manager ? 1 : 0
+  name                = "${var.md_metadata.name_prefix}-certmanager"
+  resource_group_name = data.azurerm_kubernetes_cluster.cluster.resource_group_name
 }
 
 resource "kubernetes_manifest" "cluster_issuer" {
@@ -43,15 +44,12 @@ resource "kubernetes_manifest" "cluster_issuer" {
           },
           "dns01" = {
             "azureDNS" = {
-              clientID = data.azuread_service_principal.cert_manager.0.application_id
-              clientSecretSecretRef = {
-                name = "cert-manager-auth"
-                key  = "client-cert"
-              }
               subscriptionID    = data.azurerm_client_config.current.subscription_id
-              tenantID          = data.azurerm_client_config.current.tenant_id
               resourceGroupName = zone.resource_group
               hostedZoneName    = zone.name
+              managedIdentity = {
+                clientID = data.azurerm_user_assigned_identity.cert_manager[0].client_id
+              }
             }
           }
           }], [ // could put other solvers here
