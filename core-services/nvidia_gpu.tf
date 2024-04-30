@@ -19,7 +19,7 @@ resource "kubernetes_daemonset" "nvidia" {
     template {
       metadata {
         labels = merge(var.md_metadata.default_tags, {
-          name = "nvidia-devic e-plugin-ds"
+          name = "nvidia-device-plugin-ds"
         })
         annotations = {
           "scheduler.alpha.kubernetes.io/critical-pod" : ""
