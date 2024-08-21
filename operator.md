@@ -28,9 +28,7 @@ The standard way to manage connection and authentication details for kubernetes 
 
 The standard way to manage connection and authentication details for kubernetes clusters is through a configuration file called a [`kubeconfig`](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/) file. The `kubernetes-cluster` artifact that is created when you make a kubernetes cluster in Massdriver contains the basic information needed to create a `kubeconfig` file. Because of this, Massdriver makes it very easy for you to download a `kubeconfig` file that will allow you to use `kubectl` to query and administer your cluster.
 
-To download a `kubeconfig` file for your cluster, navigate to the project and target where the kubernetes cluster is deployed and move the mouse so it hovers over the artifact connection port. This will pop a windows that allows you to download the artifact in raw JSON, or as a `kubeconfig` yaml. Select "Kube Config" from the drop down, and click the button. This will download the `kubeconfig` for the kubernetes cluster to your local system.
-
-![Download Kubeconfig](https://github.com/massdriver-cloud/azure-aks-cluster/blob/main/images/kubeconfig-download.gif?raw=true)
+To download a `kubeconfig` file for your cluster, navigate to the project and environment where the kubernetes cluster is deployed open the Details configuration pane. Click on the download and select `Kube Config` which downloads the artifact in raw JSON, or as a `kubeconfig` yaml. Select "Kube Config" from the drop down, and click the button. This will download the `kubeconfig` for the kubernetes cluster to your local system.
 
 #### Use the Kubeconfig File
 
