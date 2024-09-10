@@ -17,7 +17,7 @@ Azure Kubernetes Service (AKS) is a fully managed container orchestration servic
 
 ## Design
 
-For detailed information, check out our [Operator Guide](operator.mdx) for this bundle.
+For detailed information, check out our [Operator Guide](operator.md) for this bundle.
 
 ## Usage
 
