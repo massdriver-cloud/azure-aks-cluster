@@ -209,12 +209,12 @@ Resources created by this bundle that can be connected to other bundles.
 
 - **`kubernetes_cluster`** *(object)*: Kubernetes cluster authentication and cloud-specific configuration. Cannot contain additional properties.
   - **`data`** *(object)*
-    - **`authentication`** *(object)*
-      - **`cluster`** *(object)*
-        - **`certificate-authority-data`** *(string)*
-        - **`server`** *(string)*
-      - **`user`** *(object)*
-        - **`token`** *(string)*
+    - **`authentication`** *(object)*: Authentication details required to access the Kubernetes cluster.
+      - **`cluster`** *(object)*: Information about the Kubernetes cluster you wish to connect to.
+        - **`certificate-authority-data`** *(string)*: Base64-encoded certificate authority data used to verify the Kubernetes API server's certificate.
+        - **`server`** *(string)*: The URL or endpoint of the Kubernetes API server.
+      - **`user`** *(object)*: User credentials for authenticating with the Kubernetes cluster.
+        - **`token`** *(string)*: Bearer token used for authenticating the user with the Kubernetes API server.
     - **`infrastructure`** *(object)*: Cloud specific Kubernetes configuration data.
       - **One of**
         - AWS EKS infrastructure config*object*: . Cannot contain additional properties.

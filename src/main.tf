@@ -8,7 +8,7 @@ resource "random_string" "temp_node_group" {
   lower   = true
   upper   = false
   special = false
-  number  = false
+  numeric = false
 }
 resource "azurerm_resource_group" "main" {
   name     = var.md_metadata.name_prefix
@@ -30,7 +30,7 @@ resource "azurerm_kubernetes_cluster" "main" {
   resource_group_name               = azurerm_resource_group.main.name
   dns_prefix                        = "${var.md_metadata.name_prefix}-dns"
   node_resource_group               = local.node_rg_name
-  automatic_channel_upgrade         = "stable"
+  automatic_upgrade_channel         = "stable"
   azure_policy_enabled              = true
   role_based_access_control_enabled = true
   workload_identity_enabled         = true
@@ -38,14 +38,23 @@ resource "azurerm_kubernetes_cluster" "main" {
   tags                              = var.md_metadata.default_tags
 
   azure_active_directory_role_based_access_control {
-    managed            = true
-    azure_rbac_enabled = true
+    azure_rbac_enabled     = true
+    admin_group_object_ids = []
+  }
+
+  dynamic "monitor_metrics" {
+    for_each = var.cluster.enable_log_analytics ? toset(["enabled"]) : toset([])
+    content {
+      annotations_allowed = null
+      labels_allowed      = null
+    }
   }
 
   dynamic "oms_agent" {
     for_each = var.cluster.enable_log_analytics ? toset(["enabled"]) : toset([])
     content {
-      log_analytics_workspace_id = azurerm_log_analytics_workspace.main[0].id
+      log_analytics_workspace_id      = azurerm_log_analytics_workspace.main[0].id
+      msi_auth_for_monitoring_enabled = true
     }
   }
 
@@ -56,8 +65,11 @@ resource "azurerm_kubernetes_cluster" "main" {
     max_count                   = var.node_groups.default_node_group.max_size
     vnet_subnet_id              = var.vnet.data.infrastructure.default_subnet_id
     temporary_name_for_rotation = "${random_string.temp_node_group.result}temp"
-    enable_auto_scaling         = true
-    tags                        = var.md_metadata.default_tags
+    auto_scaling_enabled        = true
+    upgrade_settings {
+      max_surge = "10%"
+    }
+    tags = var.md_metadata.default_tags
   }
 
   identity {
@@ -68,15 +80,15 @@ resource "azurerm_kubernetes_cluster" "main" {
   the customer might set as their VNet CIDR. These are also the defaults for
   these parameters when deploying AKS in the Azure Portal. */
   network_profile {
-    network_plugin = "azure"
-    network_policy = "azure"
-    dns_service_ip = "172.20.0.10"
-    service_cidr   = "172.20.0.0/16"
+    network_plugin    = "azure"
+    network_policy    = "azure"
+    dns_service_ip    = "172.20.0.10"
+    service_cidr      = "172.20.0.0/16"
+    load_balancer_sku = "standard"
+    outbound_type     = "loadBalancer"
   }
 
-  depends_on = [
-    data.http.feature
-  ]
+
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "main" {
@@ -85,12 +97,15 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
   kubernetes_cluster_id = azurerm_kubernetes_cluster.main.id
   vm_size               = each.value.node_size
   vnet_subnet_id        = var.vnet.data.infrastructure.default_subnet_id
-  enable_auto_scaling   = true
+  auto_scaling_enabled  = true
   mode                  = "User"
   max_count             = each.value.max_size
   min_count             = each.value.min_size
-  node_taints           = var.node_groups.additional_node_groups.0.compute_type == "GPU" ? ["sku=gpu:NoSchedule"] : []
-  tags                  = var.md_metadata.default_tags
+  node_taints           = each.value.compute_type == "GPU" ? ["sku=gpu:NoSchedule"] : []
+  upgrade_settings {
+    max_surge = "10%"
+  }
+  tags = var.md_metadata.default_tags
 }
 
 data "azurerm_client_config" "main" {
@@ -100,4 +115,11 @@ resource "azurerm_role_assignment" "aks_read_acr" {
   scope                = "/subscriptions/${data.azurerm_client_config.main.subscription_id}"
   role_definition_name = "AcrPull"
   principal_id         = azurerm_kubernetes_cluster.main.kubelet_identity[0].object_id
+}
+
+# Network Contributor role for AKS cluster identity to manage load balancers and network resources
+resource "azurerm_role_assignment" "aks_network_contributor" {
+  scope                = var.vnet.data.infrastructure.id
+  role_definition_name = "Network Contributor"
+  principal_id         = azurerm_kubernetes_cluster.main.identity[0].principal_id
 }
