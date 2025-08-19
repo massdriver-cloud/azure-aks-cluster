@@ -3,7 +3,6 @@ name: azure-aks-cluster
 version: 1.0.0
 description: Azure Kubernetes Service (AKS) is a fully managed container orchestration service. AKS offers serverless Kubernetes, an integrated continuous integration and continuous delivery (CI/CD) experience, and enterprise-grade security and governance.
 source_url: https://github.com/massdriver-cloud/azure-aks-cluster
-type: application
 NodeGroup:
   required: &1
   - name
