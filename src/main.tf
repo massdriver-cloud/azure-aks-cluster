@@ -31,10 +31,13 @@ resource "azurerm_kubernetes_cluster" "main" {
   dns_prefix                        = "${var.md_metadata.name_prefix}-dns"
   node_resource_group               = local.node_rg_name
   automatic_upgrade_channel         = "stable"
+  sku_tier                          = "Standard"
   azure_policy_enabled              = true
   role_based_access_control_enabled = true
   workload_identity_enabled         = true
   oidc_issuer_enabled               = true
+  image_cleaner_enabled             = true
+  image_cleaner_interval_hours      = 48
   tags                              = var.md_metadata.default_tags
 
   azure_active_directory_role_based_access_control {
@@ -81,7 +84,7 @@ resource "azurerm_kubernetes_cluster" "main" {
   these parameters when deploying AKS in the Azure Portal. */
   network_profile {
     network_plugin    = "azure"
-    network_policy    = "azure"
+    network_policy    = "calico"
     dns_service_ip    = "172.20.0.10"
     service_cidr      = "172.20.0.0/16"
     load_balancer_sku = "standard"

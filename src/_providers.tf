@@ -19,14 +19,14 @@ provider "azurerm" {
     }
   }
 
-  client_id       = var.azure_service_principal.data.client_id
-  tenant_id       = var.azure_service_principal.data.tenant_id
-  client_secret   = var.azure_service_principal.data.client_secret
-  subscription_id = var.azure_service_principal.data.subscription_id
+  client_id       = var.azure_authentication.client_id
+  tenant_id       = var.azure_authentication.tenant_id
+  client_secret   = var.azure_authentication.client_secret
+  subscription_id = var.azure_authentication.subscription_id
 }
 
 provider "azuread" {
-  client_id     = var.azure_service_principal.data.client_id
-  tenant_id     = var.azure_service_principal.data.tenant_id
-  client_secret = var.azure_service_principal.data.client_secret
+  client_id     = var.azure_authentication.client_id
+  tenant_id     = var.azure_authentication.tenant_id
+  client_secret = var.azure_authentication.client_secret
 }

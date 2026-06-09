@@ -41,13 +41,6 @@ Form input parameters for configuring a bundle for deployment.
 
 - **`cluster`** *(object)*: Configure the Kubernetes cluster.
   - **`enable_log_analytics`** *(boolean)*: Enable Log Analytics for this cluster. Default: `False`.
-- **`core_services`** *(object)*: Configure core services in Kubernetes for Massdriver to manage.
-  - **`azure_dns_zones`** *(array)*: Add an Azure DNS Zone associated with this cluster to allow Kubernetes to automatically manage DNS records and SSL certificates.
-    - **Items** *(string)*
-  - **`enable_ingress`** *(boolean)*: Enabling this will create an NGINX Ingress Controller in the cluster, allowing internet traffic to flow into web accessible services within the cluster. Default: `False`.
-- **`monitoring`** *(object)*
-  - **`prometheus`** *(object)*: Configuration settings for the Prometheus instances that are automatically installed into the cluster to provide monitoring capabilities.
-    - **`grafana_enabled`** *(boolean)*: Install Grafana into the cluster to provide a metric visualizer. Default: `False`.
 - **`node_groups`** *(object)*: The node groups that should be used for this cluster.
   - **`additional_node_groups`** *(array)*: Default: `[]`.
     - **Items** *(object)*
@@ -105,10 +98,6 @@ Form input parameters for configuring a bundle for deployment.
       "__name": "Wizard",
       "cluster": {
           "enable_log_analytics": false
-      },
-      "core_services": {
-          "azure_dns_zones": [],
-          "enable_ingress": true
       },
       "node_groups": {
           "additional_node_groups": [],

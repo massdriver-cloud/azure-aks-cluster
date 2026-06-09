@@ -4,6 +4,7 @@ Azure AKS (Azure Kubernetes Service) is a managed Kubernetes service that makes 
 
 ### Design Decisions
 
+0. **Minimal core footprint**: This bundle intentionally provisions only the resources required to run AKS plus the Massdriver access credentials. AKS natively manages CoreDNS, kube-proxy, the Azure CNI, the cluster autoscaler, and the Azure Disk/File CSI drivers (with default storage classes), so they are not installed here. Higher-level services such as an ingress controller, external-dns, cert-manager, and Prometheus/Grafana monitoring are deliberately left out and should be deployed as separate bundles.
 1. **Azure Policy**: Enabling Azure Policy ensures compliance and governance across the AKS resources.
 2. **RBAC and AAD Integration**: Role-Based Access Control (RBAC) combined with Azure Active Directory (AAD) integration ensures secure access and management.
 3. **Automatic Upgrade**: Clusters are set to stable automatic channel upgrade to ensure they are up-to-date with the latest stable features.
@@ -26,9 +27,9 @@ The standard way to manage connection and authentication details for kubernetes 
 
 #### Download the Kubeconfig File
 
-The standard way to manage connection and authentication details for kubernetes clusters is through a configuration file called a [`kubeconfig`](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/) file. The `kubernetes-cluster` artifact that is created when you make a kubernetes cluster in Massdriver contains the basic information needed to create a `kubeconfig` file. Because of this, Massdriver makes it very easy for you to download a `kubeconfig` file that will allow you to use `kubectl` to query and administer your cluster.
+The standard way to manage connection and authentication details for kubernetes clusters is through a configuration file called a [`kubeconfig`](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/) file. The `kubernetes-cluster` resource that is created when you make a kubernetes cluster in Massdriver contains the basic information needed to create a `kubeconfig` file. Because of this, Massdriver makes it very easy for you to download a `kubeconfig` file that will allow you to use `kubectl` to query and administer your cluster.
 
-To download a `kubeconfig` file for your cluster, navigate to the project and environment where the kubernetes cluster is deployed open the Details configuration pane. Click on the download and select `Kube Config` which downloads the artifact in raw JSON, or as a `kubeconfig` yaml. Select "Kube Config" from the drop down, and click the button. This will download the `kubeconfig` for the kubernetes cluster to your local system.
+To download a `kubeconfig` file for your cluster, navigate to the `kubernetes-cluster` resource that was created by this bundle (either via the resources tab in the instance sidebar, or the resource page) and select download.
 
 #### Use the Kubeconfig File
 
@@ -143,22 +144,4 @@ az monitor log-analytics query -w <workspace-id> --analytics-query "KubePodInven
 ```
 
 This returns a summary of pod counts by cluster and node.
-
-#### Certificate Issues
-
-For issues with cert-manager in obtaining certificates:
-
-Describe the certificate request:
-
-```sh
-kubectl describe certificaterequest <certificaterequest-name>
-```
-
-Check If the challenge is failing:
-
-```sh
-kubectl describe challenge <challenge-name>
-```
-
-This should provide details on why the validation is failing, such as DNS issues or misconfiguration.
 

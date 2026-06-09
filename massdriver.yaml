@@ -1,6 +1,6 @@
 schema: draft-07
 name: azure-aks-cluster
-version: 1.0.0
+version: 2.0.0
 description: Azure Kubernetes Service (AKS) is a fully managed container orchestration service. AKS offers serverless Kubernetes, an integrated continuous integration and continuous delivery (CI/CD) experience, and enterprise-grade security and governance.
 source_url: https://github.com/massdriver-cloud/azure-aks-cluster
 NodeGroup:
@@ -173,8 +173,6 @@ steps:
   provisioner: opentofu
 - path: core-services
   provisioner: opentofu
-- path: custom-resources
-  provisioner: opentofu
 params:
   examples:
   - __name: Development
@@ -209,14 +207,9 @@ params:
         compute_type: General Purpose
         node_size: Standard_B2s
       additional_node_groups: []
-    core_services:
-      enable_ingress: true
-      azure_dns_zones: []
   required:
   - cluster
   - node_groups
-  - core_services
-  - monitoring
   properties:
     cluster:
       title: Cluster
@@ -254,79 +247,25 @@ params:
             required: *1
             properties: *2
             dependencies: *3
-    core_services:
-      type: object
-      title: Core Services
-      description: Configure core services in Kubernetes for Massdriver to manage.
-      required: []
-      properties:
-        enable_ingress:
-          type: boolean
-          title: Enable Ingress Controller
-          description: Enabling this will create an NGINX Ingress Controller in the cluster, allowing internet traffic to flow into web accessible services within the cluster.
-          default: false
-        azure_dns_zones:
-          type: array
-          title: Azure DNS Zone
-          description: Add an Azure DNS Zone associated with this cluster to allow Kubernetes to automatically manage DNS records and SSL certificates.
-          maxItems: 1
-          items:
-            type: string
-    monitoring:
-      type: object
-      title: Monitoring
-      required:
-      - prometheus
-      properties:
-        prometheus:
-          type: object
-          title: Prometheus Configuration
-          description: Configuration settings for the Prometheus instances that are automatically installed into the cluster to provide monitoring capabilities
-          required:
-          - grafana_enabled
-          properties:
-            grafana_enabled:
-              title: Enable Grafana
-              type: boolean
-              description: Install Grafana into the cluster to provide a metric visualizer
-              default: false
-          dependencies:
-            grafana_enabled:
-              oneOf:
-              - properties:
-                  grafana_enabled:
-                    const: false
-              - properties:
-                  grafana_enabled:
-                    const: true
-                  grafana_password:
-                    title: Grafana Admin Password
-                    description: Set the password for the `admin` user
-                    type: string
-                    format: password
-                required:
-                - grafana_password
 connections:
   required:
-  - azure_service_principal
+  - azure_authentication
   - vnet
   properties:
-    azure_service_principal:
-      "$ref": massdriver/azure-service-principal
+    azure_authentication:
+      "$ref": azure-service-principal
     vnet:
-      "$ref": massdriver/azure-virtual-network
+      "$ref": azure-virtual-network
 artifacts:
   required:
   - kubernetes_cluster
   properties:
     kubernetes_cluster:
-      "$ref": massdriver/kubernetes-cluster
+      "$ref": kubernetes-cluster
 ui:
   ui:order:
   - cluster
   - node_groups
-  - core_services
-  - monitoring
   - "*"
   cluster:
     ui:order:
@@ -354,20 +293,3 @@ ui:
         - min_size
         - max_size
         - "*"
-  core_services:
-    ui:order:
-    - enable_ingress
-    - azure_dns_zones
-    - "*"
-    azure_dns_zones:
-      items:
-        ui:field: dnsZonesDropdown
-        cloud: azure
-  monitoring:
-    ui:order:
-    - prometheus
-    - "*"
-    prometheus:
-      ui:order:
-      - grafana_enabled
-      - "*"
