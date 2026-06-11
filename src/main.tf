@@ -66,7 +66,7 @@ resource "azurerm_kubernetes_cluster" "main" {
     vm_size                     = var.node_groups.default_node_group.node_size
     min_count                   = var.node_groups.default_node_group.min_size
     max_count                   = var.node_groups.default_node_group.max_size
-    vnet_subnet_id              = var.vnet.data.infrastructure.default_subnet_id
+    vnet_subnet_id              = var.vnet.infrastructure.default_subnet_id
     temporary_name_for_rotation = "${random_string.temp_node_group.result}temp"
     auto_scaling_enabled        = true
     upgrade_settings {
@@ -99,7 +99,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "main" {
   name                  = each.value.name
   kubernetes_cluster_id = azurerm_kubernetes_cluster.main.id
   vm_size               = each.value.node_size
-  vnet_subnet_id        = var.vnet.data.infrastructure.default_subnet_id
+  vnet_subnet_id        = var.vnet.infrastructure.default_subnet_id
   auto_scaling_enabled  = true
   mode                  = "User"
   max_count             = each.value.max_size
@@ -122,7 +122,7 @@ resource "azurerm_role_assignment" "aks_read_acr" {
 
 # Network Contributor role for AKS cluster identity to manage load balancers and network resources
 resource "azurerm_role_assignment" "aks_network_contributor" {
-  scope                = var.vnet.data.infrastructure.id
+  scope                = var.vnet.infrastructure.id
   role_definition_name = "Network Contributor"
   principal_id         = azurerm_kubernetes_cluster.main.identity[0].principal_id
 }

@@ -55,12 +55,10 @@ variable "node_groups" {
 }
 variable "vnet" {
   type = object({
-    data = object({
-      infrastructure = object({
-        cidr              = string
-        default_subnet_id = string
-        id                = string
-      })
+    infrastructure = object({
+      cidr              = string
+      default_subnet_id = string
+      id                = string
     })
     specs = optional(object({
       azure = optional(object({
